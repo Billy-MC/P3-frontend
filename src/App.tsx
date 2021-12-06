@@ -1,10 +1,10 @@
-import Content from './components/app/Content/Content';
-import Header from './components/app/Header/Header';
+import Route from './routes/Route';
+import SideNav from './layouts/sideNav/sideNav';
 
 const App = () => (
     <div>
-        <Header />
-        <Content />
+        <SideNav />
+        <Route />
     </div>
 );
 
