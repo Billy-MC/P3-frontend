@@ -6,7 +6,7 @@ import CustomerPage from '../screens/CustomerPage';
 import ProductPage from '../screens/ProductPage';
 import OrderPage from '../screens/OrderPage';
 import DashboardPage from '../screens/DashboardPage';
-import ForgetPwdPage from '../screens/ForgetPwdPage';
+import ForgetPasswordPage from '../screens/ForgetPasswordPage';
 import WelcomePage from '../screens/WelcomePage';
 
 const Route = () => (
@@ -15,7 +15,7 @@ const Route = () => (
             <RouterPage path="/" element={<WelcomePage />} />
             <RouterPage path="/login" element={<LoginPage />} />
             <RouterPage path="/register" element={<RegisterPage />} />
-            <RouterPage path="/forgetpassword" element={<ForgetPwdPage />} />
+            <RouterPage path="/forgetpassword" element={<ForgetPasswordPage />} />
             <RouterPage path="/user" element={<UserPage />} />
             <RouterPage path="/customer" element={<CustomerPage />} />
             <RouterPage path="/product" element={<ProductPage />} />
