@@ -1,5 +1,5 @@
-import Route from './routes/Route';
-import SideNav from './layouts/sideNav/sideNav';
+import Route from './routes';
+import SideNav from './layouts/sideNav';
 
 const App = () => (
     <div>

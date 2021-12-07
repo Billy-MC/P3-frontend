@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Header = () => (
+const SideNav = () => (
     <div>
         <ul>
             <li>
@@ -13,7 +13,7 @@ const Header = () => (
                 <Link to="/register">Register</Link>
             </li>
             <li>
-                <Link to="/forgetpwd">Forget Password</Link>
+                <Link to="/forgetpassword">Forget Password</Link>
             </li>
             <li>
                 <Link to="/customer">Customer</Link>
@@ -33,4 +33,4 @@ const Header = () => (
         </ul>
     </div>
 );
-export default Header;
+export default SideNav;
