@@ -15,7 +15,7 @@
         }
     },
     "rules": {
-        "no-console": "off",
+        "no-console": "warn",
         "semi": 0,
         "no-use-before-define": "off",
         "react/react-in-jsx-scope": "off",
