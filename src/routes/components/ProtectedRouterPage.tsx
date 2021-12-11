@@ -1,9 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
 const useAuth = () => {
-    const token = false;
+    const token = true;
     const user = { loggedIn: token };
-    console.log(user);
     return user && user.loggedIn;
 };
 
