@@ -8,6 +8,7 @@ import OrderPage from '../screens/OrderPage';
 import DashboardPage from '../screens/DashboardPage';
 import ForgetPasswordPage from '../screens/ForgetPasswordPage';
 import WelcomePage from '../screens/WelcomePage';
+import ProtectedRouterPage from './components';
 
 const Route = () => (
     <div>
@@ -16,11 +17,13 @@ const Route = () => (
             <RouterPage path="/login" element={<LoginPage />} />
             <RouterPage path="/register" element={<RegisterPage />} />
             <RouterPage path="/forgetpassword" element={<ForgetPasswordPage />} />
-            <RouterPage path="/user" element={<UserPage />} />
-            <RouterPage path="/customer" element={<CustomerPage />} />
-            <RouterPage path="/product" element={<ProductPage />} />
-            <RouterPage path="/order" element={<OrderPage />} />
-            <RouterPage path="/dashboard" element={<DashboardPage />} />
+            <RouterPage element={<ProtectedRouterPage />}>
+                <RouterPage path="/user" element={<UserPage />} />
+                <RouterPage path="/customer" element={<CustomerPage />} />
+                <RouterPage path="/product" element={<ProductPage />} />
+                <RouterPage path="/order" element={<OrderPage />} />
+                <RouterPage path="/dashboard" element={<DashboardPage />} />
+            </RouterPage>
         </Routes>
     </div>
 );
