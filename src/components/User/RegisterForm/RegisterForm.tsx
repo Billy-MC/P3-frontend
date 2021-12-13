@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './FormInput.css';
+import './RegisterForm.css';
 
 type FormInputProps = {
     id: number;
@@ -22,6 +22,7 @@ const FormInput = (props: FormInputProps) => {
     };
 
     const { label, errorMessage, handleChange, id, ...inputProps } = props;
+
     return (
         <div className="formInput">
             <label htmlFor="">{label}</label>

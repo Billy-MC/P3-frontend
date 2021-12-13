@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
 import './RegisterPage.css';
-import FormInput from '../../components/FormInput/FormInput';
+import FormInput from '../../components/User/RegisterForm/RegisterForm';
+
+type Data = {
+    id: number;
+    name: string;
+    type: string;
+    placeholder: string;
+    errorMessage: string;
+    label: string;
+    required: boolean;
+    pattern?: string;
+}[];
+
+const defaultFormData = {
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+    confirmedPassword: '',
+};
 
 const RegisterPage = () => {
-    const [values, setValues] = useState({
-        email: '',
-        firstName: '',
-        lastName: '',
-        password: '',
-        confirmedPassword: '',
-    });
+    const [values, setValues] = useState(defaultFormData);
 
-    const inputs = [
+    const inputs: Data = [
         {
             id: 1,
             name: 'email',
@@ -65,8 +78,9 @@ const RegisterPage = () => {
         setValues({ ...values, [event.target.name]: event.target.value });
     };
 
-    const submitHandler = (event: React.FormEvent<HTMLInputElement>) => {
+    const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setValues(defaultFormData);
     };
 
     return (
@@ -81,7 +95,7 @@ const RegisterPage = () => {
                         onChange={handleChange}
                     />
                 ))}
-                <button type="button">Submit</button>
+                <button type="submit">Submit</button>
             </form>
         </div>
     );
