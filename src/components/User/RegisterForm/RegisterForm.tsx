@@ -1,41 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './RegisterForm.css';
 
-type FormInputProps = {
-    id: number;
+type RegisterFormProps = {
     label: string;
-    name: string;
-    placeholder: string;
+    onChange: React.ChangeEventHandler<HTMLInputElement>;
     errorMessage: string;
-    required: boolean;
-    type: string;
-    pattern: string;
-    handleChange: React.ChangeEvent<HTMLInputElement>;
-    // handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    name: string;
 };
 
-const FormInput = (props: FormInputProps) => {
-    const [focused, setFocused] = useState(false);
-
-    const focusHandler = () => {
-        setFocused(true);
-    };
-
-    const { label, errorMessage, handleChange, id, ...inputProps } = props;
+const RegisterForm = (props: RegisterFormProps) => {
+    const { label, onChange, errorMessage, ...inputProps } = props;
 
     return (
         <div className="formInput">
-            <label htmlFor="">{label}</label>
-            <input
-                {...inputProps}
-                onChange={handleChange}
-                onFocus={() => inputProps.name === 'confirmPassword' && setFocused(true)}
-                focused={focused.toString()}
-                onBlur={focusHandler}
-            />
+            <label>{label}</label>
+            <input {...inputProps} onChange={onChange} />
             <span>{errorMessage}</span>
         </div>
     );
 };
 
-export default FormInput;
+export default RegisterForm;

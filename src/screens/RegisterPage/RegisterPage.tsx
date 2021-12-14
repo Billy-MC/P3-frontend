@@ -1,19 +1,10 @@
 import React, { useState } from 'react';
-import './RegisterPage.css';
-import FormInput from '../../components/User/RegisterForm/RegisterForm';
+import { Link } from 'react-router-dom';
 
-type Data = {
-    id: number;
-    name: string;
-    type: string;
-    placeholder: string;
-    errorMessage: string;
-    label: string;
-    required: boolean;
-    pattern?: string;
-}[];
+import './RegisterPage.scss';
+import RegisterForm from '../../components/User/RegisterForm/RegisterForm';
 
-const defaultFormData = {
+const initialState = {
     email: '',
     firstName: '',
     lastName: '',
@@ -22,9 +13,8 @@ const defaultFormData = {
 };
 
 const RegisterPage = () => {
-    const [values, setValues] = useState(defaultFormData);
-
-    const inputs: Data = [
+    const [values, setValues] = useState(initialState);
+    const inputs = [
         {
             id: 1,
             name: 'email',
@@ -53,7 +43,7 @@ const RegisterPage = () => {
             required: true,
         },
         {
-            id: 3,
+            id: 4,
             name: 'password',
             type: 'password',
             placeholder: 'Password',
@@ -64,7 +54,7 @@ const RegisterPage = () => {
             required: true,
         },
         {
-            id: 4,
+            id: 5,
             name: 'confirmedPassword',
             type: 'password',
             placeholder: 'Confirm Password',
@@ -74,31 +64,37 @@ const RegisterPage = () => {
             required: true,
         },
     ];
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValues({ ...values, [event.target.name]: event.target.value });
-    };
 
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setValues(defaultFormData);
+        setValues(initialState);
+    };
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value });
     };
 
     return (
-        <div className="app">
+        <div className="registerform">
+            <div className="registerform-title">Devil CRM System</div>
             <form onSubmit={submitHandler}>
                 <h1>Registration</h1>
                 {inputs.map((input) => (
-                    <FormInput
-                        key={input.id}
-                        {...input}
-                        value={values[input.name]}
-                        onChange={handleChange}
-                    />
+                    <RegisterForm key={input.id} {...input} onChange={onChange} />
                 ))}
+
                 <button type="submit">Submit</button>
+                <p>
+                    {' '}
+                    <Link to="/forgetpassword">Forgot password?</Link>
+                </p>
+                <p>
+                    {' '}
+                    Have an account? &nbsp;
+                    <Link to="/login">Sign in</Link>
+                </p>
             </form>
         </div>
     );
 };
-
 export default RegisterPage;
