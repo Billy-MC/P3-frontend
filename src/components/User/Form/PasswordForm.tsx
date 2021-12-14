@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-
 import './PasswordForm.scss';
 
 type PasswordFormProps = {
@@ -17,12 +15,10 @@ const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} />;
 
 const PasswordForm = (props: PasswordFormProps) => {
     const [passwordShown, setPasswordShown] = useState(false);
-
     const togglePassword = () => {
         setPasswordShown(!passwordShown);
     };
     const { label, onChange, errorMessage, ...inputProps } = props;
-
     return (
         <div>
             <div className="passwordformInput">
@@ -41,7 +37,6 @@ const PasswordForm = (props: PasswordFormProps) => {
                         {eyeSlash}
                     </i>
                 )}
-
                 <span>{errorMessage}</span>
             </div>
         </div>
