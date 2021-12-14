@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
@@ -33,7 +32,6 @@ const PasswordForm = (props: PasswordFormProps) => {
                 <i aria-hidden="true" onClick={togglePassword}>
                     {eye}
                 </i>
-                {/* <i>{eye}</i> */}
 
                 <span>{errorMessage}</span>
             </div>
