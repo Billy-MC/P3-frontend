@@ -52,7 +52,7 @@ const RegisterPage = () => {
                     {inputs.map((input) => (
                         <RegisterForm key={input.id} {...input} onChange={onChange} />
                     ))}
-                    <button type="submit">LOGIN</button>
+                    <button type="submit">Login</button>
                     <p>
                         {' '}
                         <Link to="/forgetpassword">Forgot password?</Link>
@@ -60,7 +60,7 @@ const RegisterPage = () => {
                     <p>
                         {' '}
                         Don&lsquo;t have an account? &nbsp;
-                        <Link to="/register">Sign up</Link>
+                        <Link to="/register">Register</Link>
                     </p>
                 </form>
             </div>
