@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import './PasswordForm.scss';
 
@@ -11,7 +11,9 @@ type PasswordFormProps = {
     errorMessage: string;
     name: string;
 };
+
 const eye = <FontAwesomeIcon icon={faEye} />;
+const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} />;
 
 const PasswordForm = (props: PasswordFormProps) => {
     const [passwordShown, setPasswordShown] = useState(false);
@@ -29,9 +31,16 @@ const PasswordForm = (props: PasswordFormProps) => {
                     onChange={onChange}
                     type={passwordShown ? 'text' : 'password'}
                 />
-                <i aria-hidden="true" onClick={togglePassword}>
-                    {eye}
-                </i>
+                {!passwordShown && (
+                    <i aria-hidden="true" onClick={togglePassword}>
+                        {eye}
+                    </i>
+                )}
+                {passwordShown && (
+                    <i aria-hidden="true" onClick={togglePassword}>
+                        {eyeSlash}
+                    </i>
+                )}
 
                 <span>{errorMessage}</span>
             </div>
