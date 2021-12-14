@@ -76,24 +76,26 @@ const RegisterPage = () => {
 
     return (
         <div className="registerform">
-            <div className="registerform-title">Devil CRM System</div>
-            <form onSubmit={submitHandler}>
-                <h1>Registration</h1>
-                {inputs.map((input) => (
-                    <RegisterForm key={input.id} {...input} onChange={onChange} />
-                ))}
+            <div className="registerform-box">
+                <div className="registerform-title">Devil CRM System</div>
+                <form onSubmit={submitHandler}>
+                    <h1>Create an account</h1>
+                    {inputs.map((input) => (
+                        <RegisterForm key={input.id} {...input} onChange={onChange} />
+                    ))}
 
-                <button type="submit">Submit</button>
-                <p>
-                    {' '}
-                    <Link to="/forgetpassword">Forgot password?</Link>
-                </p>
-                <p>
-                    {' '}
-                    Have an account? &nbsp;
-                    <Link to="/login">Sign in</Link>
-                </p>
-            </form>
+                    <button type="submit">REGISTER</button>
+                    <p>
+                        {' '}
+                        <Link to="/forgetpassword">Forgot password?</Link>
+                    </p>
+                    <p>
+                        {' '}
+                        Have an account? &nbsp;
+                        <Link to="/login">Sign in</Link>
+                    </p>
+                </form>
+            </div>
         </div>
     );
 };
