@@ -1,5 +1,5 @@
 import React from 'react';
-import './RegisterForm.scss';
+import './Form.scss';
 
 type RegisterFormProps = {
     label: string;
