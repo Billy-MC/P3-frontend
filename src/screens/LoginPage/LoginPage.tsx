@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './LoginPage.scss';
-import RegisterForm from '../../components/User/RegisterForm/RegisterForm';
+import Form from '../../components/User/Form/Form';
 
 const initialState = {
     email: '',
     password: '',
 };
 
-const RegisterPage = () => {
+const LoginPage = () => {
     const [values, setValues] = useState(initialState);
     const inputs = [
         {
@@ -50,7 +50,7 @@ const RegisterPage = () => {
                 <form onSubmit={submitHandler}>
                     <h1>Login to your account</h1>
                     {inputs.map((input) => (
-                        <RegisterForm key={input.id} {...input} onChange={onChange} />
+                        <Form key={input.id} {...input} onChange={onChange} />
                     ))}
                     <button type="submit">Login</button>
                     <p>
@@ -67,4 +67,4 @@ const RegisterPage = () => {
         </div>
     );
 };
-export default RegisterPage;
+export default LoginPage;
