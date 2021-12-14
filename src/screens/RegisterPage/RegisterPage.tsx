@@ -86,12 +86,8 @@ const RegisterPage = () => {
                     <button type="submit">REGISTER</button>
                     <p>
                         {' '}
-                        <Link to="/forgetpassword">Forgot password?</Link>
-                    </p>
-                    <p>
-                        {' '}
-                        Have an account? &nbsp;
-                        <Link to="/login">Sign in</Link>
+                        Already have an account? &nbsp;
+                        <Link to="/login">Login</Link>
                     </p>
                 </form>
             </div>
