@@ -11,14 +11,6 @@ type FormProps = {
 };
 
 const Form = (props: FormProps) => {
-    // const [passwordShown, setPasswordShown] = useState(false);
-
-    // // Password toggle handler
-    // const togglePassword = () => {
-    //     // When the handler is invoked
-    //     // inverse the boolean state of passwordShown
-    //     setPasswordShown(!passwordShown);
-    // };
     const { label, onChange, errorMessage, ...inputProps } = props;
     return (
         <div>
@@ -27,13 +19,6 @@ const Form = (props: FormProps) => {
                 <input {...inputProps} onChange={onChange} />
                 <span>{errorMessage}</span>
             </div>
-            {/* <div className="formInput">
-                <input type={passwordShown ? 'text' : 'password'} />
-                <button type="button" onClick={togglePassword}>
-                    Show Password
-                </button>
-                <span>{errorMessage}</span>
-            </div> */}
         </div>
     );
 };
