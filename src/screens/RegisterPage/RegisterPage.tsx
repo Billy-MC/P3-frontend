@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './RegisterPage.scss';
-import RegisterForm from '../../components/User/RegisterForm/RegisterForm';
+import Form from '../../components/User/Form/Form';
 
 const initialState = {
     email: '',
@@ -81,7 +81,7 @@ const RegisterPage = () => {
                 <form onSubmit={submitHandler}>
                     <h1>Create an account</h1>
                     {inputs.map((input) => (
-                        <RegisterForm key={input.id} {...input} onChange={onChange} />
+                        <Form key={input.id} {...input} onChange={onChange} />
                     ))}
                     <button type="submit">REGISTER</button>
                     <p>
