@@ -10,7 +10,6 @@ type RegisterFormProps = {
 
 const RegisterForm = (props: RegisterFormProps) => {
     const { label, onChange, errorMessage, ...inputProps } = props;
-
     return (
         <div className="formInput">
             <label>{label}</label>

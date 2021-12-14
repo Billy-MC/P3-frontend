@@ -83,7 +83,6 @@ const RegisterPage = () => {
                     {inputs.map((input) => (
                         <RegisterForm key={input.id} {...input} onChange={onChange} />
                     ))}
-
                     <button type="submit">REGISTER</button>
                     <p>
                         {' '}
