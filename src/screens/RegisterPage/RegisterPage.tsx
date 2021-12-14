@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './RegisterPage.scss';
 import Form from '../../components/User/Form/Form';
+import PasswordForm from '../../components/User/Form/PasswordForm';
 
 const initialState = {
     email: '',
@@ -42,8 +43,11 @@ const RegisterPage = () => {
             label: 'Last Name',
             required: true,
         },
+    ];
+
+    const passwordInputs = [
         {
-            id: 4,
+            id: 1,
             name: 'password',
             type: 'password',
             placeholder: 'Password',
@@ -54,7 +58,7 @@ const RegisterPage = () => {
             required: true,
         },
         {
-            id: 5,
+            id: 2,
             name: 'confirmedPassword',
             type: 'password',
             placeholder: 'Confirm Password',
@@ -82,6 +86,13 @@ const RegisterPage = () => {
                     <h1>Create an account</h1>
                     {inputs.map((input) => (
                         <Form key={input.id} {...input} onChange={onChange} />
+                    ))}
+                    {passwordInputs.map((passwordInput) => (
+                        <PasswordForm
+                            key={passwordInput.id}
+                            {...passwordInput}
+                            onChange={onChange}
+                        />
                     ))}
                     <button type="submit">REGISTER</button>
                     <p>
