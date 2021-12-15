@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Box, Typography, FormControlLabel, Button, Checkbox } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styles from './RegisterPage.module.scss';
-import '../../assets/styles/variable.scss';
 import Form from '../../components/User/Form/Form';
 import PasswordForm from '../../components/User/Form/PasswordForm';
 
