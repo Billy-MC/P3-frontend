@@ -1,96 +1,101 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Box, Typography, FormControlLabel, Button, Checkbox } from '@mui/material';
 
-import './RegisterPage.scss';
+import styles from './RegisterPage.module.scss';
 import Form from '../../components/User/Form/Form';
-
-const initialState = {
-    email: '',
-    firstName: '',
-    lastName: '',
-    password: '',
-    confirmedPassword: '',
-};
+import PasswordForm from '../../components/User/Form/PasswordForm';
 
 const RegisterPage = () => {
-    const [values, setValues] = useState(initialState);
+    const [checked, setChecked] = useState(false);
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    };
     const inputs = [
         {
             id: 1,
             name: 'email',
             type: 'text',
-            placeholder: 'Email',
-            errorMessage: 'It should be a valid email address!',
             label: 'Email',
-            required: true,
         },
         {
             id: 2,
             name: 'firstName',
             type: 'text',
-            placeholder: 'First Name',
-            errorMessage: 'First Name should be required',
             label: 'First Name',
-            required: true,
         },
         {
             id: 3,
             name: 'lastName',
             type: 'text',
-            placeholder: 'Last Name',
-            errorMessage: 'Last Name should be required',
             label: 'Last Name',
-            required: true,
-        },
-        {
-            id: 4,
-            name: 'password',
-            type: 'password',
-            placeholder: 'Password',
-            errorMessage:
-                'Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!',
-            pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^_&*])[a-zA-Z0-9!@#$%^_&*]{8,20}$`,
-            label: 'Password',
-            required: true,
-        },
-        {
-            id: 5,
-            name: 'confirmedPassword',
-            type: 'password',
-            placeholder: 'Confirm Password',
-            errorMessage: "Passwords don't match!",
-            label: 'Confirm Password',
-            pattern: values.password,
-            required: true,
         },
     ];
-
-    const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        setValues(initialState);
-    };
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value });
-    };
-
+    const passwordInputs = [
+        {
+            id: 1,
+            name: 'password',
+            type: 'password',
+            label: 'Password',
+        },
+        {
+            id: 2,
+            name: 'confirmedPassword',
+            type: 'password',
+            label: 'Confirm Password',
+        },
+    ];
     return (
-        <div className="registerform">
-            <div className="registerform-box">
-                <div className="registerform-title">Devil CRM System</div>
-                <form onSubmit={submitHandler}>
-                    <h1>Create an account</h1>
-                    {inputs.map((input) => (
-                        <Form key={input.id} {...input} onChange={onChange} />
-                    ))}
-                    <button type="submit">REGISTER</button>
-                    <p>
-                        {' '}
-                        Already have an account? &nbsp;
-                        <Link to="/login">Login</Link>
-                    </p>
-                </form>
-            </div>
+        <div className={styles.register}>
+            <Box
+                className={styles.register_box}
+                component="form"
+                onSubmit={handleSubmit}
+                noValidate
+                autoComplete="off"
+            >
+                <Typography className={styles.register_title} component="h1" variant="h5">
+                    Create an account
+                </Typography>
+                {inputs.map((input) => (
+                    <Form key={input.id} {...input} label={input.label} />
+                ))}
+                {passwordInputs.map((passwordInput) => (
+                    <PasswordForm key={passwordInput.id} label={passwordInput.label} />
+                ))}
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={checked}
+                            onChange={(event) => setChecked(event.target.checked)}
+                            name="checked"
+                            color="primary"
+                        />
+                    }
+                    label={
+                        <Typography variant="subtitle1">
+                            Agree with &nbsp;
+                            <Typography
+                                variant="subtitle1"
+                                component={Link}
+                                to="#"
+                                className={styles.register_link}
+                            >
+                                Terms & Condition.
+                            </Typography>
+                        </Typography>
+                    }
+                />
+                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                    Sign UP
+                </Button>
+                <p>
+                    Already have an account? &nbsp;
+                    <Link className={styles.register_link} to="/login">
+                        Login
+                    </Link>{' '}
+                </p>
+            </Box>
         </div>
     );
 };

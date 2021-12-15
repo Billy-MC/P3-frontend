@@ -1,6 +1,6 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from 'axios';
 
-const baseURL = process.env.NODE_ENV === "development" ? "" : "";
+const baseURL = process.env.NODE_ENV === 'development' ? '' : '';
 const withCredentials = true;
 const timeout = 30000;
 

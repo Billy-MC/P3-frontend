@@ -1,21 +1,23 @@
-import React from 'react';
-import './Form.scss';
+import { Box, TextField } from '@mui/material';
 
 type FormProps = {
     label: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
-    errorMessage: string;
-    name: string;
+    type: string;
 };
 
 const Form = (props: FormProps) => {
-    const { label, onChange, errorMessage, ...inputProps } = props;
+    const { label, type } = props;
     return (
-        <div className="formInput">
-            <label>{label}</label>
-            <input {...inputProps} onChange={onChange} />
-            <span>{errorMessage}</span>
-        </div>
+        <Box>
+            <TextField
+                fullWidth
+                label={label}
+                variant="outlined"
+                size="small"
+                sx={{ mt: 1.5 }}
+                type={type}
+            />
+        </Box>
     );
 };
 
