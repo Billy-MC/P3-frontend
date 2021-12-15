@@ -1,10 +1,25 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Typography, FormControlLabel, Button, Checkbox } from '@mui/material';
-
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styles from './RegisterPage.module.scss';
+import '../../assets/styles/variable.scss';
 import Form from '../../components/User/Form/Form';
 import PasswordForm from '../../components/User/Form/PasswordForm';
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#08192d',
+        },
+        secondary: {
+            main: '#00fff0',
+        },
+    },
+    typography: {
+        fontSize: 12,
+    },
+});
 
 const RegisterPage = () => {
     const [checked, setChecked] = useState(false);
@@ -54,9 +69,11 @@ const RegisterPage = () => {
                 noValidate
                 autoComplete="off"
             >
-                <Typography className={styles.register_title} component="h1" variant="h5">
-                    Create an account
-                </Typography>
+                <ThemeProvider theme={theme}>
+                    <Typography className={styles.register_title} component="h1" variant="h5">
+                        Create an account
+                    </Typography>
+                </ThemeProvider>
                 {inputs.map((input) => (
                     <Form key={input.id} {...input} label={input.label} />
                 ))}
@@ -86,14 +103,21 @@ const RegisterPage = () => {
                         </Typography>
                     }
                 />
-                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                    Sign UP
-                </Button>
+                <ThemeProvider theme={theme}>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2, backgroundColor: 'primary' }}
+                    >
+                        Sign UP
+                    </Button>
+                </ThemeProvider>
                 <p>
                     Already have an account? &nbsp;
                     <Link className={styles.register_link} to="/login">
                         Login
-                    </Link>{' '}
+                    </Link>
                 </p>
             </Box>
         </div>
