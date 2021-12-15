@@ -50,6 +50,15 @@
         }
     }
 
+    &_Btn {
+        text-decoration: none;
+    }
+    &_bottom {
+        align-items: center;
+        justify-content: center;
+        flex: center;
+    }
+
     &_checkBox {
         align-items: center;
         justify-content: center;
