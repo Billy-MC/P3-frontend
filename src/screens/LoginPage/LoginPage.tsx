@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Typography, FormControlLabel, Button, Checkbox } from '@mui/material';
 
-import styles from './LoginPage.module.scss';
+import loginStyles from './LoginPage.module.scss';
 import Form from '../../components/User/Form/Form';
 import PasswordForm from '../../components/User/Form/PasswordForm';
 
@@ -30,15 +30,15 @@ const LoginPage = () => {
     ];
 
     return (
-        <div className={styles.login}>
+        <div className={loginStyles.login}>
             <Box
-                className={styles.login_box}
+                className={loginStyles.login_box}
                 component="form"
                 onSubmit={handleSubmit}
                 noValidate
                 autoComplete="off"
             >
-                <Typography className={styles.login_title} component="h1" variant="h5">
+                <Typography className={loginStyles.login_title} component="h1" variant="h5">
                     Login to your account
                 </Typography>
                 {inputs.map((input) => (
@@ -48,7 +48,7 @@ const LoginPage = () => {
                     <PasswordForm key={passwordInput.id} label={passwordInput.label} />
                 ))}
                 <FormControlLabel
-                    className={styles.login_checkBox}
+                    className={loginStyles.login_checkBox}
                     control={
                         <Checkbox
                             checked={checked}
@@ -59,17 +59,27 @@ const LoginPage = () => {
                     }
                     label={<Typography variant="subtitle1">Remember me</Typography>}
                 />
-                <Link to="/dashboard">
+                <Link className={loginStyles.login_Btn} to="/dashboard">
                     <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                         Login
                     </Button>
                 </Link>
-                <p>
-                    Don&lsquo;t have an account? &nbsp;
-                    <Link className={styles.login_link} to="/register">
-                        Register
-                    </Link>{' '}
-                </p>
+                <Box
+                    className={loginStyles.login_bottom}
+                    sx={{ display: 'flex', flexDirection: 'column' }}
+                >
+                    <p>
+                        <Link className={loginStyles.login_link} to="/forgetpassword">
+                            Forgot password?
+                        </Link>{' '}
+                    </p>
+                    <p>
+                        Don&lsquo;t have an account? &nbsp;
+                        <Link className={loginStyles.login_link} to="/register">
+                            Register
+                        </Link>{' '}
+                    </p>
+                </Box>
             </Box>
         </div>
     );
