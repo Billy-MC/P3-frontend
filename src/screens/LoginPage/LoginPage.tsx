@@ -59,9 +59,11 @@ const LoginPage = () => {
                     }
                     label={<Typography variant="subtitle1">Remember me</Typography>}
                 />
-                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                    Sign UP
-                </Button>
+                <Link to="/dashboard">
+                    <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                        Login
+                    </Button>
+                </Link>
                 <p>
                     Don&lsquo;t have an account? &nbsp;
                     <Link className={styles.login_link} to="/register">
