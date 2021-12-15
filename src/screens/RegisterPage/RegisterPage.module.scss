@@ -1,4 +1,4 @@
-.registerform {
+.register {
     &::before {
         content: '';
         position: absolute;
@@ -35,11 +35,8 @@
         left: 0%;
     }
 
-    &-title {
+    &_title {
         color: #0f2540;
-        height: 50px;
-        font-size: 18px;
-        font-weight: bold;
     }
 
     &_link {

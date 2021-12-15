@@ -17,7 +17,7 @@ const Form = (props: FormProps) => {
                 label={label}
                 variant="outlined"
                 size="small"
-                sx={{ mt: 1 }}
+                sx={{ mt: 1.5 }}
                 type={type}
             />
         </Box>

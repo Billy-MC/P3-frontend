@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Box, Container, Typography, FormControlLabel, Button, Checkbox } from '@mui/material';
+import { Box, Typography, FormControlLabel, Button, Checkbox } from '@mui/material';
 
 import styles from './RegisterPage.module.scss';
 import Form from '../../components/User/Form/Form';
@@ -51,15 +51,15 @@ const RegisterPage = () => {
     ];
 
     return (
-        <div className={styles.registerform}>
+        <div className={styles.register}>
             <Box
-                className={styles.registerform_box}
+                className={styles.register_box}
                 component="form"
                 onSubmit={handleSubmit}
                 noValidate
                 autoComplete="off"
             >
-                <Typography component="h1" variant="h5">
+                <Typography className={styles.register_title} component="h1" variant="h5">
                     Create an account
                 </Typography>
                 {inputs.map((input) => (
@@ -85,7 +85,7 @@ const RegisterPage = () => {
                                 variant="subtitle1"
                                 component={Link}
                                 to="#"
-                                className={styles.registerform_link}
+                                className={styles.register_link}
                             >
                                 Terms & Condition.
                             </Typography>
@@ -97,7 +97,7 @@ const RegisterPage = () => {
                 </Button>
                 <p>
                     Already have an account? &nbsp;
-                    <Link className={styles.registerform_link} to="/login">
+                    <Link className={styles.register_link} to="/login">
                         Login
                     </Link>{' '}
                 </p>

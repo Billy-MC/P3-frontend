@@ -35,7 +35,7 @@ const PasswordForm = (props: PasswordFormProps) => {
     };
 
     return (
-        <FormControl sx={{ mt: 1, width: '32ch' }} variant="outlined" size="small">
+        <FormControl sx={{ mt: 1.5, width: '32ch' }} variant="outlined" size="small">
             <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
             <OutlinedInput
                 type={values.showPassword ? 'text' : 'password'}
