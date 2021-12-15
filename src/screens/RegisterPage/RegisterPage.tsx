@@ -5,6 +5,17 @@ import { Box, Typography, FormControlLabel, Button, Checkbox } from '@mui/materi
 import styles from './RegisterPage.module.scss';
 import Form from '../../components/User/Form/Form';
 import PasswordForm from '../../components/User/Form/PasswordForm';
+<<<<<<< HEAD
+=======
+
+const initialState = {
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+    confirmedPassword: '',
+};
+>>>>>>> 91d2cb72b7206f2a57a4c4b22b61733ea6fd1154
 
 const RegisterPage = () => {
     const [checked, setChecked] = useState(false);
@@ -29,6 +40,34 @@ const RegisterPage = () => {
             name: 'lastName',
             type: 'text',
             label: 'Last Name',
+<<<<<<< HEAD
+=======
+            required: true,
+        },
+    ];
+
+    const passwordInputs = [
+        {
+            id: 1,
+            name: 'password',
+            type: 'password',
+            placeholder: 'Password',
+            errorMessage:
+                'Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!',
+            pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^_&*])[a-zA-Z0-9!@#$%^_&*]{8,20}$`,
+            label: 'Password',
+            required: true,
+        },
+        {
+            id: 2,
+            name: 'confirmedPassword',
+            type: 'password',
+            placeholder: 'Confirm Password',
+            errorMessage: "Passwords don't match!",
+            label: 'Confirm Password',
+            pattern: values.password,
+            required: true,
+>>>>>>> 91d2cb72b7206f2a57a4c4b22b61733ea6fd1154
         },
     ];
     const passwordInputs = [
@@ -46,6 +85,7 @@ const RegisterPage = () => {
         },
     ];
     return (
+<<<<<<< HEAD
         <div className={styles.register}>
             <Box
                 className={styles.register_box}
@@ -96,6 +136,31 @@ const RegisterPage = () => {
                     </Link>{' '}
                 </p>
             </Box>
+=======
+        <div className="registerform">
+            <div className="registerform-box">
+                <div className="registerform-title">Devil CRM System</div>
+                <form onSubmit={submitHandler}>
+                    <h1>Create an account</h1>
+                    {inputs.map((input) => (
+                        <Form key={input.id} {...input} onChange={onChange} />
+                    ))}
+                    {passwordInputs.map((passwordInput) => (
+                        <PasswordForm
+                            key={passwordInput.id}
+                            {...passwordInput}
+                            onChange={onChange}
+                        />
+                    ))}
+                    <button type="submit">REGISTER</button>
+                    <p>
+                        {' '}
+                        Already have an account? &nbsp;
+                        <Link to="/login">Login</Link>
+                    </p>
+                </form>
+            </div>
+>>>>>>> 91d2cb72b7206f2a57a4c4b22b61733ea6fd1154
         </div>
     );
 };
