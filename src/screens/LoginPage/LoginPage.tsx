@@ -1,69 +1,74 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Box, Typography, FormControlLabel, Button, Checkbox } from '@mui/material';
 
-import './LoginPage.scss';
+import styles from './LoginPage.module.scss';
 import Form from '../../components/User/Form/Form';
-
-const initialState = {
-    email: '',
-    password: '',
-};
+import PasswordForm from '../../components/User/Form/PasswordForm';
 
 const LoginPage = () => {
-    const [values, setValues] = useState(initialState);
+    const [checked, setChecked] = useState(false);
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    };
     const inputs = [
         {
             id: 1,
             name: 'email',
             type: 'text',
-            placeholder: 'Email',
-            errorMessage: 'It should be a valid email address!',
             label: 'Email',
-            required: true,
-        },
-        {
-            id: 2,
-            name: 'password',
-            type: 'password',
-            placeholder: 'Password',
-            errorMessage:
-                'Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!',
-            pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^_&*])[a-zA-Z0-9!@#$%^_&*]{8,20}$`,
-            label: 'Password',
-            required: true,
         },
     ];
 
-    const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        setValues(initialState);
-    };
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setValues({ ...values, [e.currentTarget.name]: e.currentTarget.value });
-    };
+    const passwordInputs = [
+        {
+            id: 1,
+            name: 'password',
+            type: 'password',
+            label: 'Password',
+        },
+    ];
 
     return (
-        <div className="loginform">
-            <div className="loginform-box">
-                <div className="loginform-title">Devil CRM System</div>
-                <form onSubmit={submitHandler}>
-                    <h1>Login to your account</h1>
-                    {inputs.map((input) => (
-                        <Form key={input.id} {...input} onChange={onChange} />
-                    ))}
-                    <button type="submit">Login</button>
-                    <p>
-                        {' '}
-                        <Link to="/forgetpassword">Forgot password?</Link>
-                    </p>
-                    <p>
-                        {' '}
-                        Don&lsquo;t have an account? &nbsp;
-                        <Link to="/register">Register</Link>
-                    </p>
-                </form>
-            </div>
+        <div className={styles.login}>
+            <Box
+                className={styles.login_box}
+                component="form"
+                onSubmit={handleSubmit}
+                noValidate
+                autoComplete="off"
+            >
+                <Typography className={styles.login_title} component="h1" variant="h5">
+                    Login to your account
+                </Typography>
+                {inputs.map((input) => (
+                    <Form key={input.id} {...input} label={input.label} />
+                ))}
+                {passwordInputs.map((passwordInput) => (
+                    <PasswordForm key={passwordInput.id} label={passwordInput.label} />
+                ))}
+                <FormControlLabel
+                    className={styles.login_checkBox}
+                    control={
+                        <Checkbox
+                            checked={checked}
+                            onChange={(event) => setChecked(event.target.checked)}
+                            name="checked"
+                            color="primary"
+                        />
+                    }
+                    label={<Typography variant="subtitle1">Remember me</Typography>}
+                />
+                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                    Sign UP
+                </Button>
+                <p>
+                    Don&lsquo;t have an account? &nbsp;
+                    <Link className={styles.login_link} to="/register">
+                        Register
+                    </Link>{' '}
+                </p>
+            </Box>
         </div>
     );
 };
