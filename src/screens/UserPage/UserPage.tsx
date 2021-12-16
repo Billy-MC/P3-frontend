@@ -1,5 +1,6 @@
-const UserPage = () => (
+const UserPage = ({ children }: any) => (
     <div>
+        {children}
         <p>UserPage</p>
     </div>
 );
