@@ -11,7 +11,7 @@
         background: $primary_color;
     }
 
-    &:after {
+    &::after {
         content: '';
         position: absolute;
         right: 0;
@@ -42,6 +42,7 @@
 
     &_link {
         text-decoration: none;
+        color: $second_color;
 
         &:visited {
             color: $second_color;
