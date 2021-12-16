@@ -19,6 +19,17 @@ const theme = createTheme({
         fontSize: 12,
     },
 });
+interface IInput {
+    id: number;
+    name: string;
+    type: string;
+    label: string;
+    required: boolean;
+}
+
+const initialState = {
+    email: '',
+};
 
 const LoginPage = () => {
     const [checked, setChecked] = useState(false);
@@ -26,12 +37,13 @@ const LoginPage = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     };
-    const inputs = [
+    const inputs: IInput[] = [
         {
             id: 1,
             name: 'email',
             type: 'text',
             label: 'Email',
+            required: true,
         },
     ];
 
