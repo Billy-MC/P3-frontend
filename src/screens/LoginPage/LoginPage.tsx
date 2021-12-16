@@ -22,6 +22,7 @@ const theme = createTheme({
 
 const LoginPage = () => {
     const [checked, setChecked] = useState(false);
+    const [values, setValues] = useState(initialState);
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     };
@@ -43,6 +44,10 @@ const LoginPage = () => {
         },
     ];
 
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setValues({ ...values, [event.target.name]: event.target.value });
+    };
+
     return (
         <div className={loginStyles.login}>
             <Box
@@ -58,7 +63,7 @@ const LoginPage = () => {
                     </Typography>
                 </ThemeProvider>
                 {inputs.map((input) => (
-                    <Form key={input.id} {...input} label={input.label} />
+                    <Form key={input.id} {...input} label={input.label} onChange={onChange} />
                 ))}
                 {passwordInputs.map((passwordInput) => (
                     <PasswordForm key={passwordInput.id} label={passwordInput.label} />
@@ -94,13 +99,13 @@ const LoginPage = () => {
                     <p>
                         <Link className={loginStyles.login_link} to="/forgetpassword">
                             Forgot password?
-                        </Link>{' '}
+                        </Link>
                     </p>
                     <p>
                         Don&lsquo;t have an account? &nbsp;
                         <Link className={loginStyles.login_link} to="/register">
                             Register
-                        </Link>{' '}
+                        </Link>
                     </p>
                 </Box>
             </Box>
