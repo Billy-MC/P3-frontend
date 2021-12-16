@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const SideNav = () => (
     <div>
         <ul>
-            <li>
+            {/* <li>
                 <Link to="/">Welcome</Link>
             </li>
             <li>
@@ -14,7 +14,7 @@ const SideNav = () => (
             </li>
             <li>
                 <Link to="/forgetpassword">Forget Password</Link>
-            </li>
+            </li> */}
             <li>
                 <Link to="/customer">Customer</Link>
             </li>
