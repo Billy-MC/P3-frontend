@@ -4,9 +4,9 @@ import welcomeHeading from './components/welcomeHeading';
 
 const WelcomePage = () => (
     <div>
-        <welcomeHeading />
+        <welcomeHeading companyName="devilsCRM" />
         <Link to="/login">
-            <Button>Welcome</Button>
+            <Button>Login</Button>
         </Link>
         <Link to="/register">
             <Button>Register</Button>
