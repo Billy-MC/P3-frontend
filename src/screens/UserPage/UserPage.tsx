@@ -1,4 +1,10 @@
-const UserPage = ({ children }: any) => (
+import { ReactNode, FC } from 'react';
+
+type UserPageProps = {
+    children: ReactNode;
+};
+
+const UserPage: FC<UserPageProps> = ({ children }) => (
     <div>
         {children}
         <p>UserPage</p>
