@@ -9,7 +9,12 @@ import DashboardPage from '../screens/DashboardPage';
 import ForgetPasswordPage from '../screens/ForgetPasswordPage';
 import WelcomePage from '../screens/WelcomePage';
 import ProtectedRouterPage from './components';
+<<<<<<< HEAD
 import Layout from '../layouts';
+||||||| constructed merge base
+=======
+import SideNav from '../layouts/sideNav';
+>>>>>>> all problems related to sideBar solved
 
 const Route = () => (
     <div>
@@ -19,6 +24,7 @@ const Route = () => (
             <RouterPage path="/register" element={<RegisterPage />} />
             <RouterPage path="/forgetpassword" element={<ForgetPasswordPage />} />
             <RouterPage element={<ProtectedRouterPage />}>
+<<<<<<< HEAD
                 <RouterPage
                     path="/user"
                     element={
@@ -59,6 +65,54 @@ const Route = () => (
                         </DashboardPage>
                     }
                 />
+||||||| constructed merge base
+                <RouterPage path="/user" element={<UserPage />} />
+                <RouterPage path="/customer" element={<CustomerPage />} />
+                <RouterPage path="/product" element={<ProductPage />} />
+                <RouterPage path="/order" element={<OrderPage />} />
+                <RouterPage path="/dashboard" element={<DashboardPage />} />
+=======
+                <RouterPage
+                    path="/user"
+                    element={
+                        <UserPage>
+                            <SideNav />
+                        </UserPage>
+                    }
+                />
+                <RouterPage
+                    path="/customer"
+                    element={
+                        <CustomerPage>
+                            <SideNav />
+                        </CustomerPage>
+                    }
+                />
+                <RouterPage
+                    path="/product"
+                    element={
+                        <ProductPage>
+                            <SideNav />
+                        </ProductPage>
+                    }
+                />
+                <RouterPage
+                    path="/order"
+                    element={
+                        <OrderPage>
+                            <SideNav />
+                        </OrderPage>
+                    }
+                />
+                <RouterPage
+                    path="/dashboard"
+                    element={
+                        <DashboardPage>
+                            <SideNav />
+                        </DashboardPage>
+                    }
+                />
+>>>>>>> all problems related to sideBar solved
             </RouterPage>
         </Routes>
     </div>
