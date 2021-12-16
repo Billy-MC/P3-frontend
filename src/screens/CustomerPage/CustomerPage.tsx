@@ -1,5 +1,6 @@
-const CustomerPage = () => (
+const CustomerPage = ({ children }: any) => (
     <div>
+        {children}
         <p>CustomerPage</p>
     </div>
 );

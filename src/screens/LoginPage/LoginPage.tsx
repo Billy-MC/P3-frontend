@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
+
 const LoginPage = () => (
     <div>
-        <p>LoginPage</p>
+        <Link to="/forgetpassword">forgetpassword</Link>
     </div>
 );
 
