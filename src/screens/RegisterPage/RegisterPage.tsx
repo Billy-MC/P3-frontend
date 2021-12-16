@@ -20,29 +20,49 @@ const theme = createTheme({
     },
 });
 
+const initialState = {
+    email: '',
+    firstName: '',
+    lastName: '',
+};
+
+interface IInput {
+    id: number;
+    name: string;
+    type: string;
+    errorMessage: string;
+    label: string;
+    required: boolean;
+}
+
 const RegisterPage = () => {
     const [checked, setChecked] = useState(false);
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-    };
-    const inputs = [
+    const [values, setValues] = useState(initialState);
+
+    const inputs: IInput[] = [
         {
             id: 1,
             name: 'email',
             type: 'text',
+            errorMessage: 'It should be a valid email address!',
             label: 'Email',
+            required: true,
         },
         {
             id: 2,
             name: 'firstName',
             type: 'text',
+            errorMessage: 'First Name should be required',
             label: 'First Name',
+            required: true,
         },
         {
             id: 3,
             name: 'lastName',
             type: 'text',
+            errorMessage: 'Last Name should be required',
             label: 'Last Name',
+            required: true,
         },
     ];
     const passwordInputs = [
@@ -59,6 +79,15 @@ const RegisterPage = () => {
             label: 'Confirm Password',
         },
     ];
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    };
+
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setValues({ ...values, [event.target.name]: event.target.value });
+    };
+
     return (
         <div className={styles.register}>
             <Box
@@ -73,12 +102,15 @@ const RegisterPage = () => {
                         Create an account
                     </Typography>
                 </ThemeProvider>
+
                 {inputs.map((input) => (
-                    <Form key={input.id} {...input} label={input.label} />
+                    <Form key={input.id} {...input} label={input.label} onChange={onChange} />
                 ))}
+
                 {passwordInputs.map((passwordInput) => (
                     <PasswordForm key={passwordInput.id} label={passwordInput.label} />
                 ))}
+
                 <FormControlLabel
                     control={
                         <Checkbox
@@ -102,6 +134,7 @@ const RegisterPage = () => {
                         </Typography>
                     }
                 />
+
                 <ThemeProvider theme={theme}>
                     <Button
                         type="submit"
@@ -112,6 +145,7 @@ const RegisterPage = () => {
                         Sign UP
                     </Button>
                 </ThemeProvider>
+
                 <p>
                     Already have an account? &nbsp;
                     <Link className={styles.register_link} to="/login">
