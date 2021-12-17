@@ -1,16 +1,8 @@
-import { Link } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import welcomeHeading from './components/welcomeHeading';
+import HeadingWithSection from './components/HeadingWithSection';
 
 const WelcomePage = () => (
     <div>
-        <welcomeHeading companyName="devilsCRM" />
-        <Link to="/login">
-            <Button>Login</Button>
-        </Link>
-        <Link to="/register">
-            <Button>Register</Button>
-        </Link>
+        <HeadingWithSection />
     </div>
 );
 
