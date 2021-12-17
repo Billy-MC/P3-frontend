@@ -1,19 +1,20 @@
-import Stack from '@mui/material/Button';
 import * as react from 'react';
+import { Stack } from '@mui/material';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-interface welcomeHeadingType {
+interface IHeading {
     companyName: string;
 }
 
-const welcomeHeading: react.FC<welcomeHeadingType> = (props) => {
+const WelcomeHeading: react.FC<IHeading> = (props) => {
     const { companyName } = props;
     return (
         <div>
-            <Stack>
-                <div>logo1</div>
+            <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
+                <div>logo</div>
                 <div>{companyName}</div>
             </Stack>
         </div>
     );
 };
-export default welcomeHeading;
+export default WelcomeHeading;
