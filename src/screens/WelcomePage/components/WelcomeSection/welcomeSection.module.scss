@@ -1,0 +1,16 @@
+@import '../../../../assets/styles/layout.scss';
+
+.welcomeSection {
+    @include centeredFlex;
+    flex-direction: column;
+    .welcomeMessage {
+        text-align: center;
+        font-size: 60px;
+    }
+    .router {
+        text-decoration: none;
+        margin: 5px;
+        width: 150px;
+        height: auto;
+    }
+}

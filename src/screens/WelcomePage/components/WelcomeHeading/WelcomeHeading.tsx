@@ -8,9 +8,8 @@ interface IHeading {
 
 const WelcomeHeading: react.FC<IHeading> = (props) => {
     const { companyName } = props;
-    const base = styles.welcomeHeading;
     return (
-        <div className={base}>
+        <div className={styles.welcomeHeading}>
             <div className={styles.logo}>
                 <p>logo</p>
             </div>
