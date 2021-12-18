@@ -1,0 +1,19 @@
+@mixin border($color: yellow) {
+    border: 2px solid $color;
+}
+
+.headingWithSection {
+    height: 100vh;
+    width: 100vw;
+    @include border();
+    .heading {
+        height: 20%;
+        width: 100%;
+        @include border(green);
+    }
+    .section {
+        height: 80%;
+        width: 100%;
+        @include border(blue);
+    }
+}
