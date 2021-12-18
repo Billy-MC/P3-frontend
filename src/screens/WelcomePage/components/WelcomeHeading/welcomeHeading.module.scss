@@ -1,0 +1,22 @@
+@mixin border($color: yellow) {
+    border: 2px solid $color;
+}
+
+.welcomeHeading {
+    display: flex;
+    .logo {
+        height: 100px;
+        width: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include border(red);
+    }
+    .company {
+        height: 100px;
+        width: 200px;
+        justify-content: center;
+        align-items: center;
+        @include border(cyan);
+    }
+}
