@@ -1,0 +1,8 @@
+@mixin border($color: black) {
+    border: 3px solid $color;
+}
+@mixin centeredFlex() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

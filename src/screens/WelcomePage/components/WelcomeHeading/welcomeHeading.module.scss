@@ -1,22 +1,23 @@
-@mixin border($color: yellow) {
-    border: 2px solid $color;
-}
+@import '../../../../assets/styles/layout.scss';
 
 .welcomeHeading {
-    display: flex;
+    height: 100%;
+    @include centeredFlex();
     .logo {
+        @include centeredFlex;
         height: 100px;
         width: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        @include border(red);
+        margin: 10px;
+        color: white;
+        font-size: 35px;
+        background-color: #08192d;
+        text-align: center;
     }
     .company {
+        @include centeredFlex;
         height: 100px;
-        width: 200px;
-        justify-content: center;
-        align-items: center;
-        @include border(cyan);
+        width: auto;
+        margin: 10px;
+        font-size: 40px;
     }
 }

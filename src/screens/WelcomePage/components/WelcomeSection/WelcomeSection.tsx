@@ -1,19 +1,47 @@
+import { ThemeProvider, createTheme, Button } from '@mui/material';
 import * as react from 'react';
-import { Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
-import Button from '@mui/material/Button';
+import styles from './welcomeSection.module.scss';
 
-const WelcomeSection: react.FC = () => (
-    <div>
-        <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-            <Link to="/login">
-                <Button>Login</Button>
-            </Link>
-            <Link to="/register">
-                <Button>Register</Button>
-            </Link>
-        </Stack>
-    </div>
-);
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#08192d',
+        },
+        secondary: {
+            main: '#00fff0',
+        },
+    },
+    typography: {
+        fontSize: 20,
+    },
+});
+
+const WelcomeSection: react.FC = () => {
+    const message = (
+        <p>
+            Welcome to
+            <br />
+            Devils&apos; B2C CRM System
+        </p>
+    );
+    return (
+        <div className={styles.welcomeSection}>
+            <h1 className={styles.welcomeMessage}>{message}</h1>
+            <ThemeProvider theme={theme}>
+                <Link to="/login" className={styles.router}>
+                    <Button variant="contained" fullWidth>
+                        Login
+                    </Button>
+                </Link>
+                <Link to="/register" className={styles.router}>
+                    <Button variant="contained" fullWidth>
+                        Register
+                    </Button>
+                </Link>
+            </ThemeProvider>
+        </div>
+    );
+};
 
 export default WelcomeSection;
