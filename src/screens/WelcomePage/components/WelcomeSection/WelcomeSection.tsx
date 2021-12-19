@@ -13,35 +13,25 @@ const theme = createTheme({
         },
     },
     typography: {
-        fontSize: 20,
+        fontSize: 25,
     },
 });
 
-const WelcomeSection: react.FC = () => {
-    const message = (
-        <p>
+const WelcomeSection: react.FC = () => (
+    <div className={styles.welcomeSection}>
+        <h1 className={styles.welcomeMessage}>
             Welcome to
             <br />
             Devils&apos; B2C CRM System
-        </p>
-    );
-    return (
-        <div className={styles.welcomeSection}>
-            <h1 className={styles.welcomeMessage}>{message}</h1>
-            <ThemeProvider theme={theme}>
-                <Link to="/login" className={styles.router}>
-                    <Button variant="contained" fullWidth>
-                        Login
-                    </Button>
-                </Link>
-                <Link to="/register" className={styles.router}>
-                    <Button variant="contained" fullWidth>
-                        Register
-                    </Button>
-                </Link>
-            </ThemeProvider>
-        </div>
-    );
-};
+        </h1>
+        <ThemeProvider theme={theme}>
+            <Link to="/login" className={styles.router}>
+                <Button variant="contained" fullWidth sx={{ borderRadius: 30 }}>
+                    Start
+                </Button>
+            </Link>
+        </ThemeProvider>
+    </div>
+);
 
 export default WelcomeSection;

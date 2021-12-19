@@ -1,8 +1,10 @@
-import HeadingWithSection from './components/HeadingWithSection';
+import HeadingWithSection from '../../components/HeadingWithSection';
+import WelcomeHeading from './components/WelcomeHeading';
+import WelcomeSection from './components/WelcomeSection';
 
 const WelcomePage = () => (
     <div>
-        <HeadingWithSection />
+        <HeadingWithSection Heading={WelcomeHeading} Section={WelcomeSection} />
     </div>
 );
 
