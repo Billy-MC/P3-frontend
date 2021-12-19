@@ -1,5 +1,4 @@
 import * as react from 'react';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styles from './welcomeHeading.module.scss';
 
 const WelcomeHeading: react.FC = () => (
