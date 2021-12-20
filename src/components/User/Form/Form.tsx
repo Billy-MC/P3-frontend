@@ -4,7 +4,7 @@ import React from 'react';
 interface FormProps {
     label: string;
     type: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Form: React.FC<FormProps> = (props) => {

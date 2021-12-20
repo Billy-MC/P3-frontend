@@ -1,6 +1,6 @@
 @import '../../assets/styles/variable.scss';
 
-.register {
+.registration {
     &::before {
         content: '';
         position: absolute;
@@ -25,7 +25,7 @@
         background-position: center;
     }
 
-    &_box {
+    &-box {
         margin-top: 130px;
         margin-left: 200px;
         width: 275px;
@@ -36,11 +36,12 @@
         left: 0%;
     }
 
-    &_title {
+    &-title {
         color: $primary_color;
+        font-size: 12px;
     }
 
-    &_link {
+    &-link {
         text-decoration: none;
         color: $second_color;
 
@@ -50,6 +51,10 @@
         &:hover {
             text-decoration: underline;
         }
+    }
+    &-btn {
+        // background: linear-gradient($primary_color 30%, $primary_color 90%);
+        width: 100%;
     }
 
     form {

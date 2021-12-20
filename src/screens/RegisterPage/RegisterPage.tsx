@@ -7,14 +7,6 @@ import Form from '../../components/User/Form/Form';
 import PasswordForm from '../../components/User/Form/PasswordForm';
 
 const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#08192d',
-        },
-        secondary: {
-            main: '#00fff0',
-        },
-    },
     typography: {
         fontSize: 12,
     },
@@ -89,16 +81,16 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className={styles.register}>
+        <div className={styles.registration}>
             <Box
-                className={styles.register_box}
+                className={styles['registration-box']}
                 component="form"
                 onSubmit={handleSubmit}
                 noValidate
                 autoComplete="off"
             >
                 <ThemeProvider theme={theme}>
-                    <Typography className={styles.register_title} component="h1" variant="h5">
+                    <Typography className={styles['registration-title']}>
                         Create an account
                     </Typography>
                 </ThemeProvider>
@@ -127,7 +119,7 @@ const RegisterPage = () => {
                                 variant="subtitle1"
                                 component={Link}
                                 to="#"
-                                className={styles.register_link}
+                                className={styles['registration-link']}
                             >
                                 Terms & Condition.
                             </Typography>
@@ -135,20 +127,18 @@ const RegisterPage = () => {
                     }
                 />
 
-                <ThemeProvider theme={theme}>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2, backgroundColor: 'primary' }}
-                    >
-                        Sign UP
-                    </Button>
-                </ThemeProvider>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{ mt: 1, mb: 1 }}
+                    className={styles['registration-btn']}
+                >
+                    Sign UP
+                </Button>
 
                 <p>
                     Already have an account? &nbsp;
-                    <Link className={styles.register_link} to="/login">
+                    <Link className={styles['registration-link']} to="/login">
                         Login
                     </Link>
                 </p>
