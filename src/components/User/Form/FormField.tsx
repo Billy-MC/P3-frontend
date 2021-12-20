@@ -1,6 +1,6 @@
 import { Box, TextField } from '@mui/material';
 import React from 'react';
-import styles from './Form.module.scss';
+import styles from './FormField.module.scss';
 
 export interface FormProps {
     label: string;
@@ -14,13 +14,10 @@ const Form: React.FC<FormProps> = (props) => {
     return (
         <Box>
             <TextField
-                autoFocus
                 className={`${styles.form} ${className}`}
-                fullWidth
                 label={label}
                 variant="outlined"
                 size="small"
-                sx={{ mt: 1.5 }}
                 {...inputProps}
                 type={type}
                 onChange={onChange}

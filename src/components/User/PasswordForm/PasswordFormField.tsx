@@ -1,9 +1,11 @@
 import React from 'react';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { IconButton, OutlinedInput, InputLabel, InputAdornment, FormControl } from '@mui/material';
+import styles from './PasswordFormField.module.scss';
 
-interface PasswordFormProps {
+export interface PasswordFormProps {
     label: string;
+    className?: string;
 }
 interface State {
     password: string;
@@ -11,7 +13,7 @@ interface State {
 }
 
 const PasswordForm: React.FC<PasswordFormProps> = (props) => {
-    const { label } = props;
+    const { label, className } = props;
 
     const [values, setValues] = React.useState<State>({
         password: '',
@@ -34,7 +36,11 @@ const PasswordForm: React.FC<PasswordFormProps> = (props) => {
     };
 
     return (
-        <FormControl sx={{ mt: 1.5, width: '32ch' }} variant="outlined" size="small">
+        <FormControl
+            className={`${styles.passwordfield} ${className}`}
+            variant="outlined"
+            size="small"
+        >
             <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
             <OutlinedInput
                 type={values.showPassword ? 'text' : 'password'}

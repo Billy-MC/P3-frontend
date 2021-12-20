@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Box, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import styles from './RegisterPage.module.scss';
 import ButtonPrimary from '../../components/Button';
-import Form from '../../components/User/Form/Form';
-import PasswordForm from '../../components/User/Form/PasswordForm';
+import FormField from '../../components/User/Form';
+import PasswordFormField from '../../components/User/PasswordForm';
 
 const initialState = {
     email: '',
@@ -15,7 +15,7 @@ interface IInput {
     id: number;
     name: string;
     type: string;
-    errorMessage: string;
+    errorMessage?: string;
     label: string;
     required: boolean;
 }
@@ -49,19 +49,19 @@ const RegisterPage = () => {
             label: 'Last Name',
             required: true,
         },
-    ];
-    const passwordInputs = [
         {
-            id: 1,
+            id: 4,
             name: 'password',
             type: 'password',
             label: 'Password',
+            required: true,
         },
         {
-            id: 2,
+            id: 5,
             name: 'confirmedPassword',
             type: 'password',
             label: 'Confirm Password',
+            required: true,
         },
     ];
 
@@ -83,12 +83,19 @@ const RegisterPage = () => {
                 autoComplete="off"
             >
                 <Typography className={styles['registration-title']}>Create an account</Typography>
-                {inputs.map((input) => (
-                    <Form key={input.id} {...input} label={input.label} onChange={onChange} />
-                ))}
-                {passwordInputs.map((passwordInput) => (
-                    <PasswordForm key={passwordInput.id} label={passwordInput.label} />
-                ))}
+                {inputs.map((input) =>
+                    input.type === 'text' ? (
+                        <FormField
+                            key={input.id}
+                            {...input}
+                            label={input.label}
+                            onChange={onChange}
+                        />
+                    ) : (
+                        <PasswordFormField key={input.id} label={input.label} />
+                    ),
+                )}
+
                 <FormControlLabel
                     control={
                         <Checkbox
