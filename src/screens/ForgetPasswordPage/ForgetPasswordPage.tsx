@@ -6,7 +6,7 @@ import styles from './ForgetPasswordPage.module.scss';
 import FormField from '../../components/User/Form';
 
 interface IInput {
-    id: number;
+    id: string;
     name: string;
     type: string;
     label: string;
@@ -28,7 +28,7 @@ const ForgetPasswordPage = () => {
     };
     const inputs: IInput[] = [
         {
-            id: 1,
+            id: '1',
             name: 'email',
             type: 'text',
             label: 'Email',

@@ -8,7 +8,7 @@ import FormField from '../../components/User/Form';
 import PasswordFormField from '../../components/User/PasswordForm';
 
 interface IInput {
-    id: number;
+    id: string;
     name: string;
     type: string;
     label: string;
@@ -27,14 +27,14 @@ const LoginPage = () => {
     };
     const inputs: IInput[] = [
         {
-            id: 1,
+            id: '1',
             name: 'email',
             type: 'text',
             label: 'Email',
             required: true,
         },
         {
-            id: 2,
+            id: '2',
             name: 'password',
             type: 'password',
             label: 'Password',
