@@ -1,23 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Typography, FormControlLabel, Button, Checkbox } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Box, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import styles from './RegisterPage.module.scss';
+import ButtonPrimary from '../../components/Button';
 import Form from '../../components/User/Form/Form';
 import PasswordForm from '../../components/User/Form/PasswordForm';
-
-const theme = createTheme({
-    typography: {
-        fontSize: 12,
-    },
-});
 
 const initialState = {
     email: '',
     firstName: '',
     lastName: '',
 };
-
 interface IInput {
     id: number;
     name: string;
@@ -89,20 +82,13 @@ const RegisterPage = () => {
                 noValidate
                 autoComplete="off"
             >
-                <ThemeProvider theme={theme}>
-                    <Typography className={styles['registration-title']}>
-                        Create an account
-                    </Typography>
-                </ThemeProvider>
-
+                <Typography className={styles['registration-title']}>Create an account</Typography>
                 {inputs.map((input) => (
                     <Form key={input.id} {...input} label={input.label} onChange={onChange} />
                 ))}
-
                 {passwordInputs.map((passwordInput) => (
                     <PasswordForm key={passwordInput.id} label={passwordInput.label} />
                 ))}
-
                 <FormControlLabel
                     control={
                         <Checkbox
@@ -126,16 +112,9 @@ const RegisterPage = () => {
                         </Typography>
                     }
                 />
-
-                <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{ mt: 1, mb: 1 }}
-                    className={styles['registration-btn']}
-                >
+                <ButtonPrimary className={styles['registration-btn']} type="submit">
                     Sign UP
-                </Button>
-
+                </ButtonPrimary>
                 <p>
                     Already have an account? &nbsp;
                     <Link className={styles['registration-link']} to="/login">
