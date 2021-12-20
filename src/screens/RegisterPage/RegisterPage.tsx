@@ -10,9 +10,11 @@ const initialState = {
     email: '',
     firstName: '',
     lastName: '',
+    password: '',
+    confirmedPassword: '',
 };
 interface IInput {
-    id: number;
+    id: string;
     name: string;
     type: string;
     errorMessage?: string;
@@ -26,38 +28,35 @@ const RegisterPage = () => {
 
     const inputs: IInput[] = [
         {
-            id: 1,
+            id: '1',
             name: 'email',
             type: 'text',
-            errorMessage: 'It should be a valid email address!',
             label: 'Email',
             required: true,
         },
         {
-            id: 2,
+            id: '2',
             name: 'firstName',
             type: 'text',
-            errorMessage: 'First Name should be required',
             label: 'First Name',
             required: true,
         },
         {
-            id: 3,
+            id: '3',
             name: 'lastName',
             type: 'text',
-            errorMessage: 'Last Name should be required',
             label: 'Last Name',
             required: true,
         },
         {
-            id: 4,
+            id: '4',
             name: 'password',
             type: 'password',
             label: 'Password',
             required: true,
         },
         {
-            id: 5,
+            id: '5',
             name: 'confirmedPassword',
             type: 'password',
             label: 'Confirm Password',
@@ -79,7 +78,6 @@ const RegisterPage = () => {
                 className={styles['registration-box']}
                 component="form"
                 onSubmit={handleSubmit}
-                noValidate
                 autoComplete="off"
             >
                 <Typography className={styles['registration-title']}>Create an account</Typography>
