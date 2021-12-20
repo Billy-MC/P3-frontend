@@ -9,7 +9,12 @@ import DashboardPage from '../screens/DashboardPage';
 import ForgetPasswordPage from '../screens/ForgetPasswordPage';
 import WelcomePage from '../screens/WelcomePage';
 import ProtectedRouterPage from './components';
+<<<<<<< HEAD
 import Layout from '../layouts';
+||||||| d2f404b
+=======
+import SideNav from '../layouts/sideNav';
+>>>>>>> 3fa3128a1a4dd3d61045a7a18e9c6f46a84251b6
 
 const Route = () => (
     <div>
@@ -19,6 +24,7 @@ const Route = () => (
             <RouterPage path="/register" element={<RegisterPage />} />
             <RouterPage path="/forgetpassword" element={<ForgetPasswordPage />} />
             <RouterPage element={<ProtectedRouterPage />}>
+<<<<<<< HEAD
                 <RouterPage
                     path="/user"
                     element={
@@ -59,6 +65,54 @@ const Route = () => (
                         </DashboardPage>
                     }
                 />
+||||||| d2f404b
+                <RouterPage path="/user" element={<UserPage />} />
+                <RouterPage path="/customer" element={<CustomerPage />} />
+                <RouterPage path="/product" element={<ProductPage />} />
+                <RouterPage path="/order" element={<OrderPage />} />
+                <RouterPage path="/dashboard" element={<DashboardPage />} />
+=======
+                <RouterPage
+                    path="/user"
+                    element={
+                        <UserPage>
+                            <SideNav />
+                        </UserPage>
+                    }
+                />
+                <RouterPage
+                    path="/customer"
+                    element={
+                        <CustomerPage>
+                            <SideNav />
+                        </CustomerPage>
+                    }
+                />
+                <RouterPage
+                    path="/product"
+                    element={
+                        <ProductPage>
+                            <SideNav />
+                        </ProductPage>
+                    }
+                />
+                <RouterPage
+                    path="/order"
+                    element={
+                        <OrderPage>
+                            <SideNav />
+                        </OrderPage>
+                    }
+                />
+                <RouterPage
+                    path="/dashboard"
+                    element={
+                        <DashboardPage>
+                            <SideNav />
+                        </DashboardPage>
+                    }
+                />
+>>>>>>> 3fa3128a1a4dd3d61045a7a18e9c6f46a84251b6
             </RouterPage>
         </Routes>
     </div>
