@@ -1,23 +1,30 @@
-@import '../../../../assets/styles/layout.scss';
-
 .welcomeHeading {
     height: 100%;
-    @include centeredFlex();
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .logo {
-        @include centeredFlex;
         height: 100px;
         width: 100px;
         margin: 10px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         color: white;
         font-size: 35px;
         background-color: #08192d;
         text-align: center;
     }
     .company {
-        @include centeredFlex;
         height: 100px;
         width: auto;
         margin: 10px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
         font-size: 40px;
     }
 }

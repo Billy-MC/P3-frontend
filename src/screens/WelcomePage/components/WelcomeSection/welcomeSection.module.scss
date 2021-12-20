@@ -1,7 +1,7 @@
-@import '../../../../assets/styles/layout.scss';
-
 .welcomeSection {
-    @include centeredFlex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     .welcomeMessage {
         text-align: center;
