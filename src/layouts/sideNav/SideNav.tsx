@@ -10,15 +10,13 @@ import {
     Person as User,
 } from '@mui/icons-material';
 
-const drawerWidth = 240;
-
 const useStyles = makeStyles({
     root: {},
     drawer: {
-        width: drawerWidth,
+        width: 240,
     },
     drawerPaper: {
-        width: drawerWidth,
+        width: 240,
     },
     active: {
         background: '#fff',
@@ -72,7 +70,7 @@ const SideNav = () => {
                 classes={{ paper: classes.drawerPaper }}
                 sx={{
                     '& .MuiDrawer-paper': {
-                        width: drawerWidth,
+                        width: 240,
                         backgroundColor: '#0c2556',
                         color: '#fff',
                         boxSizing: 'border-box',
@@ -87,7 +85,7 @@ const SideNav = () => {
                 <List>
                     {menuItems.map((item) => (
                         <ListItem
-                            // FIXME: 如果加 button 的话 当前页不高亮
+                            // FIXME: Current onPage is not highlighted if add button property
                             key={item.text}
                             onClick={() => navigate(item.path)}
                             className={location.pathname === item.path ? classes.active : undefined}
