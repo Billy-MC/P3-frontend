@@ -81,7 +81,7 @@ const SideNav = () => {
             >
                 <div>
                     <Typography variant="h5" className={classes.title}>
-                        CRM -Devils
+                        CRM - Devils
                     </Typography>
                 </div>
                 <List>
@@ -90,7 +90,6 @@ const SideNav = () => {
                             // FIXME: 如果加 button 的话 当前页不高亮
                             key={item.text}
                             onClick={() => navigate(item.path)}
-                            // className={location.pathname === item.path ? classes.active : undefined}
                             className={location.pathname === item.path ? classes.active : undefined}
                             sx={{
                                 ':hover': {
