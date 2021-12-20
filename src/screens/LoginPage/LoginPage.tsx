@@ -1,24 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Typography, FormControlLabel, Button, Checkbox } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import loginStyles from './LoginPage.module.scss';
-import Form from '../../components/User/Form/Form';
-import PasswordForm from '../../components/User/Form/PasswordForm';
+import { Box, Typography, FormControlLabel, Checkbox } from '@mui/material';
+import ButtonPrimary from '../../components/Button';
 
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#08192d',
-        },
-        secondary: {
-            main: '#00fff0',
-        },
-    },
-    typography: {
-        fontSize: 12,
-    },
-});
+import styles from './LoginPage.module.scss';
+import FormField from '../../components/User/Form';
+import PasswordFormField from '../../components/User/PasswordForm';
+
 interface IInput {
     id: number;
     name: string;
@@ -45,14 +33,12 @@ const LoginPage = () => {
             label: 'Email',
             required: true,
         },
-    ];
-
-    const passwordInputs = [
         {
-            id: 1,
+            id: 2,
             name: 'password',
             type: 'password',
             label: 'Password',
+            required: true,
         },
     ];
 
@@ -61,61 +47,54 @@ const LoginPage = () => {
     };
 
     return (
-        <div className={loginStyles.login}>
+        <div className={styles.login}>
             <Box
-                className={loginStyles.login_box}
+                className={styles['login-box']}
                 component="form"
                 onSubmit={handleSubmit}
-                noValidate
                 autoComplete="off"
             >
-                <ThemeProvider theme={theme}>
-                    <Typography className={loginStyles.login_title} component="h1" variant="h5">
-                        Login to your account
-                    </Typography>
-                </ThemeProvider>
-                {inputs.map((input) => (
-                    <Form key={input.id} {...input} label={input.label} onChange={onChange} />
-                ))}
-                {passwordInputs.map((passwordInput) => (
-                    <PasswordForm key={passwordInput.id} label={passwordInput.label} />
-                ))}
+                <Typography className={styles['login-title']}>Login to your account</Typography>
+                {inputs.map((input) =>
+                    input.type === 'text' ? (
+                        <FormField
+                            key={input.id}
+                            {...input}
+                            label={input.label}
+                            onChange={onChange}
+                        />
+                    ) : (
+                        <PasswordFormField key={input.id} label={input.label} />
+                    ),
+                )}
                 <FormControlLabel
-                    className={loginStyles.login_checkBox}
+                    className={styles['login-checkBox']}
                     control={
                         <Checkbox
                             checked={checked}
                             onChange={(event) => setChecked(event.target.checked)}
                             name="checked"
-                            color="primary"
                         />
                     }
                     label={<Typography variant="subtitle1">Remember me</Typography>}
                 />
-                <ThemeProvider theme={theme}>
-                    <Link className={loginStyles.login_Btn} to="/dashboard">
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2, backgroundColor: 'primary' }}
-                        >
-                            Login
-                        </Button>
-                    </Link>
-                </ThemeProvider>
+                <Link className={styles['login-btn']} to="/dashboard">
+                    <ButtonPrimary className={styles['registration-btn']} type="submit">
+                        Login
+                    </ButtonPrimary>
+                </Link>
                 <Box
-                    className={loginStyles.login_bottom}
+                    className={styles['login-bottom']}
                     sx={{ display: 'flex', flexDirection: 'column' }}
                 >
                     <p>
-                        <Link className={loginStyles.login_link} to="/forgetpassword">
+                        <Link className={styles['login-link']} to="/forgetpassword">
                             Forgot password?
                         </Link>
                     </p>
                     <p>
                         Don&lsquo;t have an account? &nbsp;
-                        <Link className={loginStyles.login_link} to="/register">
+                        <Link className={styles['login-link']} to="/register">
                             Register
                         </Link>
                     </p>

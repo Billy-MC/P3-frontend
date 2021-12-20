@@ -25,7 +25,7 @@
         background-position: center;
     }
 
-    &_box {
+    &-box {
         margin-top: 130px;
         margin-left: 200px;
         width: 275px;
@@ -35,32 +35,33 @@
         position: relative;
         left: 0%;
     }
-    &_title {
+    &-title {
+        font-size: 18px;
         color: $primary_color;
     }
 
-    &_link {
+    &-link {
         text-decoration: none;
-        color: $second_color;
+        color: $secondary_color;
 
         &:visited {
-            color: $second_color;
+            color: $secondary_color;
         }
         &:hover {
             text-decoration: underline;
         }
     }
 
-    &_Btn {
+    &-btn {
         text-decoration: none;
     }
-    &_bottom {
+    &-bottom {
         align-items: center;
         justify-content: center;
         flex: center;
     }
 
-    &_checkBox {
+    &-checkBox {
         align-items: center;
         justify-content: center;
     }

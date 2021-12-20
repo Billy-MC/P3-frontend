@@ -1,23 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Typography, Button } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import forgetPasswordStyles from './ForgetPasswordPage.module.scss';
-import Form from '../../components/User/Form/Form';
+import { Box, Typography } from '@mui/material';
+import ButtonPrimary from '../../components/Button';
+import styles from './ForgetPasswordPage.module.scss';
+import FormField from '../../components/User/Form';
 
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#08192d',
-        },
-        secondary: {
-            main: '#00fff0',
-        },
-    },
-    typography: {
-        fontSize: 12,
-    },
-});
 interface IInput {
     id: number;
     name: string;
@@ -50,43 +37,28 @@ const ForgetPasswordPage = () => {
     ];
 
     return (
-        <div className={forgetPasswordStyles.forget}>
+        <div className={styles.forgotPassword}>
             <Box
-                className={forgetPasswordStyles.forget_box}
+                className={styles['forgotPassword-box']}
                 component="form"
                 onSubmit={handleSubmit}
-                noValidate
                 autoComplete="off"
             >
-                <ThemeProvider theme={theme}>
-                    <Typography
-                        className={forgetPasswordStyles.forget_title}
-                        component="h1"
-                        variant="h5"
-                    >
-                        Recover my password
-                    </Typography>
-                </ThemeProvider>
+                <Typography className={styles['forgotPassword-title']}>
+                    Recover my password
+                </Typography>
 
-                <span className={forgetPasswordStyles.forget_subTitle}>
+                <span className={styles['forgotPassword-subTitle']}>
                     Tell us your email so we can send you a reset link
                 </span>
                 {inputs.map((input) => (
-                    <Form key={input.id} {...input} label={input.label} onChange={onChange} />
+                    <FormField key={input.id} {...input} label={input.label} onChange={onChange} />
                 ))}
-                <ThemeProvider theme={theme}>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2, backgroundColor: 'primary' }}
-                    >
-                        Recover Password
-                    </Button>
-                </ThemeProvider>
+                <ButtonPrimary type="submit">Recover Password</ButtonPrimary>
+
                 <p>
                     Know your password? &nbsp;
-                    <Link className={forgetPasswordStyles.forget_link} to="/login">
+                    <Link className={styles['forgotPassword-link']} to="/login">
                         Login
                     </Link>
                 </p>
