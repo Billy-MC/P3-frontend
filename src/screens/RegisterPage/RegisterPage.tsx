@@ -1,36 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Typography, FormControlLabel, Button, Checkbox } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Box, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import styles from './RegisterPage.module.scss';
-import Form from '../../components/User/Form/Form';
-import PasswordForm from '../../components/User/Form/PasswordForm';
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#08192d',
-        },
-        secondary: {
-            main: '#00fff0',
-        },
-    },
-    typography: {
-        fontSize: 12,
-    },
-});
+import ButtonPrimary from '../../components/Button';
+import FormField from '../../components/User/Form';
+import PasswordFormField from '../../components/User/PasswordForm';
 
 const initialState = {
     email: '',
     firstName: '',
     lastName: '',
 };
-
 interface IInput {
     id: number;
     name: string;
     type: string;
-    errorMessage: string;
+    errorMessage?: string;
     label: string;
     required: boolean;
 }
@@ -64,19 +49,19 @@ const RegisterPage = () => {
             label: 'Last Name',
             required: true,
         },
-    ];
-    const passwordInputs = [
         {
-            id: 1,
+            id: 4,
             name: 'password',
             type: 'password',
             label: 'Password',
+            required: true,
         },
         {
-            id: 2,
+            id: 5,
             name: 'confirmedPassword',
             type: 'password',
             label: 'Confirm Password',
+            required: true,
         },
     ];
 
@@ -84,32 +69,32 @@ const RegisterPage = () => {
         event.preventDefault();
     };
 
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValues({ ...values, [event.target.name]: event.target.value });
     };
 
     return (
-        <div className={styles.register}>
+        <div className={styles.registration}>
             <Box
-                className={styles.register_box}
+                className={styles['registration-box']}
                 component="form"
                 onSubmit={handleSubmit}
                 noValidate
                 autoComplete="off"
             >
-                <ThemeProvider theme={theme}>
-                    <Typography className={styles.register_title} component="h1" variant="h5">
-                        Create an account
-                    </Typography>
-                </ThemeProvider>
-
-                {inputs.map((input) => (
-                    <Form key={input.id} {...input} label={input.label} onChange={onChange} />
-                ))}
-
-                {passwordInputs.map((passwordInput) => (
-                    <PasswordForm key={passwordInput.id} label={passwordInput.label} />
-                ))}
+                <Typography className={styles['registration-title']}>Create an account</Typography>
+                {inputs.map((input) =>
+                    input.type === 'text' ? (
+                        <FormField
+                            key={input.id}
+                            {...input}
+                            label={input.label}
+                            onChange={onChange}
+                        />
+                    ) : (
+                        <PasswordFormField key={input.id} label={input.label} />
+                    ),
+                )}
 
                 <FormControlLabel
                     control={
@@ -127,28 +112,19 @@ const RegisterPage = () => {
                                 variant="subtitle1"
                                 component={Link}
                                 to="#"
-                                className={styles.register_link}
+                                className={styles['registration-link']}
                             >
                                 Terms & Condition.
                             </Typography>
                         </Typography>
                     }
                 />
-
-                <ThemeProvider theme={theme}>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2, backgroundColor: 'primary' }}
-                    >
-                        Sign UP
-                    </Button>
-                </ThemeProvider>
-
+                <ButtonPrimary className={styles['registration-btn']} type="submit">
+                    Sign UP
+                </ButtonPrimary>
                 <p>
                     Already have an account? &nbsp;
-                    <Link className={styles.register_link} to="/login">
+                    <Link className={styles['registration-link']} to="/login">
                         Login
                     </Link>
                 </p>

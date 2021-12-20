@@ -1,0 +1,12 @@
+@import '../../assets/styles/variable.scss';
+
+.Button {
+    background-color: $primary_color;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    &:hover {
+        background-color: $primary_color_lighter;
+    }
+}

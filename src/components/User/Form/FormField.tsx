@@ -1,23 +1,23 @@
 import { Box, TextField } from '@mui/material';
 import React from 'react';
+import styles from './FormField.module.scss';
 
-interface FormProps {
+export interface FormProps {
     label: string;
     type: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    className?: string;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Form: React.FC<FormProps> = (props) => {
-    const { label, type, onChange, ...inputProps } = props;
+    const { label, type, onChange, className, ...inputProps } = props;
     return (
         <Box>
             <TextField
-                autoFocus
-                fullWidth
+                className={`${styles.form} ${className}`}
                 label={label}
                 variant="outlined"
                 size="small"
-                sx={{ mt: 1.5 }}
                 {...inputProps}
                 type={type}
                 onChange={onChange}
