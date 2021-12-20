@@ -1,54 +1,110 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Drawer from '@mui/material/Drawer';
-import Typography from '@mui/material/Typography';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import { Home, People, ShoppingBasket, ShoppingCart, Person } from '@mui/icons-material';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+import { Drawer, Typography, List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
+
+import {
+    Home as Dashboard,
+    People as Customer,
+    ShoppingBasket as Product,
+    ShoppingCart as Order,
+    Person as User,
+} from '@mui/icons-material';
+
+import { makeStyles } from '@mui/styles';
+
+import styles from './index.module.scss';
+
+const drawerWidth = 240;
+
+const useStyles = makeStyles({
+    root: {},
+    drawer: {
+        width: drawerWidth,
+    },
+    drawerPaper: {
+        width: drawerWidth,
+    },
+    active: {
+        background: '#fff',
+        color: '#000',
+    },
+    title: {
+        color: '#8C9EBB',
+        padding: 17,
+    },
+});
 
 const SideNav = () => {
+    const classes = useStyles();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const menuItems = [
         {
             text: 'Dashboard',
-            icon: <Home color="secondary" />,
+            icon: <Dashboard color="secondary" />,
             path: '/dashboard',
         },
         {
             text: 'Customers',
-            icon: <People color="secondary" />,
+            icon: <Customer color="secondary" />,
             path: '/customer',
         },
         {
             text: 'Products',
-            icon: <ShoppingBasket color="secondary" />,
+            icon: <Product color="secondary" />,
             path: '/product',
         },
         {
             text: 'Orders',
-            icon: <ShoppingCart color="secondary" />,
+            icon: <Order color="secondary" />,
             path: '/order',
         },
         {
             text: 'Users',
-            icon: <Person color="secondary" />,
+            icon: <User color="secondary" />,
             path: '/user',
         },
     ];
 
     return (
-        <div>
-            <Drawer variant="permanent" anchor="left">
+        <div className={classes.root}>
+            <Drawer
+                className={styles.test}
+                variant="permanent"
+                anchor="left"
+                classes={{ paper: classes.drawerPaper }}
+                sx={{
+                    '& .MuiDrawer-paper': {
+                        width: drawerWidth,
+                        backgroundColor: '#0c2556',
+                        color: '#fff',
+                        boxSizing: 'border-box',
+                    },
+                }}
+            >
                 <div>
-                    <Typography variant="h5">CRM -Devils</Typography>
+                    <Typography variant="h5" className={classes.title}>
+                        CRM -Devils
+                    </Typography>
                 </div>
-
                 <List>
                     {menuItems.map((item) => (
-                        <ListItem button key={item.text} onClick={() => navigate(item.path)}>
+                        <ListItem
+                            // FIXME: 如果加 button 的话 当前页不高亮
+                            key={item.text}
+                            onClick={() => navigate(item.path)}
+                            // className={location.pathname === item.path ? classes.active : undefined}
+                            className={location.pathname === item.path ? classes.active : undefined}
+                            sx={{
+                                ':hover': {
+                                    backgroundColor: '#ddd',
+                                    opacity: 0.9,
+                                    color: '#000',
+                                },
+                            }}
+                        >
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText primary={item.text} />
                         </ListItem>
