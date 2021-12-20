@@ -43,10 +43,10 @@
 
     &-link {
         text-decoration: none;
-        color: $second_color;
+        color: $secondary_color;
 
         &:visited {
-            color: $second_color;
+            color: $secondary_color;
         }
         &:hover {
             text-decoration: underline;

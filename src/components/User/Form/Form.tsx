@@ -15,7 +15,7 @@ const Form: React.FC<FormProps> = (props) => {
         <Box>
             <TextField
                 autoFocus
-                className={`${styles.Form} ${className}`}
+                className={`${styles.form} ${className}`}
                 fullWidth
                 label={label}
                 variant="outlined"
