@@ -1,8 +1,7 @@
 import * as React from 'react';
+import { makeStyles } from '@mui/styles';
 import { useNavigate, useLocation } from 'react-router-dom';
-
 import { Drawer, Typography, List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
-
 import {
     Home as Dashboard,
     People as Customer,
@@ -10,10 +9,6 @@ import {
     ShoppingCart as Order,
     Person as User,
 } from '@mui/icons-material';
-
-import { makeStyles } from '@mui/styles';
-
-import styles from './index.module.scss';
 
 const drawerWidth = 240;
 
@@ -71,7 +66,7 @@ const SideNav = () => {
     return (
         <div className={classes.root}>
             <Drawer
-                className={styles.test}
+                className={classes.drawer}
                 variant="permanent"
                 anchor="left"
                 classes={{ paper: classes.drawerPaper }}
