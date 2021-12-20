@@ -78,8 +78,8 @@ const LoginPage = () => {
                     }
                     label={<Typography variant="subtitle1">Remember me</Typography>}
                 />
-                <Link className={styles['login-btn']} to="/dashboard">
-                    <ButtonPrimary className={styles['registration-btn']} type="submit">
+                <Link className={styles['login-btn_link']} to="/dashboard">
+                    <ButtonPrimary className={styles['login-btn']} type="submit">
                         Login
                     </ButtonPrimary>
                 </Link>

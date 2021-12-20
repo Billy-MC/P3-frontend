@@ -53,7 +53,9 @@
     }
 
     &-btn {
-        text-decoration: none;
+        &_link {
+            text-decoration: none;
+        }
     }
     &-bottom {
         align-items: center;
