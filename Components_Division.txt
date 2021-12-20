@@ -1,0 +1,31 @@
+
+reuseable components:
+  pageAnchor: onclick navigate to page
+  headingWithSession: compose heading Session
+  tableSearchBar: search data by input
+  tableDiplayer: display table by 
+  Footer:  display footer
+App: Navbar + screen
+  Navbar: compose 
+    pageAnchor:
+      anchorIcon
+      title
+  Header:
+      Hamburger
+      headerIcons
+      Avatar
+  screens: headingWithSession + footer
+    headingWithSession: compose heading Session
+      tableHeading : compose heading + add button
+        heading:
+        *addButton: 
+      tableSession: 
+        tableFilter: filter data
+        tableSearchBar: search data, option sort
+          searchInput: 
+          *sortBy
+        tableDiplayer: compose tableInstances + tablePagination
+          tableInstance:
+            data                      
+        tablePagination
+    Footer: footer field
