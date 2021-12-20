@@ -3,17 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import StyledEngineProvider from '@mui/material/StyledEngineProvider';
 import App from './App';
 import store from './app/store';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </Provider>
+        <StyledEngineProvider injectFirst>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </Provider>
+        </StyledEngineProvider>
     </React.StrictMode>,
     document.getElementById('root'),
 );

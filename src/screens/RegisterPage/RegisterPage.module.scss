@@ -53,8 +53,10 @@
         }
     }
     &-btn {
-        // background: linear-gradient($primary_color 30%, $primary_color 90%);
+        background-color: $primary_color;
         width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
     }
 
     form {
