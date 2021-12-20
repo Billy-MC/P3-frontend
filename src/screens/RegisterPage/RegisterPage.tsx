@@ -69,7 +69,7 @@ const RegisterPage = () => {
         event.preventDefault();
     };
 
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValues({ ...values, [event.target.name]: event.target.value });
     };
 

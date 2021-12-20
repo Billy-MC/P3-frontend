@@ -2,10 +2,10 @@ import { Box, TextField } from '@mui/material';
 import React from 'react';
 import styles from './Form.module.scss';
 
-interface FormProps {
+export interface FormProps {
     label: string;
     type: string;
-    className: null;
+    className?: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -15,7 +15,7 @@ const Form: React.FC<FormProps> = (props) => {
         <Box>
             <TextField
                 autoFocus
-                className={`${styles.Button} ${className}`}
+                className={`${styles.Form} ${className}`}
                 fullWidth
                 label={label}
                 variant="outlined"
