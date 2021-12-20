@@ -9,7 +9,7 @@ import DashboardPage from '../screens/DashboardPage';
 import ForgetPasswordPage from '../screens/ForgetPasswordPage';
 import WelcomePage from '../screens/WelcomePage';
 import ProtectedRouterPage from './components';
-import SideNav from '../layouts/sideNav';
+import Layout from '../layouts';
 
 const Route = () => (
     <div>
@@ -23,7 +23,7 @@ const Route = () => (
                     path="/user"
                     element={
                         <UserPage>
-                            <SideNav />
+                            <Layout />
                         </UserPage>
                     }
                 />
@@ -31,7 +31,7 @@ const Route = () => (
                     path="/customer"
                     element={
                         <CustomerPage>
-                            <SideNav />
+                            <Layout />
                         </CustomerPage>
                     }
                 />
@@ -39,7 +39,7 @@ const Route = () => (
                     path="/product"
                     element={
                         <ProductPage>
-                            <SideNav />
+                            <Layout />
                         </ProductPage>
                     }
                 />
@@ -47,7 +47,7 @@ const Route = () => (
                     path="/order"
                     element={
                         <OrderPage>
-                            <SideNav />
+                            <Layout />
                         </OrderPage>
                     }
                 />
@@ -55,7 +55,7 @@ const Route = () => (
                     path="/dashboard"
                     element={
                         <DashboardPage>
-                            <SideNav />
+                            <Layout />
                         </DashboardPage>
                     }
                 />
