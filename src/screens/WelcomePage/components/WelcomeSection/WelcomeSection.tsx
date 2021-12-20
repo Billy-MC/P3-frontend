@@ -1,21 +1,7 @@
-import { ThemeProvider, createTheme, Button } from '@mui/material';
 import * as react from 'react';
 import { Link } from 'react-router-dom';
 import styles from './welcomeSection.module.scss';
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#08192d',
-        },
-        secondary: {
-            main: '#00fff0',
-        },
-    },
-    typography: {
-        fontSize: 25,
-    },
-});
+import ButtonPrimary from '../../../../components/Button/ButtonPrimary';
 
 const WelcomeSection: react.FC = () => (
     <div className={styles.welcomeSection}>
@@ -24,13 +10,9 @@ const WelcomeSection: react.FC = () => (
             <br />
             Devils&apos; B2C CRM System
         </h1>
-        <ThemeProvider theme={theme}>
-            <Link to="/login" className={styles.router}>
-                <Button variant="contained" fullWidth sx={{ borderRadius: 30 }}>
-                    Start
-                </Button>
-            </Link>
-        </ThemeProvider>
+        <Link to="/login" className={styles.router}>
+            <ButtonPrimary className={styles.button}>Start</ButtonPrimary>
+        </Link>
     </div>
 );
 
