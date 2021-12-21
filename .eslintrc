@@ -15,10 +15,22 @@
         }
     },
     "rules": {
+        "no-unused-vars": ["warn", { "varsIgnorePattern": "^_" }],
+        "@typescript-eslint/no-unused-vars": ["warn", { "varsIgnorePattern": "^_" }],
         "no-console": "warn",
         "semi": 0,
         "no-use-before-define": "off",
         "react/react-in-jsx-scope": "off",
+        "react/jsx-props-no-spreading": "off",
+        "jsx-a11y/label-has-associated-control": [
+            2,
+            {
+                "labelComponents": ["Label"],
+                "labelAttributes": ["label"],
+                "controlComponents": ["Input"],
+                "depth": 3
+            }
+        ],
         "react/jsx-filename-extension": [
             1,
             { "extensions": [".js", ".jsx", ".ts", ".tsx", ".d.ts"] }
