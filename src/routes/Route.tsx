@@ -10,6 +10,8 @@ import ForgetPasswordPage from '../screens/ForgetPasswordPage';
 import WelcomePage from '../screens/WelcomePage';
 import ProtectedRouterPage from './components';
 import Layout from '../layouts';
+import Header from '../layouts/Header';
+import Footer from '../layouts/Footer';
 
 const Route = () => (
     <div>
@@ -23,7 +25,10 @@ const Route = () => (
                     path="/user"
                     element={
                         <UserPage>
-                            <Layout />
+                            <Layout>
+                                <Header />
+                                <Footer />
+                            </Layout>
                         </UserPage>
                     }
                 />
@@ -31,7 +36,10 @@ const Route = () => (
                     path="/customer"
                     element={
                         <CustomerPage>
-                            <Layout />
+                            <Layout>
+                                <Header />
+                                <Footer />
+                            </Layout>
                         </CustomerPage>
                     }
                 />
@@ -39,7 +47,10 @@ const Route = () => (
                     path="/product"
                     element={
                         <ProductPage>
-                            <Layout />
+                            <Layout>
+                                <Header />
+                                <Footer />
+                            </Layout>
                         </ProductPage>
                     }
                 />
@@ -47,7 +58,10 @@ const Route = () => (
                     path="/order"
                     element={
                         <OrderPage>
-                            <Layout />
+                            <Layout>
+                                <Header />
+                                <Footer />
+                            </Layout>
                         </OrderPage>
                     }
                 />
@@ -55,7 +69,10 @@ const Route = () => (
                     path="/dashboard"
                     element={
                         <DashboardPage>
-                            <Layout />
+                            <Layout>
+                                <Header />
+                                <Footer />
+                            </Layout>
                         </DashboardPage>
                     }
                 />

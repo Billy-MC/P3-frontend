@@ -1,13 +1,15 @@
-import Header from './Header';
+import { ReactNode, FC, Fragment } from 'react';
 import SideNav from './SideNav';
-import Footer from './Footer';
 
-const Layout = () => (
-    <div>
-        <Header />
+type LayoutProps = {
+    children: ReactNode;
+};
+
+const Layout: FC<LayoutProps> = ({ children }) => (
+    <>
         <SideNav />
-        <Footer />
-    </div>
+        {children}
+    </>
 );
 
 export default Layout;
