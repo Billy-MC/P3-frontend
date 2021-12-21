@@ -1,12 +1,5 @@
-import { ReactNode, FC } from 'react';
-
-type ProductPageProps = {
-    children: ReactNode;
-};
-
-const ProductPage: FC<ProductPageProps> = ({ children }) => (
+const ProductPage = () => (
     <div>
-        {children}
         <p>ProductPage</p>
     </div>
 );

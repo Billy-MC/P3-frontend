@@ -1,12 +1,5 @@
-import { ReactNode, FC } from 'react';
-
-type OrderPageProps = {
-    children: ReactNode;
-};
-
-const OrderPage: FC<OrderPageProps> = ({ children }) => (
+const OrderPage = () => (
     <div>
-        {children}
         <p>OrderPage</p>
     </div>
 );

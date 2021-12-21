@@ -10,8 +10,6 @@ import ForgetPasswordPage from '../screens/ForgetPasswordPage';
 import WelcomePage from '../screens/WelcomePage';
 import ProtectedRouterPage from './components';
 import Layout from '../layouts';
-import Header from '../layouts/Header';
-import Footer from '../layouts/Footer';
 
 const Route = () => (
     <div>
@@ -24,56 +22,41 @@ const Route = () => (
                 <RouterPage
                     path="/user"
                     element={
-                        <UserPage>
-                            <Layout>
-                                <Header />
-                                <Footer />
-                            </Layout>
-                        </UserPage>
+                        <Layout>
+                            <UserPage />
+                        </Layout>
                     }
                 />
                 <RouterPage
                     path="/customer"
                     element={
-                        <CustomerPage>
-                            <Layout>
-                                <Header />
-                                <Footer />
-                            </Layout>
-                        </CustomerPage>
+                        <Layout>
+                            <CustomerPage />
+                        </Layout>
                     }
                 />
                 <RouterPage
                     path="/product"
                     element={
-                        <ProductPage>
-                            <Layout>
-                                <Header />
-                                <Footer />
-                            </Layout>
-                        </ProductPage>
+                        <Layout>
+                            <ProductPage />
+                        </Layout>
                     }
                 />
                 <RouterPage
                     path="/order"
                     element={
-                        <OrderPage>
-                            <Layout>
-                                <Header />
-                                <Footer />
-                            </Layout>
-                        </OrderPage>
+                        <Layout>
+                            <OrderPage />
+                        </Layout>
                     }
                 />
                 <RouterPage
                     path="/dashboard"
                     element={
-                        <DashboardPage>
-                            <Layout>
-                                <Header />
-                                <Footer />
-                            </Layout>
-                        </DashboardPage>
+                        <Layout>
+                            <DashboardPage />
+                        </Layout>
                     }
                 />
             </RouterPage>

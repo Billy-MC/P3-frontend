@@ -1,12 +1,5 @@
-import { ReactNode, FC } from 'react';
-
-type DashboardPageProps = {
-    children: ReactNode;
-};
-
-const DashboardPage: FC<DashboardPageProps> = ({ children }) => (
+const DashboardPage = () => (
     <div>
-        {children}
         <p>DashboardPage</p>
     </div>
 );

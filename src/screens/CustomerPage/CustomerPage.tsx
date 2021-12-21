@@ -1,12 +1,5 @@
-import { ReactNode, FC } from 'react';
-
-type CustomerPageProps = {
-    children: ReactNode;
-};
-
-const CustomerPage: FC<CustomerPageProps> = ({ children }) => (
+const CustomerPage = () => (
     <div>
-        {children}
         <p>CustomerPage</p>
     </div>
 );

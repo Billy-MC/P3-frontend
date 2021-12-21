@@ -1,12 +1,5 @@
-import { ReactNode, FC } from 'react';
-
-type UserPageProps = {
-    children: ReactNode;
-};
-
-const UserPage: FC<UserPageProps> = ({ children }) => (
+const UserPage = () => (
     <div>
-        {children}
         <p>UserPage</p>
     </div>
 );
