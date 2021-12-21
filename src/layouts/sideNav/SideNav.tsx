@@ -10,8 +10,10 @@ import {
     Person as User,
 } from '@mui/icons-material';
 
+import styles from './SideNav.module.scss';
+
 const useStyles = makeStyles({
-    root: {},
+    sideNav: {},
     drawer: {
         width: 240,
     },
@@ -19,11 +21,11 @@ const useStyles = makeStyles({
         width: 240,
     },
     active: {
-        background: '#fff',
+        background: 'yellow',
         color: '#000',
     },
     title: {
-        color: '#8C9EBB',
+        color: 'blue',
         padding: 17,
     },
 });
@@ -62,7 +64,7 @@ const SideNav = () => {
     ];
 
     return (
-        <div className={classes.root}>
+        <div className={classes.sideNav}>
             <Drawer
                 className={classes.drawer}
                 variant="permanent"
@@ -78,13 +80,14 @@ const SideNav = () => {
                 }}
             >
                 <div>
-                    <Typography variant="h5" className={classes.title}>
+                    <Typography variant="h5" className={styles.title}>
                         CRM - Devils
                     </Typography>
                 </div>
                 <List>
                     {menuItems.map((item) => (
                         <ListItem
+                            button
                             // FIXME: Current onPage is not highlighted if add button property
                             key={item.text}
                             onClick={() => navigate(item.path)}
