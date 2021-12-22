@@ -1,7 +1,15 @@
 import * as React from 'react';
-import { makeStyles } from '@mui/styles';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Drawer, Typography, List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
+import {
+    Drawer,
+    Typography,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemIcon,
+    ListItemButton,
+} from '@mui/material';
+
 import {
     Home as Dashboard,
     People as Customer,
@@ -12,26 +20,7 @@ import {
 
 import styles from './SideNav.module.scss';
 
-const useStyles = makeStyles({
-    sideNav: {},
-    drawer: {
-        width: 240,
-    },
-    drawerPaper: {
-        width: 240,
-    },
-    active: {
-        background: 'yellow',
-        color: '#000',
-    },
-    title: {
-        color: 'blue',
-        padding: 17,
-    },
-});
-
 const SideNav = () => {
-    const classes = useStyles();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -64,20 +53,12 @@ const SideNav = () => {
     ];
 
     return (
-        <div className={classes.sideNav}>
+        <div className={styles.sideNav}>
             <Drawer
-                className={classes.drawer}
+                className={styles.drawer}
                 variant="permanent"
                 anchor="left"
-                classes={{ paper: classes.drawerPaper }}
-                sx={{
-                    '& .MuiDrawer-paper': {
-                        width: 240,
-                        backgroundColor: '#0c2556',
-                        color: '#fff',
-                        boxSizing: 'border-box',
-                    },
-                }}
+                classes={{ paper: styles.drawerPaper }}
             >
                 <div>
                     <Typography variant="h5" className={styles.title}>
@@ -87,21 +68,14 @@ const SideNav = () => {
                 <List>
                     {menuItems.map((item) => (
                         <ListItem
-                            button
-                            // FIXME: Current onPage is not highlighted if add button property
                             key={item.text}
                             onClick={() => navigate(item.path)}
-                            className={location.pathname === item.path ? classes.active : undefined}
-                            sx={{
-                                ':hover': {
-                                    backgroundColor: '#ddd',
-                                    opacity: 0.9,
-                                    color: '#000',
-                                },
-                            }}
+                            className={location.pathname === item.path ? styles.active : undefined}
                         >
-                            <ListItemIcon>{item.icon}</ListItemIcon>
-                            <ListItemText primary={item.text} />
+                            <ListItemButton>
+                                <ListItemIcon>{item.icon}</ListItemIcon>
+                                <ListItemText primary={item.text} />
+                            </ListItemButton>
                         </ListItem>
                     ))}
                 </List>

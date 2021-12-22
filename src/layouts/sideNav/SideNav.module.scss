@@ -1,5 +1,32 @@
-.title {
-          color: 'blue';
-      }
+@import '../../assets/styles/variable';
 
+.sideNav {
+    .drawer {
+        width: 240px;
+    }
 
+    .drawerPaper {
+        width: 240px;
+        background: $primary_color_lighter;
+        color: #fff;
+        box-sizing: border-box;
+    }
+
+    .title {
+        color: $secondary_color;
+        padding: 17px;
+    }
+
+    ul {
+        :hover {
+            background: #ffffff;
+            opacity: 0.9;
+            color: #000;
+        }
+
+        .active {
+            background: #ffffff;
+            color: #000;
+        }
+    }
+}
