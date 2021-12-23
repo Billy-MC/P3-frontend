@@ -1,32 +1,92 @@
 @import '../../assets/styles/variable';
 
 .sideNav {
+    .sidebarHeader {
+        display: flex;
+        padding-top: 15px;
+        width: auto;
+        position: relative;
+        transition: all 0.6s ease-in-out;
+        align-items: center;
+        justify-content: space-between;
+
+        .sidebarLogo {
+            height: 40px;
+            width: 40px;
+            margin: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: #000;
+            font-size: 15px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .sidebarTitle {
+            margin-left: 10px;
+            color: #fff;
+            font-size: 22px;
+            line-height: 42px;
+            padding-left: 1px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            flex: 1 1;
+            transition: all 0.6s ease-in-out;
+        }
+
+        .sidebarClose {
+            color: #ffffff;
+            display: block;
+            cursor: pointer;
+            padding-right: 15px;
+        }
+    }
+
     .drawer {
-        width: 240px;
+        width: 260px;
     }
 
     .drawerPaper {
-        width: 240px;
+        width: 260px;
         background: $primary_color_lighter;
-        color: #fff;
+        color: #8f9fbc;
         box-sizing: border-box;
-    }
+        padding: 0px;
 
-    .title {
-        color: $secondary_color;
-        padding: 17px;
-    }
+        ul {
+            margin: 0;
+            padding: 0;
+            display: block;
+            margin-block-start: 1em;
 
-    ul {
-        :hover {
-            background: #ffffff;
-            opacity: 0.9;
-            color: #000;
-        }
+            li {
+                font-size: 8px;
+                padding-top: 0px;
+                padding-bottom: 0px;
 
-        .active {
-            background: #ffffff;
-            color: #000;
+                span {
+                    line-height: 1;
+                    font-size: 0.9rem;
+                }
+
+                &:hover {
+                    background: hsla(0, 0%, 100%, 0.08);
+                    color: #fff;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    width: 85%;
+                }
+            }
+
+            .active {
+                background: hsla(0, 0%, 100%, 0.08);
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+            }
         }
     }
 }
