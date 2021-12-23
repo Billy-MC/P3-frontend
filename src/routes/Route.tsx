@@ -9,6 +9,7 @@ import DashboardPage from '../screens/DashboardPage';
 import ForgetPasswordPage from '../screens/ForgetPasswordPage';
 import WelcomePage from '../screens/WelcomePage';
 import ProtectedRouterPage from './components';
+import Layout from '../layouts';
 
 const Route = () => (
     <div>
@@ -18,11 +19,46 @@ const Route = () => (
             <RouterPage path="/register" element={<RegisterPage />} />
             <RouterPage path="/forgetpassword" element={<ForgetPasswordPage />} />
             <RouterPage element={<ProtectedRouterPage />}>
-                <RouterPage path="/user" element={<UserPage />} />
-                <RouterPage path="/customer" element={<CustomerPage />} />
-                <RouterPage path="/product" element={<ProductPage />} />
-                <RouterPage path="/order" element={<OrderPage />} />
-                <RouterPage path="/dashboard" element={<DashboardPage />} />
+                <RouterPage
+                    path="/user"
+                    element={
+                        <Layout>
+                            <UserPage />
+                        </Layout>
+                    }
+                />
+                <RouterPage
+                    path="/customer"
+                    element={
+                        <Layout>
+                            <CustomerPage />
+                        </Layout>
+                    }
+                />
+                <RouterPage
+                    path="/product"
+                    element={
+                        <Layout>
+                            <ProductPage />
+                        </Layout>
+                    }
+                />
+                <RouterPage
+                    path="/order"
+                    element={
+                        <Layout>
+                            <OrderPage />
+                        </Layout>
+                    }
+                />
+                <RouterPage
+                    path="/dashboard"
+                    element={
+                        <Layout>
+                            <DashboardPage />
+                        </Layout>
+                    }
+                />
             </RouterPage>
         </Routes>
     </div>
