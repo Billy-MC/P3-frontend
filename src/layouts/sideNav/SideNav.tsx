@@ -28,27 +28,27 @@ const SideNav = () => {
     const menuItems = [
         {
             text: 'Dashboard',
-            icon: <Dashboard style={{ fill: '#8f9fbc' }} />,
+            icon: <Dashboard className={styles.listItemIcon} />,
             path: '/dashboard',
         },
         {
             text: 'Customers',
-            icon: <Customer style={{ fill: '#8f9fbc' }} />,
+            icon: <Customer className={styles.listItemIcon} />,
             path: '/customer',
         },
         {
             text: 'Products',
-            icon: <Product style={{ fill: '#8f9fbc' }} />,
+            icon: <Product className={styles.listItemIcon} />,
             path: '/product',
         },
         {
             text: 'Orders',
-            icon: <Order style={{ fill: '#8f9fbc' }} />,
+            icon: <Order className={styles.listItemIcon} />,
             path: '/order',
         },
         {
             text: 'Users',
-            icon: <User style={{ fill: '#8f9fbc' }} />,
+            icon: <User className={styles.listItemIcon} />,
             path: '/user',
         },
     ];
@@ -56,38 +56,43 @@ const SideNav = () => {
     return (
         <div className={styles.sideNav}>
             <Drawer
-                className={styles.drawer}
+                className={styles['sideNav-drawer']}
                 variant="permanent"
                 anchor="left"
-                classes={{ paper: styles.drawerPaper }}
+                classes={{ paper: styles['sideNav-drawerPaper'] }}
             >
-                <div className={styles.sidebarHeader}>
-                    <div className={styles.sidebarLogo}>
+                <div className={styles['sideNav-header']}>
+                    <div className={styles['sideNav-header-logo']}>
                         <p>logo</p>
                     </div>
-                    <Typography variant="h5" className={styles.sidebarTitle}>
+                    <Typography variant="h5" className={styles['sideNav-header-title']}>
                         Devils
                     </Typography>
-                    <div className={styles.sidebarClose}>
+                    <div className={styles['sideNav-header-close']}>
                         <Close />
                     </div>
                 </div>
-                <List>
-                    {menuItems.map((item) => (
-                        <ListItem>
-                            <ListItemButton
-                                key={item.text}
-                                onClick={() => navigate(item.path)}
-                                className={
-                                    location.pathname === item.path ? styles.active : undefined
-                                }
-                            >
-                                <ListItemIcon>{item.icon}</ListItemIcon>
-                                <ListItemText primary={item.text} className={styles.listItemText} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
+                <div className={styles['sideNav-menu']}>
+                    <List>
+                        {menuItems.map((item) => (
+                            <ListItem>
+                                <ListItemButton
+                                    key={item.text}
+                                    onClick={() => navigate(item.path)}
+                                    className={
+                                        location.pathname === item.path ? styles.active : undefined
+                                    }
+                                >
+                                    <ListItemIcon>{item.icon}</ListItemIcon>
+                                    <ListItemText
+                                        primary={item.text}
+                                        className={styles['sideNav-menu-text']}
+                                    />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                </div>
             </Drawer>
         </div>
     );

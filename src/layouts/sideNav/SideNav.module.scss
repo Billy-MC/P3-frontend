@@ -1,7 +1,7 @@
 @import '../../assets/styles/variable';
 
 .sideNav {
-    .sidebarHeader {
+    &-header {
         display: flex;
         padding-top: 15px;
         width: auto;
@@ -10,7 +10,7 @@
         align-items: center;
         justify-content: space-between;
 
-        .sidebarLogo {
+        &-logo {
             height: 40px;
             width: 40px;
             margin: 10px;
@@ -25,7 +25,7 @@
             text-align: center;
         }
 
-        .sidebarTitle {
+        &-title {
             margin-left: 10px;
             color: #fff;
             font-size: 22px;
@@ -37,7 +37,7 @@
             transition: all 0.6s ease-in-out;
         }
 
-        .sidebarClose {
+        &-close {
             color: #ffffff;
             display: block;
             cursor: pointer;
@@ -45,11 +45,11 @@
         }
     }
 
-    .drawer {
+    &-drawer {
         width: 260px;
     }
 
-    .drawerPaper {
+    &-drawerPaper {
         width: 260px;
         background: $primary_color_lighter;
         color: #8f9fbc;
@@ -88,5 +88,8 @@
                 border-radius: 5px;
             }
         }
+    }
+    .listItemIcon {
+        fill: #8f9fbc;
     }
 }
