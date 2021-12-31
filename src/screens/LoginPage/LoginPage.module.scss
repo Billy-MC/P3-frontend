@@ -8,6 +8,7 @@
         top: 0;
         width: 400px;
         height: 100%;
+        z-index: -1;
         background: $primary_color;
     }
 
@@ -18,7 +19,7 @@
         top: 0;
         width: 100%;
         height: 100%;
-        z-index: -1;
+        z-index: -2;
         background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1)),
             url('../../assets/images/laptop.jpg');
         background-size: cover;
@@ -26,26 +27,25 @@
     }
 
     &-box {
-        margin-top: 130px;
+        margin-top: 400px;
         margin-left: 200px;
         width: 275px;
         align-items: center;
         justify-content: center;
         height: auto;
-        position: relative;
-        left: 0%;
     }
     &-title {
-        font-size: 18px;
+        font-size: 20px;
         color: $primary_color;
+        font-weight: 800;
     }
 
     &-link {
         text-decoration: none;
-        color: $secondary_color;
+        color: $tertiary_color;
 
         &:visited {
-            color: $secondary_color;
+            color: $tertiary_color;
         }
         &:hover {
             text-decoration: underline;
@@ -58,6 +58,8 @@
         }
     }
     &-bottom {
+        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         flex: center;
@@ -66,6 +68,11 @@
     &-checkBox {
         align-items: center;
         justify-content: center;
+    }
+    &-error {
+        font-size: small;
+        color: #df241a;
+        margin: 5px 0;
     }
 
     form {

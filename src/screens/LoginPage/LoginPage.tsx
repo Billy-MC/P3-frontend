@@ -1,49 +1,58 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Box, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import ButtonPrimary from '../../components/Button';
-
+import InputField from '../../components/InputField';
+import PasswordInputField from '../../components/PasswordInputField';
+import useInput from '../../hooks/useInput';
 import styles from './LoginPage.module.scss';
-import FormField from '../../components/User/Form';
-import PasswordFormField from '../../components/User/PasswordForm';
+import { validateEmail, validatePassword } from '../../utils/validator';
 
-interface IInput {
-    id: string;
-    name: string;
-    type: string;
-    label: string;
-    required: boolean;
-}
-
-const initialState = {
-    email: '',
-};
+const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
+const inputPasswordIsValid = (value: string) => validatePassword(value) && value.trim() !== '';
 
 const LoginPage = () => {
     const [checked, setChecked] = useState(false);
-    const [values, setValues] = useState(initialState);
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-    };
-    const inputs: IInput[] = [
-        {
-            id: '1',
-            name: 'email',
-            type: 'text',
-            label: 'Email',
-            required: true,
-        },
-        {
-            id: '2',
-            name: 'password',
-            type: 'password',
-            label: 'Password',
-            required: true,
-        },
-    ];
+    const [formIsValid, setFormIsValid] = useState(false);
+    const navigate = useNavigate();
 
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setValues({ ...values, [event.target.name]: event.target.value });
+    const {
+        value: emailValue,
+        isValid: emailIsValid,
+        hasError: emailHasError,
+        valueChangeHandler: emailChangeHandler,
+        inputBlurHandler: emailBlurHandler,
+        reset: resetEmail,
+    } = useInput(inputEmailIsValid);
+
+    const {
+        value: passwordValue,
+        isValid: passwordIsValid,
+        hasError: passwordHasError,
+        valueChangeHandler: passwordChangeHandler,
+        inputBlurHandler: passwordBlurHandler,
+        reset: resetpassword,
+    } = useInput(inputPasswordIsValid);
+
+    useEffect(() => {
+        const identifier = setTimeout(() => {
+            setFormIsValid(emailIsValid && passwordIsValid);
+        });
+
+        return () => {
+            clearTimeout(identifier);
+        };
+    }, [emailIsValid, passwordIsValid]);
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+        event.preventDefault();
+        if (formIsValid === false) {
+            return;
+        }
+        navigate('/dashboard');
+
+        resetEmail();
+        resetpassword();
     };
 
     return (
@@ -55,17 +64,29 @@ const LoginPage = () => {
                 autoComplete="off"
             >
                 <Typography className={styles['login-title']}>Login to your account</Typography>
-                {inputs.map((input) =>
-                    input.type === 'text' ? (
-                        <FormField
-                            key={input.id}
-                            {...input}
-                            label={input.label}
-                            onChange={onChange}
-                        />
-                    ) : (
-                        <PasswordFormField key={input.id} label={input.label} />
-                    ),
+                <InputField
+                    required
+                    id="email"
+                    label="Email"
+                    type="email"
+                    value={emailValue}
+                    onChange={emailChangeHandler}
+                    onBlur={emailBlurHandler}
+                    error={emailHasError}
+                />
+                {emailHasError && <p className={styles['login-error']}>Please Enter valid Email</p>}
+                <PasswordInputField
+                    required
+                    id="password"
+                    label="Password"
+                    type="password"
+                    value={passwordValue}
+                    onChange={passwordChangeHandler}
+                    onBlur={passwordBlurHandler}
+                    error={passwordHasError}
+                />
+                {passwordHasError && (
+                    <p className={styles['login-error']}>Please Enter valid password</p>
                 )}
                 <FormControlLabel
                     className={styles['login-checkBox']}
@@ -78,15 +99,14 @@ const LoginPage = () => {
                     }
                     label={<Typography variant="subtitle1">Remember me</Typography>}
                 />
-                <Link className={styles['login-btn_link']} to="/dashboard">
-                    <ButtonPrimary className={styles['login-btn']} type="submit">
-                        Login
-                    </ButtonPrimary>
-                </Link>
-                <Box
-                    className={styles['login-bottom']}
-                    sx={{ display: 'flex', flexDirection: 'column' }}
+                <ButtonPrimary
+                    className={styles['login-btn']}
+                    type="submit"
+                    disabled={!formIsValid}
                 >
+                    Login
+                </ButtonPrimary>
+                <Box className={styles['login-bottom']}>
                     <p>
                         <Link className={styles['login-link']} to="/forgetpassword">
                             Forgot password?
