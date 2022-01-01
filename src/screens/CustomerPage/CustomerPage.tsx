@@ -5,9 +5,7 @@ import styles from './Customer.module.scss';
 const CustomerPage = () => {
     const [searchwords, setSearchWords] = useState<string>('');
 
-    useEffect(() => {
-        console.log(searchwords);
-    }, [searchwords]);
+    useEffect(() => {}, [searchwords]);
 
     return (
         <div>
