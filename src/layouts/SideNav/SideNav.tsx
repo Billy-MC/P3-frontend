@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import {
     Drawer,
     Typography,
@@ -8,11 +8,11 @@ import {
     ListItemText,
     ListItemIcon,
     ListItemButton,
+    Divider,
 } from '@mui/material';
 
 import {
     HomeOutlined as Dashboard,
-    CloseOutlined as Close,
     PeopleOutlined as Customer,
     ShoppingBasketOutlined as Product,
     ShoppingCartOutlined as Order,
@@ -62,16 +62,16 @@ const SideNav = () => {
                 classes={{ paper: styles['sideNav-drawerPaper'] }}
             >
                 <div className={styles['sideNav-header']}>
-                    <div className={styles['sideNav-header-logo']}>
-                        <p>logo</p>
-                    </div>
+                    <NavLink to="/" className={styles['sideNav-header-link']}>
+                        <div className={styles['sideNav-header-logo']}>
+                            <p>logo</p>
+                        </div>
+                    </NavLink>
                     <Typography variant="h5" className={styles['sideNav-header-title']}>
                         Devils
                     </Typography>
-                    <div className={styles['sideNav-header-close']}>
-                        <Close />
-                    </div>
                 </div>
+                <Divider className={styles['sideNav-divider']} />
                 <div className={styles['sideNav-menu']}>
                     <List>
                         {menuItems.map((item) => (

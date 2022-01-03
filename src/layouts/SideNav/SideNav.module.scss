@@ -21,13 +21,18 @@
 
             color: #000;
             font-size: 15px;
-            background-color: #ffffff;
+            background-color: $background_color;
             text-align: center;
+        }
+
+        &-link {
+            text-decoration: none;
+            text-decoration: none;
         }
 
         &-title {
             margin-left: 10px;
-            color: #fff;
+            color: $background_color;
             font-size: 22px;
             line-height: 42px;
             padding-left: 1px;
@@ -36,13 +41,11 @@
             flex: 1 1;
             transition: all 0.6s ease-in-out;
         }
+    }
 
-        &-close {
-            color: #ffffff;
-            display: block;
-            cursor: pointer;
-            padding-right: 15px;
-        }
+    &-divider {
+        margin-top: 15px;
+        background: #6b7280;
     }
 
     &-drawer {
@@ -51,8 +54,8 @@
 
     &-drawerPaper {
         width: 260px;
-        background: $primary_color_lighter;
-        color: #8f9fbc;
+        background: $primary_color;
+        color: $background_color;
         box-sizing: border-box;
         padding: 0px;
 
@@ -75,13 +78,17 @@
 
             .active {
                 background: hsla(0, 0%, 100%, 0.08);
-                color: #fff;
+                color: $secondary_color;
                 text-decoration: none;
                 border-radius: 5px;
+
+                .listItemIcon {
+                    fill: $secondary_color;
+                }
             }
         }
     }
     .listItemIcon {
-        fill: #8f9fbc;
+        fill: $background_color;
     }
 }
