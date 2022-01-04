@@ -19,6 +19,7 @@
         "@types/react-router-dom": "^5.3.2",
         "@typescript-eslint/parser": "^4.33.0",
         "axios": "^0.24.0",
+        "cross-env": "^7.0.3",
         "dotenv": "^10.0.0",
         "node-sass": "^6.0.1",
         "prettier": "^2.4.1",
@@ -32,7 +33,7 @@
         "web-vitals": "^1.1.2"
     },
     "scripts": {
-        "start": "react-scripts start",
+        "start": "cross-env PORT=8000 react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
@@ -62,5 +63,6 @@
         "eslint-plugin-import": "^2.25.3",
         "eslint-plugin-jsx-a11y": "^6.5.1",
         "eslint-plugin-prettier": "^4.0.0"
-    }
+    },
+    "proxy": "http://localhost:3000"
 }
