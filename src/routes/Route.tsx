@@ -20,7 +20,7 @@ const Route = () => (
             <RouterPage path="/forgetpassword" element={<ForgotPasswordPage />} />
             <RouterPage element={<ProtectedRouterPage />}>
                 <RouterPage
-                    path="/user"
+                    path="/users"
                     element={
                         <Layout>
                             <UserPage />
@@ -28,7 +28,7 @@ const Route = () => (
                     }
                 />
                 <RouterPage
-                    path="/customer"
+                    path="/customers"
                     element={
                         <Layout>
                             <CustomerPage />
@@ -36,7 +36,7 @@ const Route = () => (
                     }
                 />
                 <RouterPage
-                    path="/product"
+                    path="/products"
                     element={
                         <Layout>
                             <ProductPage />
@@ -44,7 +44,7 @@ const Route = () => (
                     }
                 />
                 <RouterPage
-                    path="/order"
+                    path="/orders"
                     element={
                         <Layout>
                             <OrderPage />

@@ -27,29 +27,34 @@ const SideNav = () => {
 
     const menuItems = [
         {
+            id: 'dashboard',
             text: 'Dashboard',
             icon: <Dashboard className={styles.listItemIcon} />,
             path: '/dashboard',
         },
         {
+            id: 'customers',
             text: 'Customers',
             icon: <Customer className={styles.listItemIcon} />,
-            path: '/customer',
+            path: '/customers',
         },
         {
+            id: 'products',
             text: 'Products',
             icon: <Product className={styles.listItemIcon} />,
-            path: '/product',
+            path: '/products',
         },
         {
+            id: 'orders',
             text: 'Orders',
             icon: <Order className={styles.listItemIcon} />,
-            path: '/order',
+            path: '/orders',
         },
         {
+            id: 'users',
             text: 'Users',
             icon: <User className={styles.listItemIcon} />,
-            path: '/user',
+            path: '/users',
         },
     ];
 
@@ -75,9 +80,8 @@ const SideNav = () => {
                 <div className={styles['sideNav-menu']}>
                     <List>
                         {menuItems.map((item) => (
-                            <ListItem>
+                            <ListItem key={item.id}>
                                 <ListItemButton
-                                    key={item.text}
                                     onClick={() => navigate(item.path)}
                                     className={
                                         location.pathname === item.path ? styles.active : undefined
