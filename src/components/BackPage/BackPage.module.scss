@@ -1,0 +1,25 @@
+@import '../../assets/styles/variable.scss';
+.backBtn {
+    display: flex;
+    color: $primary_color;
+    align-items: center;
+    font-size: 13px;
+    text-decoration: none;
+
+    svg {
+        margin-right: 8px;
+        width: 16px;
+        height: 16px;
+        font-size: 1.25rem;
+    }
+
+    h3 {
+        margin: 0;
+        font-weight: 500;
+    }
+
+    &:hover {
+        background-color: transparent;
+        text-decoration: underline;
+    }
+}
