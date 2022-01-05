@@ -66,7 +66,9 @@ const ForgetPasswordPage = () => {
                 {emailHasError && (
                     <p className={styles['forgotPassword-error']}>Please Enter valid Email</p>
                 )}
-                <ButtonPrimary type="submit">Recover Password</ButtonPrimary>
+                <ButtonPrimary className={styles['forgotPassword-btn']} type="submit">
+                    Recover Password
+                </ButtonPrimary>
                 <p className={styles['forgotPassword-redirect']}>
                     Know your password? &nbsp;
                     <Link className={styles['forgotPassword-link']} to="/login">

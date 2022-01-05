@@ -1,0 +1,71 @@
+@import '../../../../assets/styles/variable.scss';
+
+.editform {
+    margin-top: 24px;
+
+    &-subtitle {
+        margin: 0;
+        padding: 32px 24px;
+    }
+
+    &-input {
+        &_form {
+            padding: 32px 24px;
+            display: flex;
+            gap: 1rem;
+            flex-flow: row wrap;
+        }
+
+        &_field {
+            flex: 0 0 49%;
+        }
+    }
+    &-error {
+        font-size: small;
+        color: #df241a;
+        margin: 5px 0;
+    }
+    &-btnsection {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 16px 24px;
+
+        &_update {
+            margin: 8px;
+            font-size: 0.875rem;
+            padding: 8px 20px;
+            font-weight: 400;
+        }
+
+        &_delete {
+            font-size: 0.875rem;
+            padding: 8px 20px;
+            background-color: #fff;
+            color: $tertiary_color;
+            box-shadow: none;
+            &:hover {
+                box-shadow: none;
+                background-color: $tertiary_color_lighter;
+            }
+        }
+
+        &_cancel {
+            font-size: 0.875rem;
+            padding: 10px 20px;
+            margin: 8px auto 8px 8px;
+            border-radius: 8px;
+            border: 1px solid $primary_color;
+            color: $primary_color;
+            font-weight: 600;
+            &:active {
+                color: $primary_color;
+            }
+        }
+    }
+}
+form {
+    background-color: #fff;
+    border-radius: 10px;
+    height: auto;
+}

@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import SearchBar from '../../components/SearchBar';
 import styles from './Customer.module.scss';
 
@@ -15,6 +17,7 @@ const CustomerPage = () => {
                 className={styles.styledInputBase}
                 searchByClick={(data: string) => setSearchWords(data)}
             />
+            <Link to="edit">Button</Link>
         </div>
     );
 };

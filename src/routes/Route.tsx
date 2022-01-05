@@ -3,6 +3,7 @@ import LoginPage from '../screens/LoginPage';
 import RegisterPage from '../screens/RegisterPage';
 import UserPage from '../screens/UserPage';
 import CustomerPage from '../screens/CustomerPage';
+import CustomerEditPage from '../screens/CustomerEditPage';
 import ProductPage from '../screens/ProductPage';
 import OrderPage from '../screens/OrderPage';
 import DashboardPage from '../screens/DashboardPage';
@@ -32,6 +33,14 @@ const Route = () => (
                     element={
                         <Layout>
                             <CustomerPage />
+                        </Layout>
+                    }
+                />
+                <RouterPage
+                    path="/customers/edit"
+                    element={
+                        <Layout>
+                            <CustomerEditPage />
                         </Layout>
                     }
                 />

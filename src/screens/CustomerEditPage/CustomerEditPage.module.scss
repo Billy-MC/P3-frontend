@@ -1,0 +1,27 @@
+@import '../../assets/styles/variable.scss';
+
+.editcontent {
+    &-title {
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        padding: 0 24px;
+        &-custname {
+            font-size: 32px;
+        }
+        &-custemailtitle {
+            font-size: 14px;
+        }
+        &-custemail {
+            margin: 0 4px;
+            padding: 1px 8px;
+            background-color: $primary_color_alt;
+            align-items: center;
+            border-radius: 16px;
+        }
+    }
+}
+h2,
+h3 {
+    margin: 0;
+}
