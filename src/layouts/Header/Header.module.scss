@@ -1,0 +1,50 @@
+@import '../../assets/styles/variable.scss';
+@import '../../assets/styles/breakpoints';
+
+.header {
+    &-box {
+        flex-grow: 1;
+        margin-left: 260px;
+    }
+    &-box2 {
+        flex-grow: 1;
+    }
+    &-appbar {
+        background-color: $primary_color;
+        position: static;
+    }
+    &-iconmenu {
+        color: inherit;
+        margin-right: 2;
+    }
+    &-color {
+        color: inherit;
+    }
+    &-avatar {
+        height: 36px;
+        width: 36px;
+    }
+    &-logout {
+        border-top: lightgray 1px solid;
+    }
+    &-p {
+        margin: 0px 10px;
+    }
+    &-iconsize {
+        padding: 1px;
+    }
+    &-typography {
+        margin-left: 10px;
+        font-weight: 400;
+    }
+    &-toolbar {
+        padding-right: 0px;
+    }
+    &-btn {
+        padding-right: 24px;
+        color: inherit;
+    }
+    &-menu {
+        margin-top: 63px;
+    }
+}
