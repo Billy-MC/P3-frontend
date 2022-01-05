@@ -1,11 +1,13 @@
-import { Tab, Tabs, Box } from '@mui/material';
+import { Tab, Box, Divider } from '@mui/material';
 import * as React from 'react';
 import { useState } from 'react';
+import { TabPanel, TabList, TabContext } from '@mui/lab';
 import styles from './TabFilter.module.scss';
 
-interface IFilter {
+export interface IFilter {
     name: string;
     filterEventHandler: () => void;
+    children?: React.ReactNode;
 }
 
 interface ITabFilter {
@@ -32,16 +34,30 @@ const TabFilter: React.FC<ITabFilter> = (props) => {
         />
     ));
 
+    const content = filter.map((e) => (
+        <TabPanel key={e.name} value={e.name}>
+            {e.children}
+        </TabPanel>
+    ));
+
     return (
         <Box sx={{ width: '100%' }} className={styles.buttonGroup}>
-            <Tabs
-                value={value}
-                textColor="inherit"
-                onChange={handleChange}
-                aria-label="wrapped label tabs example"
-            >
-                {buttons}
-            </Tabs>
+            <TabContext value={value}>
+                <TabList
+                    onChange={handleChange}
+                    aria-label="wrapped label tabs example"
+                    textColor="inherit"
+                    TabIndicatorProps={{
+                        style: {
+                            backgroundColor: '#08192d',
+                        },
+                    }}
+                >
+                    {buttons}
+                </TabList>
+                <Divider />
+                {content}
+            </TabContext>
         </Box>
     );
 };
