@@ -11,7 +11,7 @@
     }
     &-appbar {
         background-color: $primary_color;
-        position: static;
+        position: fixed;
     }
     &-iconmenu {
         color: inherit;
