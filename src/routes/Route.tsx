@@ -11,6 +11,7 @@ import ForgotPasswordPage from '../screens/ForgotPasswordPage';
 import WelcomePage from '../screens/WelcomePage';
 import ProtectedRouterPage from './components';
 import Layout from '../layouts';
+import AddCustomerPage from '../screens/AddCustomerPage';
 
 const Route = () => (
     <div>
@@ -41,6 +42,14 @@ const Route = () => (
                     element={
                         <Layout>
                             <CustomerEditPage />
+                        </Layout>
+                    }
+                />
+                <RouterPage
+                    path="/customers/add"
+                    element={
+                        <Layout>
+                            <AddCustomerPage />
                         </Layout>
                     }
                 />
