@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import DataGridTable from '../../../../components/DataGridTable';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { fetchAllCustomers, selectCustomers } from '../../../../store/slices/customerSlice';
@@ -14,7 +14,7 @@ const CustomerDataGrid: React.FC = () => {
     });
     useEffect(() => {
         dispatch(fetchAllCustomers());
-    }, []);
+    }, [dispatch]);
     return (
         <div>
             <DataGridTable rows={customerToDisplay} />
