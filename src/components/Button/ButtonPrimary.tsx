@@ -11,7 +11,6 @@ interface ButtonProps
 
 const ButtonPrimary: React.FC<ButtonProps> = (props) => {
     const { children, type, className, onClick } = props;
-
     return (
         <Button
             className={`${styles.Button} ${className}`}

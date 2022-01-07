@@ -11,10 +11,11 @@ import ForgotPasswordPage from '../screens/ForgotPasswordPage';
 import WelcomePage from '../screens/WelcomePage';
 import ProtectedRouterPage from './components';
 import Layout from '../layouts';
+import style from './Route.module.scss';
 import AddCustomerPage from '../screens/AddCustomerPage';
 
 const Route = () => (
-    <div>
+    <div className={style.route}>
         <Routes>
             <RouterPage path="/" element={<WelcomePage />} />
             <RouterPage path="/login" element={<LoginPage />} />
