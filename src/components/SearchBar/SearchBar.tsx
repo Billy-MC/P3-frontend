@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent, MouseEvent } from 'react';
+import { FC, useState, ChangeEvent, MouseEvent, KeyboardEvent } from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -23,6 +23,13 @@ const SearchBar: FC<SearchBarProps> = ({ placeHolder, className, searchByClick }
         searchByClick(keywords);
     };
 
+    const onKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {
+        if (event.code === 'Enter') {
+            event.preventDefault();
+            searchByClick(keywords);
+        }
+    };
+
     return (
         <div className={style.SearchBar}>
             <Toolbar className={style.toolBar}>
@@ -34,6 +41,7 @@ const SearchBar: FC<SearchBarProps> = ({ placeHolder, className, searchByClick }
                         className={`${style.styledInputBase} ${className}`}
                         placeholder={placeHolder}
                         onChange={onChange}
+                        onKeyPress={onKeyPress}
                     />
                 </div>
             </Toolbar>
