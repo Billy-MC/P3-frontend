@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import SearchBar from '../../../../components/SearchBar';
 import { fetchAllCustomers, selectCustomers } from '../../../../store/slices/customerSlice';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-
+import ICustomer from '../../../../types/ICustomer';
 import styles from './CustomerPageSearchBar.module.scss';
 
 const CustomerPageSearchBar = () => {
     const [searchwords, setSearchWords] = useState<string>('');
-    const customers = useAppSelector(selectCustomers);
+    const customers: ICustomer[] = useAppSelector(selectCustomers);
     const dispatch = useAppDispatch();
 
     useEffect(() => {

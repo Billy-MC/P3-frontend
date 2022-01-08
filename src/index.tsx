@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import StyledEngineProvider from '@mui/material/StyledEngineProvider';
 import App from './App';
-import { store } from './store/store';
+import store from './store';
 import reportWebVitals from './reportWebVitals';
 import './index.scss';
 
