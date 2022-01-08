@@ -1,8 +1,7 @@
-/* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { RootState } from '../store';
+import type { RootState } from '../../interfaces/redux';
 import { getAllCustomers } from '../../services/customer';
-import type ICustomer from '../../types/ICustomer';
+import ICustomer from '../../types/ICustomer';
 import asyncStatus from '../../types/asyncStatus';
 
 export interface CustomersState {
