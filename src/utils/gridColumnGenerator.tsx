@@ -26,7 +26,7 @@ const dataColumnGenerator = (row: { [key: string]: any }[]): GridColDef[] => {
     // map complete row  to GridColDef
     const outputColumn: GridColDef[] = keys.map((key) => {
         const field: string = key;
-        let flex: number = 10;
+        let flex = 10;
         switch (typeof noNullRow[key]) {
             case 'string':
                 flex += noNullRow[key].length;

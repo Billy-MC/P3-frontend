@@ -8,7 +8,7 @@ import style from './searchBar.module.scss';
 interface SearchBarProps {
     placeHolder: string;
     className: string;
-    searchByClick: Function;
+    searchByClick: (keyword: string) => void;
 }
 
 const SearchBar: FC<SearchBarProps> = ({ placeHolder, className, searchByClick }) => {
