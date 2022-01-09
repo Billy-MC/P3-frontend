@@ -1,5 +1,10 @@
 @import '../../../../assets/styles/variable.scss';
 
+%styled-btn {
+    font-size: 0.875rem;
+    padding: 8px 20px;
+}
+
 .editform {
     margin-top: 24px;
 
@@ -32,18 +37,16 @@
         padding: 16px 24px;
 
         &_update {
+            @extend %styled-btn;
             margin: 8px;
-            font-size: 0.875rem;
-            padding: 8px 20px;
             font-weight: 400;
         }
 
         &_delete {
-            font-size: 0.875rem;
-            padding: 8px 20px;
-            background-color: #fff;
-            color: $tertiary_color;
+            @extend %styled-btn;
             box-shadow: none;
+            background-color: white;
+            color: $tertiary_color;
             &:hover {
                 box-shadow: none;
                 background-color: $tertiary_color_lighter;
@@ -51,21 +54,24 @@
         }
 
         &_cancel {
-            font-size: 0.875rem;
-            padding: 10px 20px;
+            @extend %styled-btn;
             margin: 8px auto 8px 8px;
+            font-weight: 600;
+            box-shadow: none;
+            background-color: white;
+            color: $primary_color;
             border-radius: 8px;
             border: 1px solid $primary_color;
-            color: $primary_color;
-            font-weight: 600;
-            &:active {
-                color: $primary_color;
+
+            &:hover {
+                box-shadow: none;
+                background-color: $primary_color_alt;
             }
         }
     }
 }
 form {
-    background-color: #fff;
+    background-color: white;
     border-radius: 10px;
     height: auto;
 }

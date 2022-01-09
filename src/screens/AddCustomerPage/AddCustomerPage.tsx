@@ -6,13 +6,11 @@ import AddCustomerForm from './components/AddCustomerForm';
 
 const AddCustomerPage = () => (
     <EditPageTemplate>
-        <main className={styles.addcustomercontent}>
-            <BackToCustomer />
-            <Box className={styles['addcustomercontent-title']}>
-                <h2>Add Customer Page</h2>
-            </Box>
-            <AddCustomerForm />
-        </main>
+        <BackToCustomer />
+        <Box className={styles['addcustomercontent-title']}>
+            <h2>Add Customer Page</h2>
+        </Box>
+        <AddCustomerForm />
     </EditPageTemplate>
 );
 

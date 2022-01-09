@@ -1,6 +1,6 @@
 import { Box, Divider } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import InputField from '../../../../components/InputField';
 import ButtonPrimary from '../../../../components/Button/ButtonPrimary';
 import useInput from '../../../../hooks/useInput';
@@ -13,6 +13,7 @@ const valueIsNotEmpty = (value: string) => value.trim() !== '';
 
 const EditCustomerForm = () => {
     const [formIsValid, setFormIsValid] = useState(true);
+    const navigate = useNavigate();
 
     const {
         value: emailValue,
@@ -127,6 +128,8 @@ const EditCustomerForm = () => {
         resetState();
         resetPhone();
     };
+
+    const navigateHandler = () => navigate(-1);
     return (
         <Box className={styles.editform} component="form" onSubmit={handleSubmit}>
             <h2 className={styles['editform-subtitle']}>Edit customer</h2>
@@ -259,9 +262,12 @@ const EditCustomerForm = () => {
                 <ButtonPrimary className={styles['editform-btnsection_update']} type="submit">
                     Update
                 </ButtonPrimary>
-                <Link className={styles['editform-btnsection_cancel']} to="/customers">
+                <ButtonPrimary
+                    className={styles['editform-btnsection_cancel']}
+                    onClick={navigateHandler}
+                >
                     CANCEL
-                </Link>
+                </ButtonPrimary>
                 <ButtonPrimary className={styles['editform-btnsection_delete']} type="submit">
                     Delete User
                 </ButtonPrimary>

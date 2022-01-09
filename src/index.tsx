@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import StyledEngineProvider from '@mui/material/StyledEngineProvider';
 import App from './App';
 import store from './store';
@@ -12,9 +12,9 @@ ReactDOM.render(
     <React.StrictMode>
         <StyledEngineProvider injectFirst>
             <Provider store={store}>
-                <BrowserRouter>
+                <Router>
                     <App />
-                </BrowserRouter>
+                </Router>
             </Provider>
         </StyledEngineProvider>
     </React.StrictMode>,

@@ -13,6 +13,7 @@ import ProtectedRouterPage from './components';
 import Layout from '../layouts';
 import style from './Route.module.scss';
 import AddCustomerPage from '../screens/AddCustomerPage';
+import CustomerDetailPage from '../screens/CustomerDetailPage';
 
 const Route = () => (
     <div className={style.route}>
@@ -31,7 +32,7 @@ const Route = () => (
                     }
                 />
                 <RouterPage
-                    path="/customers"
+                    path="/customers/*"
                     element={
                         <Layout>
                             <CustomerPage />
@@ -43,6 +44,14 @@ const Route = () => (
                     element={
                         <Layout>
                             <CustomerEditPage />
+                        </Layout>
+                    }
+                />
+                <RouterPage
+                    path="/customers/:id"
+                    element={
+                        <Layout>
+                            <CustomerDetailPage />
                         </Layout>
                     }
                 />
