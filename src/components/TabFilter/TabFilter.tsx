@@ -6,7 +6,7 @@ import styles from './TabFilter.module.scss';
 
 export interface IFilter {
     name: string;
-    filterEventHandler: () => void;
+    filterEventHandler?: () => void;
     children?: React.ReactNode;
 }
 

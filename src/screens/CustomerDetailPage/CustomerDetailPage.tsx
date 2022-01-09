@@ -9,12 +9,10 @@ const CustomerDetailPage = () => {
     const FILTER_TITLES = [
         {
             name: 'Details',
-            filterEventHandler: () => {},
             children: <CustomerDetail />,
         },
         {
             name: 'Invoices',
-            filterEventHandler: () => {},
             children: <CustomerInvoice />,
         },
     ];
