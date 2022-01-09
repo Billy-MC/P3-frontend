@@ -13,7 +13,6 @@ const Layout: FC<LayoutProps> = ({ children }) => (
         <Header />
         <SideNav />
         <div className={styles.main}>{children}</div>
-        <Footer />
     </>
 );
 
