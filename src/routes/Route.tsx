@@ -10,7 +10,8 @@ import DashboardPage from '../screens/DashboardPage';
 import ForgotPasswordPage from '../screens/ForgotPasswordPage';
 import WelcomePage from '../screens/WelcomePage';
 import ProtectedRouterPage from './components';
-import Layout from '../layouts';
+import MainLayout from '../layouts/MainLayout';
+import SubLayout from '../layouts/SubLayout';
 import style from './Route.module.scss';
 import AddCustomerPage from '../screens/AddCustomerPage';
 import CustomerDetailPage from '../screens/CustomerDetailPage';
@@ -26,65 +27,65 @@ const Route = () => (
                 <RouterPage
                     path="/users"
                     element={
-                        <Layout>
+                        <MainLayout>
                             <UserPage />
-                        </Layout>
+                        </MainLayout>
                     }
                 />
                 <RouterPage
-                    path="/customers/*"
+                    path="/customers"
                     element={
-                        <Layout>
+                        <MainLayout>
                             <CustomerPage />
-                        </Layout>
+                        </MainLayout>
                     }
                 />
                 <RouterPage
                     path="/customers/edit"
                     element={
-                        <Layout>
+                        <SubLayout>
                             <CustomerEditPage />
-                        </Layout>
+                        </SubLayout>
                     }
                 />
                 <RouterPage
                     path="/customers/:id"
                     element={
-                        <Layout>
+                        <SubLayout>
                             <CustomerDetailPage />
-                        </Layout>
+                        </SubLayout>
                     }
                 />
                 <RouterPage
                     path="/customers/add"
                     element={
-                        <Layout>
+                        <SubLayout>
                             <AddCustomerPage />
-                        </Layout>
+                        </SubLayout>
                     }
                 />
                 <RouterPage
                     path="/products"
                     element={
-                        <Layout>
+                        <MainLayout>
                             <ProductPage />
-                        </Layout>
+                        </MainLayout>
                     }
                 />
                 <RouterPage
                     path="/orders"
                     element={
-                        <Layout>
+                        <MainLayout>
                             <OrderPage />
-                        </Layout>
+                        </MainLayout>
                     }
                 />
                 <RouterPage
                     path="/dashboard"
                     element={
-                        <Layout>
+                        <MainLayout>
                             <DashboardPage />
-                        </Layout>
+                        </MainLayout>
                     }
                 />
             </RouterPage>

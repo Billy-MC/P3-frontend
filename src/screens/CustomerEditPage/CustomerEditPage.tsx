@@ -1,12 +1,10 @@
 import { Box } from '@mui/material';
-
-import EditPageTemplate from '../../components/EditPageTemplate';
 import BackToCustomer from './components/BackToCustomer';
 import EditCustomerForm from './components/EditCustomerForm';
 import styles from './CustomerEditPage.module.scss';
 
 const CustomerEditPage = () => (
-    <EditPageTemplate>
+    <>
         <BackToCustomer />
         <Box className={styles['editcontent-title']}>
             <h2 className={styles['editcontent-title-custname']}>Name</h2>
@@ -16,7 +14,7 @@ const CustomerEditPage = () => (
             </h3>
         </Box>
         <EditCustomerForm />
-    </EditPageTemplate>
+    </>
 );
 
 export default CustomerEditPage;

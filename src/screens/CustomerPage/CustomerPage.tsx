@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import CustomerPageSearchBar from './components/CustomerPageSearchBar';
 
 const CustomerPage = () => (
     <div>
@@ -7,8 +6,6 @@ const CustomerPage = () => (
         <Link to="edit">Edit Button</Link>
         <Link to="add">Add Customer Button</Link>
         <Link to="1">Customer Detail</Link>
-
-        <CustomerPageSearchBar />
     </div>
 );
 

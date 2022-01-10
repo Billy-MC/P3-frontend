@@ -1,5 +1,4 @@
 import { Container } from '@mui/material';
-import EditPageTemplate from '../../components/EditPageTemplate';
 import TabFilter from '../../components/TabFilter';
 import CustomerDetail from './components/CustomerDetail';
 import CustomerDetailHeading from './components/CustomerDetailHeading';
@@ -18,12 +17,10 @@ const CustomerDetailPage = () => {
     ];
 
     return (
-        <EditPageTemplate>
-            <Container>
-                <CustomerDetailHeading />
-                <TabFilter filter={FILTER_TITLES} />
-            </Container>
-        </EditPageTemplate>
+        <Container>
+            <CustomerDetailHeading />
+            <TabFilter filter={FILTER_TITLES} />
+        </Container>
     );
 };
 
