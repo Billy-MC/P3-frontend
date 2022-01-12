@@ -19,7 +19,7 @@ const ForgetPasswordPage = () => {
         valueChangeHandler: emailChangeHandler,
         inputBlurHandler: emailBlurHandler,
         reset: resetEmail,
-    } = useInput(inputEmailIsValid);
+    } = useInput(inputEmailIsValid, '');
 
     useEffect(() => {
         const identifier = setTimeout(() => {

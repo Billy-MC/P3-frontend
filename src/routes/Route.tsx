@@ -33,7 +33,7 @@ const Route = () => (
                     }
                 />
                 <RouterPage
-                    path="/customers"
+                    path="/customers/*"
                     element={
                         <MainLayout>
                             <CustomerPage />
@@ -41,18 +41,18 @@ const Route = () => (
                     }
                 />
                 <RouterPage
-                    path="/customers/edit"
+                    path="/customers/:email"
                     element={
                         <SubLayout>
-                            <CustomerEditPage />
+                            <CustomerDetailPage />
                         </SubLayout>
                     }
                 />
                 <RouterPage
-                    path="/customers/:id"
+                    path="/customers/:email/edit"
                     element={
                         <SubLayout>
-                            <CustomerDetailPage />
+                            <CustomerEditPage />
                         </SubLayout>
                     }
                 />

@@ -13,4 +13,18 @@ const validateEmail = (email: string): boolean => {
     return emailValidateResult;
 };
 
-export { validatePassword, validateEmail };
+const validateNumber = (code: string): boolean => {
+    const numberRegex = /^[0-9]/;
+
+    const numberValidateResult = numberRegex.test(code);
+    return numberValidateResult;
+};
+
+const validatePhone = (phone: string): boolean => {
+    const numberRegex = /^(\+?\(61\)|\(\+?61\)|\+?61|\(0[1-9]\)|0[1-9])?( ?-?[0-9]){7,9}$/;
+
+    const numberValidateResult = numberRegex.test(phone);
+    return numberValidateResult;
+};
+
+export { validatePassword, validateEmail, validateNumber, validatePhone };

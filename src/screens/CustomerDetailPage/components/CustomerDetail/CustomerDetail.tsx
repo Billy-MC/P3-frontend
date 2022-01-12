@@ -1,18 +1,42 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, List, ListItem, ListItemText, Divider } from '@mui/material';
 import ButtonPrimary from '../../../../components/Button';
 import styles from '../../CustomerDetailPage.module.scss';
+import ICustomer from '../../../../types/ICustomer';
+import { useAppDispatch } from '../../../../hooks/redux';
+import { deleteCustomer } from '../../../../store/slices/customerSlice';
 
-const CustomerDetail = () => {
-    const details = [
-        {
-            name: 'Email',
-            value: 'miron.vitold@devias.io',
-        },
-        {
-            name: 'Phone',
-            value: '+55 748 327 439',
-        },
-    ];
+interface IDetail {
+    Email: string;
+    Phone: string;
+    Name: string;
+    Address: string;
+    Spent: number;
+}
+export interface DetailsProps {
+    details: ICustomer;
+}
+
+const CustomerDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
+    const { details } = props;
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    const detail = {
+        Email: details.email,
+        Name: `${details.firstName} ${details.lastName}`,
+        Phone: details.phone,
+        Address: `${details.address.street},${details.address.city}, ${details.address.state} ${details.address.postcode}`,
+        Spent: details.spending,
+    };
+
+    const deleteHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        event.preventDefault();
+
+        dispatch(deleteCustomer(details.email));
+        navigate({ pathname: '/customers' });
+    };
 
     return (
         <>
@@ -20,16 +44,16 @@ const CustomerDetail = () => {
                 <span className={styles['customerdetail-details-title']}>Basic Details</span>
                 <Divider />
                 <List>
-                    {details.map((detail) => (
-                        <>
-                            <ListItem
-                                key={detail.name}
-                                className={styles['customerdetail-details-itemtext']}
-                            >
-                                <ListItemText primary={detail.name} secondary={detail.value} />
+                    {Object.keys(detail).map((key, i) => (
+                        <div key={key[i]}>
+                            <ListItem className={styles['customerdetail-details-itemtext']}>
+                                <ListItemText
+                                    primary={key}
+                                    secondary={detail[key as keyof IDetail]}
+                                />
                             </ListItem>
                             <Divider />
-                        </>
+                        </div>
                     ))}
                 </List>
                 <Box className={styles['customerdetail-details-reset']}>
@@ -42,7 +66,10 @@ const CustomerDetail = () => {
                 <span className={styles['customerdetail-details-title']}>Data Management</span>
                 <Divider />
                 <Box className={styles['customerdetail-details-delete']}>
-                    <ButtonPrimary className={styles['customerdetail-details-delete-btn']}>
+                    <ButtonPrimary
+                        className={styles['customerdetail-details-delete-btn']}
+                        onClick={deleteHandler}
+                    >
                         Delete Account
                     </ButtonPrimary>
                     <span>

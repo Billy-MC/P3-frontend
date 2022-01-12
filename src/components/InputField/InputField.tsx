@@ -21,13 +21,25 @@ export interface InputFieldProps {
     className?: string;
     error?: boolean | null;
     required?: boolean | null;
+    disabled?: boolean | null;
     value: string | number;
-    onChange: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+    onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
 const InputField: React.FC<InputFieldProps> = (props) => {
-    const { id, label, type, onChange, value, onBlur, className, required, error = null } = props;
+    const {
+        id,
+        label,
+        type,
+        onChange,
+        value,
+        onBlur,
+        className,
+        disabled,
+        required,
+        error = null,
+    } = props;
     return (
         <CssFormControl
             className={`${styles.inputfield} ${className}`}
@@ -35,6 +47,7 @@ const InputField: React.FC<InputFieldProps> = (props) => {
             size="small"
             {...((error && { error: true }) || '')}
             {...((required && { required: true }) || '')}
+            {...((disabled && { disabled: true }) || '')}
         >
             <InputLabel htmlFor={label} {...(error || '')}>
                 {label}

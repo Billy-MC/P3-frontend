@@ -4,25 +4,28 @@ import { useNavigate } from 'react-router-dom';
 import InputField from '../../../../components/InputField';
 import ButtonPrimary from '../../../../components/Button/ButtonPrimary';
 import useInput from '../../../../hooks/useInput';
-import { validateEmail } from '../../../../utils/validator';
+import { validateEmail, validateNumber, validatePhone } from '../../../../utils/validator';
 import styles from './EditCustomerForm.module.scss';
+import { useAppDispatch } from '../../../../hooks/redux';
+import { updateCustomer, deleteCustomer } from '../../../../store/slices/customerSlice';
+import ICustomer from '../../../../types/ICustomer';
 
-const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
+export interface DetailsProps {
+    details: ICustomer;
+}
+const inputEmailIsValid = (value: string) =>
+    value.trim() !== '' && validateEmail(value.toLowerCase());
+const valueIsNumber = (value: string) => value.trim() !== '' && validateNumber(value);
 
 const valueIsNotEmpty = (value: string) => value.trim() !== '';
 
-const EditCustomerForm = () => {
+const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
+    const { details } = props;
     const [formIsValid, setFormIsValid] = useState(true);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
-    const {
-        value: emailValue,
-        isValid: emailIsValid,
-        hasError: emailHasError,
-        valueChangeHandler: emailChangeHandler,
-        inputBlurHandler: emailBlurHandler,
-        reset: resetEmail,
-    } = useInput(inputEmailIsValid);
+    const { value: emailValue } = useInput(inputEmailIsValid, details.email);
 
     const {
         value: firstNameValue,
@@ -30,16 +33,14 @@ const EditCustomerForm = () => {
         hasError: firstNameHasError,
         valueChangeHandler: firstNameChangeHandler,
         inputBlurHandler: firstNameBlurHandler,
-        reset: resetFirstName,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNotEmpty, details.firstName);
     const {
         value: lastNameValue,
         isValid: lastNameIsValid,
         hasError: lastNameHasError,
         valueChangeHandler: lastNameChangeHandler,
         inputBlurHandler: lastNameBlurHandler,
-        reset: resetLastName,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNotEmpty, details.lastName);
 
     const {
         value: addressValue,
@@ -47,8 +48,7 @@ const EditCustomerForm = () => {
         hasError: addressHasError,
         valueChangeHandler: addressChangeHandler,
         inputBlurHandler: addressBlurHandler,
-        reset: resetAddress,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNotEmpty, details.address.street);
 
     const {
         value: postCodeValue,
@@ -56,8 +56,7 @@ const EditCustomerForm = () => {
         hasError: postCodeHasError,
         valueChangeHandler: postCodeChangeHandler,
         inputBlurHandler: postCodeBlurHandler,
-        reset: resetPostCode,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNumber, details.address.postcode);
 
     const {
         value: cityValue,
@@ -65,8 +64,7 @@ const EditCustomerForm = () => {
         hasError: cityHasError,
         valueChangeHandler: cityChangeHandler,
         inputBlurHandler: cityBlurHandler,
-        reset: resetCity,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNotEmpty, details.address.city);
 
     const {
         value: stateValue,
@@ -74,8 +72,7 @@ const EditCustomerForm = () => {
         hasError: stateHasError,
         valueChangeHandler: stateChangeHandler,
         inputBlurHandler: stateBlurHandler,
-        reset: resetState,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNotEmpty, details.address.state);
 
     const {
         value: phoneValue,
@@ -83,14 +80,12 @@ const EditCustomerForm = () => {
         hasError: phoneHasError,
         valueChangeHandler: phoneChangeHandler,
         inputBlurHandler: phoneBlurHandler,
-        reset: resetPhone,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(validatePhone, details.phone);
 
     useEffect(() => {
         const identifier = setTimeout(() => {
             setFormIsValid(
-                emailIsValid &&
-                    firstNameIsValid &&
+                firstNameIsValid &&
                     lastNameIsValid &&
                     addressIsValid &&
                     postCodeIsValid &&
@@ -104,7 +99,6 @@ const EditCustomerForm = () => {
             clearTimeout(identifier);
         };
     }, [
-        emailIsValid,
         firstNameIsValid,
         lastNameIsValid,
         addressIsValid,
@@ -114,22 +108,40 @@ const EditCustomerForm = () => {
         phoneIsValid,
     ]);
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const navigateHandler = () => navigate(-1);
+
+    const deleteHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        if (formIsValid === false) {
-            return;
-        }
-        resetEmail();
-        resetFirstName();
-        resetLastName();
-        resetAddress();
-        resetPostCode();
-        resetCity();
-        resetState();
-        resetPhone();
+
+        dispatch(deleteCustomer(details.email));
+        navigate({ pathname: '/customers' });
     };
 
-    const navigateHandler = () => navigate(-1);
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        if (!formIsValid) {
+            return;
+        }
+
+        dispatch(
+            updateCustomer({
+                email: emailValue,
+                firstName: firstNameValue,
+                lastName: lastNameValue,
+                phone: phoneValue,
+                address: {
+                    street: addressValue,
+                    city: cityValue,
+                    state: stateValue,
+                    postcode: postCodeValue,
+                },
+            }),
+        );
+
+        navigate({ pathname: '/customers' });
+    };
+
     return (
         <Box className={styles.editform} component="form" onSubmit={handleSubmit}>
             <h2 className={styles['editform-subtitle']}>Edit customer</h2>
@@ -168,18 +180,12 @@ const EditCustomerForm = () => {
                     </Box>
                     <Box className={styles['editform-input_field']}>
                         <InputField
-                            required
+                            disabled
                             id="email"
                             label="Email"
                             type="email"
                             value={emailValue}
-                            onChange={emailChangeHandler}
-                            onBlur={emailBlurHandler}
-                            error={emailHasError}
                         />
-                        {emailHasError && (
-                            <p className={styles['editform-error']}>Please Enter valid Email</p>
-                        )}
                     </Box>
                     <Box className={styles['editform-input_field']}>
                         <InputField
@@ -207,7 +213,9 @@ const EditCustomerForm = () => {
                             error={postCodeHasError}
                         />
                         {postCodeHasError && (
-                            <p className={styles['editform-error']}>This field is required.</p>
+                            <p className={styles['editform-error']}>
+                                This field cannot empty & only can number
+                            </p>
                         )}
                     </Box>
                     <Box className={styles['editform-input_field']}>
@@ -252,7 +260,9 @@ const EditCustomerForm = () => {
                             error={phoneHasError}
                         />
                         {phoneHasError && (
-                            <p className={styles['editform-error']}>This field cannot empty</p>
+                            <p className={styles['editform-error']}>
+                                This field cannot empty & only can number
+                            </p>
                         )}
                     </Box>
                 </Box>
@@ -268,8 +278,12 @@ const EditCustomerForm = () => {
                 >
                     CANCEL
                 </ButtonPrimary>
-                <ButtonPrimary className={styles['editform-btnsection_delete']} type="submit">
-                    Delete User
+                <ButtonPrimary
+                    className={styles['editform-btnsection_delete']}
+                    type="submit"
+                    onClick={deleteHandler}
+                >
+                    Delete Account
                 </ButtonPrimary>
             </Box>
         </Box>

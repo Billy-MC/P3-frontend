@@ -23,7 +23,7 @@ const LoginPage = () => {
         valueChangeHandler: emailChangeHandler,
         inputBlurHandler: emailBlurHandler,
         reset: resetEmail,
-    } = useInput(inputEmailIsValid);
+    } = useInput(inputEmailIsValid, '');
 
     const {
         value: passwordValue,
@@ -32,7 +32,7 @@ const LoginPage = () => {
         valueChangeHandler: passwordChangeHandler,
         inputBlurHandler: passwordBlurHandler,
         reset: resetpassword,
-    } = useInput(inputPasswordIsValid);
+    } = useInput(inputPasswordIsValid, '');
 
     useEffect(() => {
         const identifier = setTimeout(() => {

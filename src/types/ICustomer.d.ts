@@ -1,20 +1,30 @@
-interface Address {
-    street?: string;
+export interface IAddress {
+    street: string;
     city: string;
-    postCode: string;
+    state: string;
+    postcode: string;
 }
+
 enum Gender {
     MALE = 'MALE',
     FEMALE = 'FEMALE',
+    OTHER = 'OTHER',
+    NOTTOTELL = 'NOTTOTELL',
+}
+
+enum Notification {
+    SMS = 'SMS',
+    EMAIL = 'EMAIL',
+    PHONE = 'PHONE',
 }
 export default interface ICustomer {
-    customerId: string;
     email: string;
     firstName: string;
     lastName: string;
     phone: string;
-    dob: Date;
+    address: IAddress;
+    dob?: Date;
     notification?: Notification;
-    gender: Gender;
-    address: Address;
+    gender?: Gender;
+    spending?: number;
 }

@@ -13,6 +13,7 @@ const CustomerDataGrid: React.FC = () => {
         delete result.notification;
         return result;
     });
+
     useEffect(() => {
         dispatch(fetchAllCustomers());
     }, [dispatch]);

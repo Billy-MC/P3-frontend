@@ -1,11 +1,14 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+
+const email = 'ante@aol.net';
 
 const CustomerPage = () => (
     <div>
         <p>Customer page</p>
-        <Link to="edit">Edit Button</Link>
+        <Link to={`/customers/${email}/edit`}>Edit Button</Link>
         <Link to="add">Add Customer Button</Link>
-        <Link to="1">Customer Detail</Link>
+        <Link to={`/customers/${email}`}>Customer Detail</Link>
     </div>
 );
 

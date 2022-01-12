@@ -1,17 +1,23 @@
 import { Box, Divider } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import InputField from '../../../../components/InputField';
 import ButtonPrimary from '../../../../components/Button/ButtonPrimary';
 import useInput from '../../../../hooks/useInput';
-import { validateEmail } from '../../../../utils/validator';
+import { validateEmail, validateNumber, validatePhone } from '../../../../utils/validator';
 import styles from './AddCustomerForm.module.scss';
+import { useAppDispatch } from '../../../../hooks/redux';
+import { addCustomer } from '../../../../store/slices/customerSlice';
 
-const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
+const inputEmailIsValid = (value: string) =>
+    validateEmail(value.toLowerCase()) && value.trim() !== '';
 const valueIsNotEmpty = (value: string) => value.trim() !== '';
+const valueIsNumber = (value: string) => value.trim() !== '' && validateNumber(value);
 
 const AddCustomerForm = () => {
     const [formIsValid, setFormIsValid] = useState(true);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const {
         value: emailValue,
@@ -20,7 +26,7 @@ const AddCustomerForm = () => {
         valueChangeHandler: emailChangeHandler,
         inputBlurHandler: emailBlurHandler,
         reset: resetEmail,
-    } = useInput(inputEmailIsValid);
+    } = useInput(inputEmailIsValid, '');
 
     const {
         value: firstNameValue,
@@ -29,7 +35,7 @@ const AddCustomerForm = () => {
         valueChangeHandler: firstNameChangeHandler,
         inputBlurHandler: firstNameBlurHandler,
         reset: resetFirstName,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNotEmpty, '');
 
     const {
         value: lastNameValue,
@@ -38,7 +44,7 @@ const AddCustomerForm = () => {
         valueChangeHandler: lastNameChangeHandler,
         inputBlurHandler: lastNameBlurHandler,
         reset: resetLastName,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNotEmpty, '');
 
     const {
         value: addressValue,
@@ -47,16 +53,16 @@ const AddCustomerForm = () => {
         valueChangeHandler: addressChangeHandler,
         inputBlurHandler: addressBlurHandler,
         reset: resetAddress,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNotEmpty, '');
 
     const {
-        value: countryValue,
-        isValid: countryIsValid,
-        hasError: countryHasError,
-        valueChangeHandler: countryChangeHandler,
-        inputBlurHandler: countryBlurHandler,
-        reset: resetCountry,
-    } = useInput(valueIsNotEmpty);
+        value: cityValue,
+        isValid: cityIsValid,
+        hasError: cityHasError,
+        valueChangeHandler: cityChangeHandler,
+        inputBlurHandler: cityBlurHandler,
+        reset: resetCity,
+    } = useInput(valueIsNotEmpty, '');
 
     const {
         value: stateValue,
@@ -65,7 +71,7 @@ const AddCustomerForm = () => {
         valueChangeHandler: stateChangeHandler,
         inputBlurHandler: stateBlurHandler,
         reset: resetState,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNotEmpty, '');
 
     const {
         value: phoneValue,
@@ -74,13 +80,16 @@ const AddCustomerForm = () => {
         valueChangeHandler: phoneChangeHandler,
         inputBlurHandler: phoneBlurHandler,
         reset: resetPhone,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(validatePhone, '');
 
     const {
         value: postCodeValue,
+        isValid: postCodeIsValid,
         valueChangeHandler: postCodeChangeHandler,
+        inputBlurHandler: postCodeBlurHandler,
+        hasError: postCodeHasError,
         reset: resetPostCode,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNumber, '');
 
     useEffect(() => {
         const identifier = setTimeout(() => {
@@ -89,7 +98,7 @@ const AddCustomerForm = () => {
                     firstNameIsValid &&
                     lastNameIsValid &&
                     addressIsValid &&
-                    countryIsValid &&
+                    cityIsValid &&
                     stateIsValid &&
                     phoneIsValid,
             );
@@ -103,7 +112,8 @@ const AddCustomerForm = () => {
         firstNameIsValid,
         lastNameIsValid,
         addressIsValid,
-        countryIsValid,
+        postCodeIsValid,
+        cityIsValid,
         stateIsValid,
         phoneIsValid,
     ]);
@@ -111,18 +121,35 @@ const AddCustomerForm = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (formIsValid === false) {
+        if (!formIsValid) {
             return;
         }
+
+        dispatch(
+            addCustomer({
+                email: emailValue,
+                firstName: firstNameValue,
+                lastName: lastNameValue,
+                phone: phoneValue,
+                address: {
+                    street: addressValue,
+                    city: cityValue,
+                    state: stateValue,
+                    postcode: postCodeValue,
+                },
+            }),
+        );
 
         resetEmail();
         resetFirstName();
         resetLastName();
         resetAddress();
-        resetCountry();
+        resetCity();
         resetState();
         resetPostCode();
         resetPhone();
+
+        navigate({ pathname: '/customers' });
     };
 
     return (
@@ -178,25 +205,23 @@ const AddCustomerForm = () => {
                             onBlur={emailBlurHandler}
                             error={emailHasError}
                         />
-
                         {emailHasError && (
                             <p className={styles['addform-error']}>Please Enter valid Email</p>
                         )}
                     </Box>
-
                     <Box className={styles['addform-input_field']}>
                         <InputField
                             required
-                            id="country"
-                            label="Country"
+                            id="city"
+                            label="City"
                             type="text"
-                            value={countryValue}
-                            onChange={countryChangeHandler}
-                            onBlur={countryBlurHandler}
-                            error={countryHasError}
+                            value={cityValue}
+                            onChange={cityChangeHandler}
+                            onBlur={cityBlurHandler}
+                            error={cityHasError}
                         />
 
-                        {countryHasError && (
+                        {cityHasError && (
                             <p className={styles['addform-error']}>This field is required.</p>
                         )}
                     </Box>
@@ -233,23 +258,29 @@ const AddCustomerForm = () => {
                             <p className={styles['addform-error']}>This field is required.</p>
                         )}
                     </Box>
-
-                    <InputField
-                        className={styles['addform-input_field']}
-                        required
-                        id="postcode"
-                        label="Post Code"
-                        type="text"
-                        value={postCodeValue}
-                        onChange={postCodeChangeHandler}
-                    />
-
+                    <Box className={styles['addform-input_field']}>
+                        <InputField
+                            required
+                            id="postcode"
+                            label="Post Code"
+                            type="text"
+                            value={postCodeValue}
+                            onChange={postCodeChangeHandler}
+                            onBlur={postCodeBlurHandler}
+                            error={postCodeHasError}
+                        />
+                        {postCodeHasError && (
+                            <p className={styles['addform-error']}>
+                                This field cannot empty & only can number
+                            </p>
+                        )}
+                    </Box>
                     <Box className={styles['addform-input_field']}>
                         <InputField
                             required
                             id="phone"
                             label="Mobile Phone Number"
-                            type="text"
+                            type="test"
                             value={phoneValue}
                             onChange={phoneChangeHandler}
                             onBlur={phoneBlurHandler}
@@ -257,7 +288,9 @@ const AddCustomerForm = () => {
                         />
 
                         {phoneHasError && (
-                            <p className={styles['addform-error']}>This field cannot empty</p>
+                            <p className={styles['addform-error']}>
+                                This field cannot empty & only can number
+                            </p>
                         )}
                     </Box>
                 </Box>

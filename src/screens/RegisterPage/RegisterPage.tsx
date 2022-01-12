@@ -23,7 +23,7 @@ const RegisterPage = () => {
         valueChangeHandler: emailChangeHandler,
         inputBlurHandler: emailBlurHandler,
         reset: resetEmail,
-    } = useInput(inputEmailIsValid);
+    } = useInput(inputEmailIsValid, '');
     const {
         value: firstNameValue,
         isValid: firstNameIsValid,
@@ -31,7 +31,7 @@ const RegisterPage = () => {
         valueChangeHandler: firstNameChangeHandler,
         inputBlurHandler: firstNameBlurHandler,
         reset: resetFirstName,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNotEmpty, '');
     const {
         value: lastNameValue,
         isValid: lastNameIsValid,
@@ -39,7 +39,7 @@ const RegisterPage = () => {
         valueChangeHandler: lastNameChangeHandler,
         inputBlurHandler: lastNameBlurHandler,
         reset: resetLastName,
-    } = useInput(valueIsNotEmpty);
+    } = useInput(valueIsNotEmpty, '');
 
     const {
         value: passwordValue,
@@ -48,7 +48,7 @@ const RegisterPage = () => {
         valueChangeHandler: passwordChangeHandler,
         inputBlurHandler: passwordBlurHandler,
         reset: resetpassword,
-    } = useInput(inputPasswordIsValid);
+    } = useInput(inputPasswordIsValid, '');
 
     const {
         value: comfirmPasswordValue,
@@ -57,7 +57,7 @@ const RegisterPage = () => {
         valueChangeHandler: comfirmPasswordChangeHandler,
         inputBlurHandler: comfirmPasswordBlurHandler,
         reset: resetComfirmPassword,
-    } = useInput(inputPasswordIsValid);
+    } = useInput(inputPasswordIsValid, '');
 
     useEffect(() => {
         const identifier = setTimeout(() => {
@@ -97,7 +97,6 @@ const RegisterPage = () => {
             >
                 <Typography className={styles['registration-title']}>Create an account</Typography>
                 <InputField
-                    required
                     id="email"
                     label="Email"
                     type="email"
