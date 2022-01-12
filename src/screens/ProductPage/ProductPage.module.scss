@@ -1,0 +1,42 @@
+
+@import '../../assets/styles/variable.scss';
+
+.productPage {
+    &-box {
+        margin: 0px 0px 32px;
+        width: 100%;
+        flex-grow: 1;
+    }
+    &-toolbar {
+        margin: 0px 0px 0px -24px;
+        padding-left: 24px;
+        padding-right: 0px;
+        flex-grow: inherit;
+    }
+    &-header {
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1.375;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        flex-grow: inherit;
+    }
+    &-btnSection {
+        display: flex;
+        padding: 2px;
+        justify-content: right;
+    }
+    &-addBtn {
+        width: 100px;
+        margin: 0px;
+        border: 0px;
+        padding: 8px 50px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        white-space: nowrap;
+    }
+    &-addIcon {
+        font-size: large;
+        padding-right: 5px;
+    }
+}

@@ -1,12 +1,12 @@
 @import '../../assets/styles/breakpoints';
 
-.SearchBar{
+.SearchBar {
     display: flex;
 }
 
 .toolBar {
-    background-color: #fff;
     padding-left: 0px;
+    flex-grow: 2;
 }
 
 .Search {
@@ -18,13 +18,14 @@
     margin-right: 16px;
     margin-left: 0;
     width: auto;
+    flex-grow: inherit;
     &:hover {
-        color:rgb(18, 24, 40);
-      }
-    &:focus-within  {
-        color:#5048E5;
+        color: rgb(18, 24, 40);
     }
-    color:rgba(18, 24, 40, 0.15);
+    &:focus-within {
+        color: #5048e5;
+    }
+    color: rgba(18, 24, 40, 0.15);
 }
 
 .searchIconWrapper {
@@ -48,5 +49,5 @@
 }
 
 .Button {
-    width:100px;
+    width: 100px;
 }
