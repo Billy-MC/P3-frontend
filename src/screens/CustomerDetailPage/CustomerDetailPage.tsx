@@ -6,10 +6,16 @@ import CustomerDetail from './components/CustomerDetail';
 import CustomerDetailHeading from './components/CustomerDetailHeading';
 import CustomerInvoice from './components/CustomerInvoice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchCustomerByEmail, selectCustomer } from '../../store/slices/customerSlice';
+import {
+    fetchCustomerByEmail,
+    selectCustomer,
+    selectCustomerStatus,
+} from '../../store/slices/customerSlice';
 import ICustomer from '../../types/ICustomer';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const CustomerDetailPage = () => {
+    const status = useAppSelector(selectCustomerStatus);
     const dispatch = useAppDispatch();
     const { email } = useParams();
 
@@ -32,8 +38,13 @@ const CustomerDetailPage = () => {
     const name = `${customer.firstName} ${customer.lastName}`;
     return (
         <Container>
-            <CustomerDetailHeading name={name} email={customer.email} />
-            <TabFilter filter={FILTER_TITLES} />
+            {status === 'loading' && <LoadingSpinner />}
+            {status === 'succeeded' && (
+                <>
+                    <CustomerDetailHeading name={name} email={customer.email} />
+                    <TabFilter filter={FILTER_TITLES} />
+                </>
+            )}
         </Container>
     );
 };
