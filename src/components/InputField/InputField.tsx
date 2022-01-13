@@ -17,12 +17,13 @@ const CssFormControl = styled(FormControl)({
 export interface InputFieldProps {
     id: string;
     label: string;
-    type: string;
+    type?: string;
     className?: string;
     error?: boolean | null;
     required?: boolean | null;
     disabled?: boolean | null;
     value: string | number;
+    select?: boolean;
     onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
@@ -39,6 +40,7 @@ const InputField: React.FC<InputFieldProps> = (props) => {
         disabled,
         required,
         error = null,
+        select,
     } = props;
     return (
         <CssFormControl
@@ -48,6 +50,7 @@ const InputField: React.FC<InputFieldProps> = (props) => {
             {...((error && { error: true }) || '')}
             {...((required && { required: true }) || '')}
             {...((disabled && { disabled: true }) || '')}
+            {...(select || '')}
         >
             <InputLabel htmlFor={label} {...(error || '')}>
                 {label}
@@ -60,6 +63,7 @@ const InputField: React.FC<InputFieldProps> = (props) => {
                 onBlur={onBlur}
                 onChange={onChange}
                 {...(error || '')}
+                {...(select || '')}
             />
         </CssFormControl>
     );

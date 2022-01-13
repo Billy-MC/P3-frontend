@@ -6,10 +6,10 @@ export interface IAddress {
 }
 
 enum Gender {
-    MALE = 'MALE',
-    FEMALE = 'FEMALE',
-    OTHER = 'OTHER',
-    NOTTOTELL = 'NOTTOTELL',
+    MALE = 'Male',
+    FEMALE = 'Female',
+    OTHER = 'Other',
+    NOTTOTELL = 'Not to tell',
 }
 
 enum Notification {
@@ -25,6 +25,6 @@ export default interface ICustomer {
     address: IAddress;
     dob?: Date;
     notification?: Notification;
-    gender?: Gender;
+    gender: Gender;
     spending?: number;
 }

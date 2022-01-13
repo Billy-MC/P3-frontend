@@ -1,4 +1,4 @@
-import { Box, Divider } from '@mui/material';
+import { Box, Divider, MenuItem } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../../../../components/InputField';
@@ -8,16 +8,19 @@ import { validateEmail, validateNumber, validatePhone } from '../../../../utils/
 import styles from './EditCustomerForm.module.scss';
 import { useAppDispatch } from '../../../../hooks/redux';
 import { updateCustomer, deleteCustomer } from '../../../../store/slices/customerSlice';
-import ICustomer from '../../../../types/ICustomer';
+import ICustomer, { Gender } from '../../../../types/ICustomer';
+import SelectField from '../../../../components/SelectField';
 
 export interface DetailsProps {
     details: ICustomer;
 }
+
 const inputEmailIsValid = (value: string) =>
     value.trim() !== '' && validateEmail(value.toLowerCase());
 const valueIsNumber = (value: string) => value.trim() !== '' && validateNumber(value);
-
 const valueIsNotEmpty = (value: string) => value.trim() !== '';
+
+const genderSelect = ['Male', 'Female', 'Other', 'Not to Tell'];
 
 const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
     const { details } = props;
@@ -41,6 +44,13 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
         valueChangeHandler: lastNameChangeHandler,
         inputBlurHandler: lastNameBlurHandler,
     } = useInput(valueIsNotEmpty, details.lastName);
+
+    const {
+        value: genderValue,
+        isValid: genderIsValid,
+        valueChangeHandler: genderChangeHandler,
+        inputBlurHandler: genderBlurHandler,
+    } = useInput(valueIsNotEmpty, details.gender);
 
     const {
         value: addressValue,
@@ -87,8 +97,8 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
             setFormIsValid(
                 firstNameIsValid &&
                     lastNameIsValid &&
+                    genderIsValid &&
                     addressIsValid &&
-                    postCodeIsValid &&
                     cityIsValid &&
                     stateIsValid &&
                     phoneIsValid,
@@ -106,8 +116,8 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
         cityIsValid,
         stateIsValid,
         phoneIsValid,
+        genderIsValid,
     ]);
-
     const navigateHandler = () => navigate(-1);
 
     const deleteHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -130,6 +140,7 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
                 firstName: firstNameValue,
                 lastName: lastNameValue,
                 phone: phoneValue,
+                gender: genderValue as Gender,
                 address: {
                     street: addressValue,
                     city: cityValue,
@@ -178,6 +189,21 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
                             <p className={styles['editform-error']}>This field is required.</p>
                         )}
                     </Box>
+                    <SelectField
+                        className={styles['editform-input_select']}
+                        id="gender"
+                        label="Gender"
+                        value={genderValue}
+                        onChange={genderChangeHandler}
+                        onBlur={genderBlurHandler}
+                        required
+                    >
+                        {genderSelect.map((genders) => (
+                            <MenuItem key={genders} value={genders}>
+                                {genders}
+                            </MenuItem>
+                        ))}
+                    </SelectField>
                     <Box className={styles['editform-input_field']}>
                         <InputField
                             disabled

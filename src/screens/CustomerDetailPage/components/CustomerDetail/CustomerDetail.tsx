@@ -11,6 +11,7 @@ interface IDetail {
     Email: string;
     Phone: string;
     Name: string;
+    Gender: string;
     Address: string;
     Spent: number;
 }
@@ -27,6 +28,7 @@ const CustomerDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
         Email: details.email,
         Name: `${details.firstName} ${details.lastName}`,
         Phone: details.phone,
+        Gender: details.gender,
         Address: `${details.address.street}, ${details.address.city}, ${details.address.state} ${details.address.postcode}`,
         Spent: details.spending,
     };

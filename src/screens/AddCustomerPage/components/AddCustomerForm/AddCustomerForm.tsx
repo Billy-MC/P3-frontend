@@ -1,4 +1,4 @@
-import { Box, Divider } from '@mui/material';
+import { Box, Divider, MenuItem } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import InputField from '../../../../components/InputField';
@@ -8,11 +8,15 @@ import { validateEmail, validateNumber, validatePhone } from '../../../../utils/
 import styles from './AddCustomerForm.module.scss';
 import { useAppDispatch } from '../../../../hooks/redux';
 import { addCustomer } from '../../../../store/slices/customerSlice';
+import { Gender } from '../../../../types/ICustomer';
+import SelectField from '../../../../components/SelectField';
 
 const inputEmailIsValid = (value: string) =>
     validateEmail(value.toLowerCase()) && value.trim() !== '';
 const valueIsNotEmpty = (value: string) => value.trim() !== '';
 const valueIsNumber = (value: string) => value.trim() !== '' && validateNumber(value);
+
+const genderSelect = ['Male', 'Female', 'Other', 'Not to Tell'];
 
 const AddCustomerForm = () => {
     const [formIsValid, setFormIsValid] = useState(true);
@@ -27,6 +31,14 @@ const AddCustomerForm = () => {
         inputBlurHandler: emailBlurHandler,
         reset: resetEmail,
     } = useInput(inputEmailIsValid, '');
+
+    const {
+        value: genderValue,
+        isValid: genderIsValid,
+        valueChangeHandler: genderChangeHandler,
+        inputBlurHandler: genderBlurHandler,
+        reset: resetGender,
+    } = useInput(valueIsNotEmpty, 'Not to Tell');
 
     const {
         value: firstNameValue,
@@ -97,6 +109,7 @@ const AddCustomerForm = () => {
                 emailIsValid &&
                     firstNameIsValid &&
                     lastNameIsValid &&
+                    genderIsValid &&
                     addressIsValid &&
                     cityIsValid &&
                     stateIsValid &&
@@ -116,6 +129,7 @@ const AddCustomerForm = () => {
         cityIsValid,
         stateIsValid,
         phoneIsValid,
+        genderIsValid,
     ]);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -131,6 +145,7 @@ const AddCustomerForm = () => {
                 firstName: firstNameValue,
                 lastName: lastNameValue,
                 phone: phoneValue,
+                gender: genderValue as Gender,
                 address: {
                     street: addressValue,
                     city: cityValue,
@@ -143,6 +158,7 @@ const AddCustomerForm = () => {
         resetEmail();
         resetFirstName();
         resetLastName();
+        resetGender();
         resetAddress();
         resetCity();
         resetState();
@@ -193,7 +209,21 @@ const AddCustomerForm = () => {
                             <p className={styles['addform-error']}>This field is required.</p>
                         )}
                     </Box>
-
+                    <SelectField
+                        className={styles['addform-input_select']}
+                        id="gender"
+                        label="Gender"
+                        value={genderValue}
+                        onChange={genderChangeHandler}
+                        onBlur={genderBlurHandler}
+                        required
+                    >
+                        {genderSelect.map((genders) => (
+                            <MenuItem key={genders} value={genders}>
+                                {genders}
+                            </MenuItem>
+                        ))}
+                    </SelectField>
                     <Box className={styles['addform-input_field']}>
                         <InputField
                             required
@@ -219,7 +249,6 @@ const AddCustomerForm = () => {
                             onBlur={addressBlurHandler}
                             error={addressHasError}
                         />
-
                         {addressHasError && (
                             <p className={styles['addform-error']}>This field is required.</p>
                         )}
@@ -235,12 +264,10 @@ const AddCustomerForm = () => {
                             onBlur={cityBlurHandler}
                             error={cityHasError}
                         />
-
                         {cityHasError && (
                             <p className={styles['addform-error']}>This field is required.</p>
                         )}
                     </Box>
-
                     <Box className={styles['addform-input_field']}>
                         <InputField
                             required
@@ -252,7 +279,6 @@ const AddCustomerForm = () => {
                             onBlur={stateBlurHandler}
                             error={stateHasError}
                         />
-
                         {stateHasError && (
                             <p className={styles['addform-error']}>This field cannot empty</p>
                         )}
@@ -285,7 +311,6 @@ const AddCustomerForm = () => {
                             onBlur={phoneBlurHandler}
                             error={phoneHasError}
                         />
-
                         {phoneHasError && (
                             <p className={styles['addform-error']}>
                                 This field cannot empty & only can number
@@ -294,14 +319,11 @@ const AddCustomerForm = () => {
                     </Box>
                 </Box>
             </Box>
-
             <Divider />
-
             <Box className={styles['addform-btnsection']}>
                 <ButtonPrimary className={styles['addform-btnsection_add']} type="submit">
                     Add
                 </ButtonPrimary>
-
                 <Link className={styles['addform-btnsection_link']} to="/customers">
                     <ButtonPrimary className={styles['addform-btnsection_cancel']}>
                         CANCEL
