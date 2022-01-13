@@ -1,5 +1,3 @@
-import DataGridTable from '../../../../components/DataGridTable';
-
-const OrderDataGrid = () => <DataGridTable rows={[]} />;
+const OrderDataGrid = () => <p>OrderDataGrid</p>;
 
 export default OrderDataGrid;
