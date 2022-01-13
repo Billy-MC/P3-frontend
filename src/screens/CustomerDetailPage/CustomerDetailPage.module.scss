@@ -52,13 +52,13 @@
             align-items: flex-start;
             span {
                 margin: 0px;
-                font-size: 0.875rem;
+                font-size: 14px;
                 font-weight: 500;
                 line-height: 1.57;
             }
             p {
                 margin: 0px;
-                font-size: 0.875rem;
+                font-size: 14px;
                 font-weight: 400;
                 color: $span_color;
             }
@@ -70,7 +70,7 @@
             flex-wrap: wrap;
             padding: 16px 24px;
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 14px;
 
             &-btn {
                 background-color: white;
@@ -92,10 +92,10 @@
             flex-wrap: wrap;
             padding: 16px 24px;
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 14px;
 
             &-btn {
-                font-size: 0.875rem;
+                font-size: 14px;
                 padding: 8px 20px;
                 background-color: white;
                 color: $tertiary_color;
@@ -110,7 +110,7 @@
 
             span {
                 margin: 0px;
-                font-size: 0.875rem;
+                font-size: 14px;
                 font-weight: 400;
                 color: $span_color;
             }
