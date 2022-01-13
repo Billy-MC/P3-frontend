@@ -47,7 +47,7 @@ const CustomerDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
                 <Divider />
                 <List>
                     {Object.keys(detail).map((key, i) => (
-                        <div key={key[i]}>
+                        <div key={key}>
                             <ListItem className={styles['customerdetail-details-itemtext']}>
                                 <ListItemText
                                     primary={key}
