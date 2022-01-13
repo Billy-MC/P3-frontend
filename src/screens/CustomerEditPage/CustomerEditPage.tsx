@@ -29,10 +29,10 @@ const CustomerEditPage = () => {
 
     return (
         <>
-            <BackToCustomer />
             {status === 'loading' && <LoadingSpinner />}
             {status === 'succeeded' && (
                 <>
+                    <BackToCustomer />
                     <EditCustomerHeader name={name} email={customer.email} />
                     <EditCustomerForm details={details} />
                 </>
