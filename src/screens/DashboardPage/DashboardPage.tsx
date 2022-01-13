@@ -1,6 +1,8 @@
+import LoadingSpinner from '../../components/LoadingSpinner';
+
 const DashboardPage = () => (
     <div>
-        <p>DashboardPage</p>
+        <LoadingSpinner />
     </div>
 );
 
