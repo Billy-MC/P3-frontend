@@ -27,7 +27,7 @@ const CustomerDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
         Email: details.email,
         Name: `${details.firstName} ${details.lastName}`,
         Phone: details.phone,
-        Address: `${details.address.street},${details.address.city}, ${details.address.state} ${details.address.postcode}`,
+        Address: `${details.address.street}, ${details.address.city}, ${details.address.state} ${details.address.postcode}`,
         Spent: details.spending,
     };
 
