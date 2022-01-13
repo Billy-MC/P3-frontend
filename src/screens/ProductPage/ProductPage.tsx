@@ -8,7 +8,7 @@ import ProductToggleBtn from './components/ProductToggleBtn';
 import styles from './ProductPage.module.scss';
 
 const ProductPage = () => (
-    <div>
+    <>
         <Box className={styles['productPage-box']}>
             <Toolbar className={styles['productPage-toolbar']}>
                 <Typography className={styles['productPage-header']}>Products</Typography>
@@ -23,7 +23,7 @@ const ProductPage = () => (
         <ProductToggleBtn />
         <ProductPageSearchBar />
         <ProductDataGrid />
-    </div>
+    </>
 );
 
 export default ProductPage;

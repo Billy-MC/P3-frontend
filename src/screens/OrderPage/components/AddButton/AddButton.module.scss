@@ -1,0 +1,12 @@
+@import '../../../../assets/styles/variable.scss';
+
+.addBtn {
+    border: 1px $primary_color_lighter solid;
+    font-size: 0.875rem;
+    padding: 10px 20px;
+    margin: 8px 20px 8px 8px;
+    border-radius: 8px;
+    width: 10%;
+    font-weight: 600;
+    left: 80%;
+}

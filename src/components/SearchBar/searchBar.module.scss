@@ -17,8 +17,7 @@
     overflow: hidden;
     margin-right: 16px;
     margin-left: 0;
-    width: auto;
-    flex-grow: inherit;
+    flex-grow: 1;
     &:hover {
         color: rgb(18, 24, 40);
     }
