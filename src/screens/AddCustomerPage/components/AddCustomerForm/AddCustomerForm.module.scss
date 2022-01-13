@@ -51,9 +51,16 @@
             border-radius: 8px;
             border: 1px solid $primary_color;
             font-weight: 600;
-            text-decoration: none;
-            background-color: $background_color;
+            box-shadow: none;
+            background-color: white;
             color: $primary_color;
+            border-radius: 8px;
+            border: 1px solid $primary_color;
+
+            &:hover {
+                box-shadow: none;
+                background-color: $primary_color_alt;
+            }
         }
 
         &_link {
