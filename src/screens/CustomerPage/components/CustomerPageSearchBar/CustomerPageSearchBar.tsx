@@ -1,33 +1,26 @@
 import { useState, useEffect } from 'react';
 import SearchBar from '../../../../components/SearchBar';
-import { fetchAllCustomers, selectCustomers } from '../../../../store/slices/customerSlice';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import ICustomer from '../../../../types/ICustomer';
+import { useAppDispatch } from '../../../../hooks/redux';
 import styles from './CustomerPageSearchBar.module.scss';
+import { changeSearchFilter } from '../../../../store/slices/customerSlice';
 
 const CustomerPageSearchBar = () => {
-    const [searchwords, setSearchWords] = useState<string>('');
-    const customers: ICustomer[] = useAppSelector(selectCustomers);
+    const [searchWords, setSearchWords] = useState<string>('');
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(fetchAllCustomers());
-    }, [dispatch]);
+        const id = 'fullName';
+        dispatch(changeSearchFilter({ id, searchWords }));
+    }, [dispatch, searchWords]);
+
     return (
-        <>
+        <div>
             <SearchBar
-                placeHolder="Enter Customer First Name"
+                placeHolder="Enter Customer Name"
                 className={styles.styledInputBase}
-                searchByClick={(data: string) => setSearchWords(data)}
+                searchByClick={(data: string) => setSearchWords(data.trim())}
             />
-            {customers
-                .filter((customer) =>
-                    customer.firstName.toLowerCase().includes(searchwords.toLowerCase()),
-                )
-                .map((customer) => (
-                    <li key={customer.email}>{customer.firstName}</li>
-                ))}
-        </>
+        </div>
     );
 };
 

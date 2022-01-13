@@ -1,0 +1,20 @@
+@import '../../../../assets/styles/variable.scss';
+
+.primary {
+    margin: 0;
+    color: black;
+    padding: 0;
+    text-transform: none;
+}
+.primary:hover {
+    background-color: transparent;
+}
+.secondary {
+    margin: 0;
+    color: $span_color;
+}
+
+.dollar_color {
+    margin: 0;
+    color: $dollar_color;
+}

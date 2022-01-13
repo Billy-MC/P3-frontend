@@ -1,4 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { GridFilterModel } from '@mui/x-data-grid';
 import type { RootState } from '../../interfaces/redux';
 import {
     getAllCustomers,
@@ -13,6 +14,7 @@ import asyncStatus from '../../types/asyncStatus';
 interface CustomersState {
     customers: ICustomer[];
     status: asyncStatus;
+    searchFilter: GridFilterModel;
     error: null | string | undefined;
     selectedCustomer: ICustomer;
 }
@@ -32,6 +34,7 @@ const selectedCustomerInitialState = {
 const initialState: CustomersState = {
     customers: [],
     status: asyncStatus.idle,
+    searchFilter: { items: [] },
     error: null,
     selectedCustomer: selectedCustomerInitialState as ICustomer,
 };
@@ -89,7 +92,20 @@ export const deleteCustomer = createAsyncThunk(
 export const customerSlice = createSlice({
     name: 'customer',
     initialState,
-    reducers: {},
+    reducers: {
+        changeSearchFilter: (state, action: PayloadAction<{ id: string; searchWords: string }>) => {
+            state.searchFilter = {
+                items: [
+                    {
+                        id: action.payload.id,
+                        columnField: action.payload.id,
+                        value: action.payload.searchWords,
+                        operatorValue: 'contains',
+                    },
+                ],
+            };
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllCustomers.pending, (state: CustomersState) => {
@@ -165,6 +181,9 @@ export const customerSlice = createSlice({
     },
 });
 
+export const { changeSearchFilter } = customerSlice.actions;
+
+export const selectSearchFilter = (state: RootState) => state.customers.searchFilter;
 export const selectCustomers = (state: RootState) => state.customers.customers;
 export const selectCustomer = (state: RootState) => state.customers.selectedCustomer;
 export const selectCustomerStatus = (state: RootState) => state.customers.status;
