@@ -211,6 +211,21 @@ const AddCustomerForm = () => {
                     </Box>
                     <Box className={styles['addform-input_field']}>
                         <InputField
+                            id="address"
+                            label="Address"
+                            type="text"
+                            value={addressValue}
+                            onChange={addressChangeHandler}
+                            onBlur={addressBlurHandler}
+                            error={addressHasError}
+                        />
+
+                        {addressHasError && (
+                            <p className={styles['addform-error']}>This field is required.</p>
+                        )}
+                    </Box>
+                    <Box className={styles['addform-input_field']}>
+                        <InputField
                             required
                             id="city"
                             label="City"
@@ -240,22 +255,6 @@ const AddCustomerForm = () => {
 
                         {stateHasError && (
                             <p className={styles['addform-error']}>This field cannot empty</p>
-                        )}
-                    </Box>
-
-                    <Box className={styles['addform-input_field']}>
-                        <InputField
-                            id="address"
-                            label="Address"
-                            type="text"
-                            value={addressValue}
-                            onChange={addressChangeHandler}
-                            onBlur={addressBlurHandler}
-                            error={addressHasError}
-                        />
-
-                        {addressHasError && (
-                            <p className={styles['addform-error']}>This field is required.</p>
                         )}
                     </Box>
                     <Box className={styles['addform-input_field']}>
