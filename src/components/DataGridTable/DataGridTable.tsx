@@ -1,9 +1,16 @@
 import * as React from 'react';
 import { Box } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { styled } from '@mui/material/styles';
 import { useAppSelector } from '../../hooks/redux';
 import { selectSearchFilter } from '../../store/slices/customerSlice';
 
+const StyledDataGrid = styled(DataGrid)`
+    &.MuiDataGrid-root .MuiDataGrid-columnHeader:focus,
+    &.MuiDataGrid-root .MuiDataGrid-cell:focus {
+        outline: none;
+    }
+`;
 export interface IRow {
     [key: string]: any;
 }
@@ -19,14 +26,14 @@ const DataGridTable: React.FC<IDataGridTableProps> = (props) => {
     return (
         <Box
             sx={{
-                height: 920,
                 width: 1,
                 '& .super-app-theme--header': {
                     backgroundColor: '#F3F4F6',
                 },
             }}
         >
-            <DataGrid
+            <StyledDataGrid
+                autoHeight
                 rows={rows}
                 getRowId={(row) => row._id}
                 columns={columns}
