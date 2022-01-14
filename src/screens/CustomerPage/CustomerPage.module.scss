@@ -1,0 +1,41 @@
+@import '../../assets/styles/variable.scss';
+
+.customerpage {
+    &-box {
+        margin: 0px 0px 32px;
+        width: 100%;
+        flex-grow: 1;
+    }
+    &-toolbar {
+        margin: 0px 0px 0px -24px;
+        padding-left: 24px;
+        padding-right: 0px;
+        flex-grow: inherit;
+    }
+    &-header {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 44px;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        flex-grow: inherit;
+    }
+    &-btnsection {
+        display: flex;
+        padding: 2px;
+        justify-content: right;
+    }
+    &-addbtn {
+        width: 20%;
+        margin: 0px;
+        border: 0px;
+        padding: 8px 50px;
+        font-weight: 600;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    &-addicon {
+        font-size: large;
+        padding-right: 5px;
+    }
+}

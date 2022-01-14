@@ -14,7 +14,7 @@ const CustomerPageSearchBar = () => {
     }, [dispatch, searchWords]);
 
     return (
-        <div>
+        <div className={styles.searchbar}>
             <SearchBar
                 placeHolder="Enter Customer Name"
                 className={styles.styledInputBase}
