@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, List, ListItem, ListItemText, Divider } from '@mui/material';
 import ButtonPrimary from '../../../../components/Button';
@@ -6,6 +6,7 @@ import styles from '../../CustomerDetailPage.module.scss';
 import ICustomer from '../../../../types/ICustomer';
 import { useAppDispatch } from '../../../../hooks/redux';
 import { deleteCustomer } from '../../../../store/slices/customerSlice';
+import DeleteConfirmation from '../../../../components/DeleteConfirmationModal';
 
 interface IDetail {
     Email: string;
@@ -20,6 +21,9 @@ export interface DetailsProps {
 }
 
 const CustomerDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
+    const [openPopup, setOpenPopup] = useState(false);
+    const showModal = () => setOpenPopup(true);
+
     const { details } = props;
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -70,10 +74,15 @@ const CustomerDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
                 <Box className={styles['customerdetail-details-delete']}>
                     <ButtonPrimary
                         className={styles['customerdetail-details-delete-btn']}
-                        onClick={deleteHandler}
+                        onClick={showModal}
                     >
                         Delete Account
                     </ButtonPrimary>
+                    <DeleteConfirmation
+                        onClick={deleteHandler}
+                        openPopup={openPopup}
+                        setOpenPopup={setOpenPopup}
+                    />
                     <span>
                         Remove this customer&#32;s chart if he requested that, if not please be
                         aware that what has been deleted can never brought back

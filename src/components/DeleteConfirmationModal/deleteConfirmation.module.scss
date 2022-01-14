@@ -1,0 +1,35 @@
+@import '../../assets/styles/variable.scss';
+
+.dialogue {
+    &__btnsection {
+        display: flex;
+        padding: 2px;
+        justify-content: space-between;
+        width: 100%;
+
+        &--delete {
+            border: 1px $primary_color_lighter solid;
+            font-size: 14px;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 400;
+        }
+
+        &--cancel {
+            font-size: 14px;
+            padding: 8px 20px;
+            margin-right: 8px;
+            border-radius: 8px;
+            border: 1px solid $primary_color;
+            font-weight: 600;
+            text-decoration: none;
+            background-color: $background_color;
+            color: $primary_color;
+            box-shadow: none;
+            &:hover {
+                box-shadow: none;
+                background-color: $primary_color_alt;
+            }
+        }
+    }
+}

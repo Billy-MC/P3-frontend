@@ -8,6 +8,7 @@ import { validateEmail, validateNumber, validatePhone } from '../../../../utils/
 import styles from './EditCustomerForm.module.scss';
 import { useAppDispatch } from '../../../../hooks/redux';
 import { updateCustomer, deleteCustomer } from '../../../../store/slices/customerSlice';
+import DeleteConfirmation from '../../../../components/DeleteConfirmationModal';
 import ICustomer, { Gender } from '../../../../types/ICustomer';
 import SelectField from '../../../../components/SelectField';
 
@@ -23,6 +24,8 @@ const valueIsNotEmpty = (value: string) => value.trim() !== '';
 const genderSelect = ['Male', 'Female', 'Other', 'Not to Tell'];
 
 const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
+    const [openPopup, setOpenPopup] = useState(false);
+    const showModal = () => setOpenPopup(true);
     const { details } = props;
     const [formIsValid, setFormIsValid] = useState(true);
     const navigate = useNavigate();
@@ -304,13 +307,14 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
                 >
                     CANCEL
                 </ButtonPrimary>
-                <ButtonPrimary
-                    className={styles['editform-btnsection_delete']}
-                    type="submit"
-                    onClick={deleteHandler}
-                >
+                <ButtonPrimary className={styles['editform-btnsection_delete']} onClick={showModal}>
                     Delete Account
                 </ButtonPrimary>
+                <DeleteConfirmation
+                    onClick={deleteHandler}
+                    openPopup={openPopup}
+                    setOpenPopup={setOpenPopup}
+                />
             </Box>
         </Box>
     );
