@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useCallback, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -14,10 +14,20 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
+import { logedout } from '../../store/slices/userSlice';
+import { useAppDispatch } from '../../hooks/redux';
 
 const Header = () => {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    const logOut = useCallback(() => {
+        dispatch(logedout());
+    }, [dispatch]);
+
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
     const isMenuOpen = Boolean(anchorEl);
 
@@ -26,6 +36,11 @@ const Header = () => {
     };
     const handleMenuClose = () => {
         setAnchorEl(null);
+    };
+
+    const logoutHandler = () => {
+        logOut();
+        navigate('/login');
     };
 
     const user = {
@@ -87,7 +102,7 @@ const Header = () => {
                 </IconButton>
                 <p className={styles['header-p']}>Account Settings</p>
             </MenuItem>
-            <MenuItem onClick={handleMenuClose} className={styles['header-logout']}>
+            <MenuItem onClick={logoutHandler} className={styles['header-logout']}>
                 <IconButton
                     size="large"
                     aria-label="logout of current account"

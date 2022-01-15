@@ -10,7 +10,7 @@ const WelcomeSection: react.FC = () => (
             <br />
             Devils&apos; B2C CRM System
         </h1>
-        <Link to="/login" className={styles.router}>
+        <Link to="/dashboard" className={styles.router}>
             <ButtonPrimary className={styles.button}>Start</ButtonPrimary>
         </Link>
     </div>

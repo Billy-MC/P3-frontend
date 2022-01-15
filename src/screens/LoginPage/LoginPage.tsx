@@ -7,6 +7,8 @@ import PasswordInputField from '../../components/PasswordInputField';
 import useInput from '../../hooks/useInput';
 import styles from './LoginPage.module.scss';
 import { validateEmail, validatePassword } from '../../utils/validator';
+import { useAppDispatch } from '../../hooks/redux';
+import { login } from '../../store/slices/userSlice';
 
 const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
 const inputPasswordIsValid = (value: string) => validatePassword(value) && value.trim() !== '';
@@ -14,6 +16,7 @@ const inputPasswordIsValid = (value: string) => validatePassword(value) && value
 const LoginPage = () => {
     const [checked, setChecked] = useState(false);
     const [formIsValid, setFormIsValid] = useState(false);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const {
@@ -49,7 +52,17 @@ const LoginPage = () => {
         if (formIsValid === false) {
             return;
         }
-        navigate('/dashboard');
+
+        dispatch(
+            login({
+                email: emailValue,
+                password: passwordValue,
+            }),
+        )
+            .unwrap()
+            .then(() => {
+                navigate('/dashboard');
+            });
 
         resetEmail();
         resetpassword();

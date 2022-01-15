@@ -9,7 +9,8 @@ import IFilter from '../../types/IFilter';
 
 const StyledDataGrid = styled(DataGrid)`
     &.MuiDataGrid-root .MuiDataGrid-columnHeader:focus,
-    &.MuiDataGrid-root .MuiDataGrid-cell:focus {
+    &.MuiDataGrid-root .MuiDataGrid-cell:focus,
+    &.MuiDataGrid-root .MuiDataGrid-cell:focus-within {
         outline: none;
     }
 `;

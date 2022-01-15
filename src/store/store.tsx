@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import customerSlice from './slices/customerSlice';
 import productSlice from './slices/productSlice';
+import userSlice from './slices/userSlice';
 import filterSlice from './slices/filterSlice';
 
 const store = configureStore({
@@ -8,6 +9,7 @@ const store = configureStore({
         filterModels: filterSlice,
         customers: customerSlice,
         products: productSlice,
+        users: userSlice,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

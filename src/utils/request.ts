@@ -4,7 +4,7 @@ const baseURL =
     process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000/api/'
         : 'http://devils-alb-958117536.us-east-1.elb.amazonaws.com/api/';
-const withCredentials = false;
+const withCredentials = true;
 const timeout = 30000;
 
 /**
