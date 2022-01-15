@@ -1,3 +1,6 @@
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import TabFilter from '../../components/TabFilter';
 import OrderAll from './components/OrderAll';
 import OrderCancel from './components/OrderCancel';
@@ -34,15 +37,17 @@ const OrderPage = () => {
     ];
 
     return (
-        <div>
-            <p className={styles.title}>
-                Orders
-                <AddButton />
-            </p>
+        <>
+            <Box className={styles['orderpage-box']}>
+                <Toolbar className={styles['orderpage-toolbar']}>
+                    <Typography className={styles['orderpage-header']}>Orders</Typography>
+                    <AddButton />
+                </Toolbar>
+            </Box>
             <TabFilter filter={ORDER_FILTER} />
             <OrderPageSearchBar />
             <OrderDataGrid />
-        </div>
+        </>
     );
 };
 
