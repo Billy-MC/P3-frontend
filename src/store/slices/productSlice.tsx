@@ -8,10 +8,12 @@ import {
     deleteProductBySku,
 } from '../../services/product';
 import IProduct from '../../types/IProduct';
+import IFilter from '../../types/IFilter';
 import asyncStatus from '../../types/asyncStatus';
 
 export interface ProductsState {
     products: IProduct[];
+    filters: IFilter[];
     status: asyncStatus;
     error: null | string | undefined;
     selectedProduct?: IProduct;
@@ -27,6 +29,7 @@ const selectedProductInitialState = {
 
 const initialState: ProductsState = {
     products: [],
+    filters: [],
     status: asyncStatus.idle,
     error: null,
     selectedProduct: selectedProductInitialState as IProduct,

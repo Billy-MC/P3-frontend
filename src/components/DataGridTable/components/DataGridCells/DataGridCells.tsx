@@ -9,7 +9,7 @@ interface IPrimaryKeyLayoutProps {
     linkAddress: string;
 }
 
-const PrimaryKeyLayout: React.FC<IPrimaryKeyLayoutProps> = (props) => {
+export const PrimaryKeyLayout: React.FC<IPrimaryKeyLayoutProps> = (props) => {
     const { primary, secondary, linkAddress } = props;
 
     return (
@@ -20,6 +20,11 @@ const PrimaryKeyLayout: React.FC<IPrimaryKeyLayoutProps> = (props) => {
             <p className={styles.secondary}>{secondary}</p>
         </div>
     );
+};
+
+export const MoneyTag: React.FC<{ amount: number }> = (props) => {
+    const { amount } = props;
+    return <p className={styles.dollar_color}>{`$${amount}`}</p>;
 };
 
 export default PrimaryKeyLayout;

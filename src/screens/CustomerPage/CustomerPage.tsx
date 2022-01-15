@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
-
 import CustomerPageSearchBar from './components/CustomerPageSearchBar';
 import CustomerDataGrid from './components/CustomerDataGrid/CustomerDataGrid';
 import ButtonPrimary from '../../components/Button/ButtonPrimary';

@@ -1,4 +1,3 @@
-
 @import '../../assets/styles/variable.scss';
 
 .productPage {
@@ -38,5 +37,9 @@
     &-addIcon {
         font-size: large;
         padding-right: 5px;
+    }
+    &-box_white {
+        background-color: white;
+        border-radius: 15px 10px 0px 0px;
     }
 }

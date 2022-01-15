@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './statusBar.module.scss';
 
-type TStatus =
+export type TStatus =
     | 'PENDING'
     | 'COMPLETE'
     | 'CANCELED'

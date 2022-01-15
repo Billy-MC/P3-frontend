@@ -3,7 +3,9 @@ import { Box } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { styled } from '@mui/material/styles';
 import { useAppSelector } from '../../hooks/redux';
-import { selectSearchFilter } from '../../store/slices/customerSlice';
+import { selectFilters, selectLocalFilters } from '../../store/slices/filterSlice';
+import styles from './DataGridTable.module.scss';
+import IFilter from '../../types/IFilter';
 
 const StyledDataGrid = styled(DataGrid)`
     &.MuiDataGrid-root .MuiDataGrid-columnHeader:focus,
@@ -21,7 +23,24 @@ interface IDataGridTableProps {
 
 const DataGridTable: React.FC<IDataGridTableProps> = (props) => {
     const { rows, columns } = props;
-    const filterModel = useAppSelector(selectSearchFilter);
+    const filterModel = useAppSelector(selectFilters);
+    const localFilters: IFilter[] = useAppSelector(selectLocalFilters);
+    let newRow: IRow[];
+    // if local Filter has required filter
+    if (localFilters.length !== 0) {
+        // filter all rows by requirements
+        newRow = rows.filter((row) => {
+            // map all filter, to list of booleans
+            const fullFills: boolean[] = localFilters.map((filter: IFilter) => {
+                if (row[filter.field] === undefined) return true;
+                return row[filter.field].toLowerCase().includes(filter.query);
+            });
+            // reduce list of booleans to true or false values
+            return fullFills.reduce((a: boolean, b: boolean) => a && b);
+        });
+    } else {
+        newRow = rows;
+    }
 
     return (
         <Box
@@ -31,10 +50,11 @@ const DataGridTable: React.FC<IDataGridTableProps> = (props) => {
                     backgroundColor: '#F3F4F6',
                 },
             }}
+            className={styles.table_background}
         >
             <StyledDataGrid
                 autoHeight
-                rows={rows}
+                rows={newRow}
                 getRowId={(row) => row._id}
                 columns={columns}
                 pageSize={10}

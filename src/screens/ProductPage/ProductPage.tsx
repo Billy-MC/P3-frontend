@@ -20,9 +20,11 @@ const ProductPage = () => (
                 </Link>
             </Toolbar>
         </Box>
-        <ProductToggleBtn />
-        <ProductPageSearchBar />
-        <ProductDataGrid />
+        <Box className={styles['productPage-box_white']}>
+            <ProductToggleBtn />
+            <ProductPageSearchBar />
+            <ProductDataGrid />
+        </Box>
     </>
 );
 

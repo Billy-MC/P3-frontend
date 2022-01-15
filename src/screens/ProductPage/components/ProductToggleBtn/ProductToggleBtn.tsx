@@ -1,34 +1,36 @@
+import { useEffect } from 'react';
 import TabFilter from '../../../../components/TabFilter';
-import ProductAll from '../ProductAll';
-import ProductAvailable from '../ProductAvailable';
-import ProductNoStock from '../ProductNoStock';
-import ProductPublished from '../ProductPublished';
-import ProductDraft from '../ProductDraft';
+import { cleanUpFilters, updateFilter } from '../../../../store/slices/filterSlice';
+import { useAppDispatch } from '../../../../hooks/redux';
 
 const ProductToggleBtn = () => {
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        cleanUpFilters();
+        return () => {
+            dispatch(cleanUpFilters());
+        };
+    }, [dispatch]);
+
     const PRODUCT_FILTER = [
         {
             name: 'All',
-            children: <ProductAll />,
+            filterEventHandler: () => dispatch(updateFilter({ id: 'status', query: '' })),
         },
         {
-            name: 'Published',
-            children: <ProductPublished />,
+            name: 'In Stock',
+            filterEventHandler: () => dispatch(updateFilter({ id: 'status', query: 'IN STOCK' })),
         },
         {
-            name: 'Draft',
-            children: <ProductDraft />,
-        },
-        {
-            name: 'Available',
-            children: <ProductAvailable />,
+            name: 'Limited',
+            filterEventHandler: () => dispatch(updateFilter({ id: 'status', query: 'LIMITED' })),
         },
         {
             name: 'Out of Stock',
-            children: <ProductNoStock />,
+            filterEventHandler: () =>
+                dispatch(updateFilter({ id: 'status', query: 'OUT OF STOCK' })),
         },
     ];
-
     return <TabFilter filter={PRODUCT_FILTER} />;
 };
 

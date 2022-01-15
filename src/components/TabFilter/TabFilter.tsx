@@ -34,11 +34,15 @@ const TabFilter: React.FC<ITabFilter> = (props) => {
         />
     ));
 
-    const content = filter.map((e) => (
-        <TabPanel key={e.name} value={e.name}>
-            {e.children}
-        </TabPanel>
-    ));
+    const content = filter.map((e) =>
+        e.children ? (
+            <TabPanel key={e.name} value={e.name}>
+                {e.children}
+            </TabPanel>
+        ) : (
+            false
+        ),
+    );
 
     return (
         <Box sx={{ width: '100%' }} className={styles.buttonGroup}>

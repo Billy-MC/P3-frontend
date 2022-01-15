@@ -2,15 +2,17 @@ import { useState, useEffect } from 'react';
 import SearchBar from '../../../../components/SearchBar';
 import { useAppDispatch } from '../../../../hooks/redux';
 import styles from './CustomerPageSearchBar.module.scss';
-import { changeSearchFilter } from '../../../../store/slices/customerSlice';
+import { updateFilter, cleanUpFilters } from '../../../../store/slices/filterSlice';
 
 const CustomerPageSearchBar = () => {
     const [searchWords, setSearchWords] = useState<string>('');
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        const id = 'fullName';
-        dispatch(changeSearchFilter({ id, searchWords }));
+        dispatch(updateFilter({ id: 'fullName', query: searchWords }));
+        return () => {
+            dispatch(cleanUpFilters());
+        };
     }, [dispatch, searchWords]);
 
     return (
