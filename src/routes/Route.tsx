@@ -14,6 +14,7 @@ import MainLayout from '../layouts/MainLayout';
 import SubLayout from '../layouts/SubLayout';
 import style from './Route.module.scss';
 import AddCustomerPage from '../screens/AddCustomerPage';
+import AddProductPage from '../screens/AddProductPage';
 import CustomerDetailPage from '../screens/CustomerDetailPage';
 
 const Route = () => (
@@ -70,6 +71,14 @@ const Route = () => (
                         <MainLayout>
                             <ProductPage />
                         </MainLayout>
+                    }
+                />
+                <RouterPage
+                    path="/products/add"
+                    element={
+                        <SubLayout>
+                            <AddProductPage />
+                        </SubLayout>
                     }
                 />
                 <RouterPage
