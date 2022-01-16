@@ -19,7 +19,7 @@ import CustomerDetailPage from '../screens/CustomerDetailPage';
 const Route = () => (
     <div className={style.route}>
         <Routes>
-            <RouterPage path="/" element={<WelcomePage />} />
+            <RouterPage path="/*" element={<WelcomePage />} />
             <RouterPage path="/login" element={<LoginPage />} />
             <RouterPage path="/register" element={<RegisterPage />} />
             <RouterPage path="/forgetpassword" element={<ForgotPasswordPage />} />
