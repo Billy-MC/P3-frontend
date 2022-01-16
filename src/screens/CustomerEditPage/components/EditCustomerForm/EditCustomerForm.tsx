@@ -153,7 +153,7 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
             }),
         );
 
-        navigate({ pathname: '/customers' });
+        navigate({ pathname: `/customers/${emailValue}` });
     };
 
     return (
