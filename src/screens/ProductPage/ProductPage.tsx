@@ -18,6 +18,11 @@ const ProductPage = () => (
                         Add
                     </ButtonPrimary>
                 </Link>
+                <Link to="edit" className={styles['productPage-btnSection']}>
+                    <ButtonPrimary className={styles['productPage-editBtn']} type="submit">
+                        Edit
+                    </ButtonPrimary>
+                </Link>
             </Toolbar>
         </Box>
         <Box className={styles['productPage-box_white']}>

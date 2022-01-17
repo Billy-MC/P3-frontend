@@ -16,6 +16,7 @@ import style from './Route.module.scss';
 import AddCustomerPage from '../screens/AddCustomerPage';
 import AddProductPage from '../screens/AddProductPage';
 import CustomerDetailPage from '../screens/CustomerDetailPage';
+import ProductEditPage from '../screens/ProductEditPage';
 
 const Route = () => (
     <div className={style.route}>
@@ -78,6 +79,14 @@ const Route = () => (
                     element={
                         <SubLayout>
                             <AddProductPage />
+                        </SubLayout>
+                    }
+                />
+                <RouterPage
+                    path="/products/edit"
+                    element={
+                        <SubLayout>
+                            <ProductEditPage />
                         </SubLayout>
                     }
                 />
