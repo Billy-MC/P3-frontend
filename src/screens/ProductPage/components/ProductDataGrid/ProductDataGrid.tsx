@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import { GridColDef, GridRenderCellParams, GridActionsCellItem } from '@mui/x-data-grid';
+import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
-import { Box } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import DataGridTable from '../../../../components/DataGridTable';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { fetchAllProducts, selectProducts } from '../../../../store/slices/productSlice';
-import ICustomer from '../../../../types/ICustomer';
+import IProduct from '../../../../types/IProduct';
 import { capitalizor, quantityToStatus } from '../../../../utils/dataProcessor';
 import {
     PrimaryKeyLayout,
@@ -54,25 +54,21 @@ const columnDef: GridColDef[] = [
         renderCell: (params) => (
             <Box>
                 <Link to={`${params.row.sku}`}>
-                    <GridActionsCellItem
-                        style={{ padding: '15px' }}
-                        icon={<VisibilityIcon />}
-                        label="view"
-                    />
+                    <IconButton style={{ padding: '15px' }} aria-label="edit">
+                        <VisibilityIcon />
+                    </IconButton>
                 </Link>
                 <Link to={`${params.row.sku}/edit`}>
-                    <GridActionsCellItem
-                        style={{ padding: '15px' }}
-                        icon={<EditIcon />}
-                        label="edit"
-                    />
+                    <IconButton style={{ padding: '15px' }} aria-label="edit">
+                        <EditIcon />
+                    </IconButton>
                 </Link>
             </Box>
         ),
     },
 ];
 const ProductDataGrid = () => {
-    const customers: ICustomer[] = useAppSelector(selectProducts);
+    const products: IProduct[] = useAppSelector(selectProducts);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -81,7 +77,7 @@ const ProductDataGrid = () => {
 
     return (
         <DataGridTable
-            rows={customers}
+            rows={products}
             columns={columnDef.map((row) => ({
                 headerClassName: 'super-app-theme--header',
                 ...row,

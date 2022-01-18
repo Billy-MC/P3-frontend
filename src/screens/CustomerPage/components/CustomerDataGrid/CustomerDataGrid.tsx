@@ -1,15 +1,11 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import {
-    GridColDef,
-    GridRenderCellParams,
-    GridActionsCellItem,
-    GridValueGetterParams,
-} from '@mui/x-data-grid';
+import { GridColDef, GridRenderCellParams, GridValueGetterParams } from '@mui/x-data-grid';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import { Box } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import DataGridTable from '../../../../components/DataGridTable';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import {
@@ -88,18 +84,14 @@ const columnDef: GridColDef[] = [
         renderCell: (params) => (
             <Box>
                 <Link to={`${params.row.email}`}>
-                    <GridActionsCellItem
-                        style={{ padding: '15px' }}
-                        icon={<VisibilityIcon />}
-                        label="view"
-                    />
+                    <IconButton style={{ padding: '15px' }} aria-label="edit">
+                        <VisibilityIcon />
+                    </IconButton>
                 </Link>
                 <Link to={`${params.row.email}/edit`}>
-                    <GridActionsCellItem
-                        style={{ padding: '15px' }}
-                        icon={<EditIcon />}
-                        label="edit"
-                    />
+                    <IconButton style={{ padding: '15px' }} aria-label="edit">
+                        <EditIcon />
+                    </IconButton>
                 </Link>
             </Box>
         ),

@@ -3,7 +3,7 @@ import styles from './statusBar.module.scss';
 
 export type TStatus =
     | 'PENDING'
-    | 'COMPLETE'
+    | 'COMPLETED'
     | 'CANCELED'
     | 'REJECTED'
     | 'IN STOCK'
@@ -11,13 +11,13 @@ export type TStatus =
     | 'OUT OF STOCK';
 
 const colorsMatch = {
-    PENDING: 'rgb(33, 150, 243)',
-    COMPLETE: 'rgb(20, 184, 166)',
-    CANCELED: 'rgb(255, 176, 32)',
-    REJECTED: 'rgb(209, 67, 67)',
-    'IN STOCK': 'rgb(20, 184, 166)',
-    LIMITED: 'rgb(255, 176, 32)',
-    'OUT OF STOCK': 'rgb(209, 67, 67)',
+    PENDING: '#2196F3',
+    COMPLETED: '#14B8A6',
+    'IN STOCK': '#14B8A6',
+    CANCELED: '#FFB020',
+    LIMITED: '#FFB020',
+    REJECTED: '#D14343',
+    'OUT OF STOCK': '#D14343',
 };
 
 interface IStatusBar {
