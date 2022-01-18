@@ -1,9 +1,11 @@
+import { Suspense } from 'react';
+import LoadingSpinner from './components/LoadingSpinner';
 import Route from './routes';
 
 const App = () => (
-    <div>
+    <Suspense fallback={<LoadingSpinner />}>
         <Route />
-    </div>
+    </Suspense>
 );
 
 export default App;

@@ -1,31 +1,40 @@
+import { lazy } from 'react';
 import { Route as RouterPage, Routes } from 'react-router-dom';
-import LoginPage from '../screens/LoginPage';
-import RegisterPage from '../screens/RegisterPage';
-import UserPage from '../screens/UserPage';
-import CustomerPage from '../screens/CustomerPage';
-import CustomerEditPage from '../screens/CustomerEditPage';
-import ProductPage from '../screens/ProductPage';
-import OrderPage from '../screens/OrderPage';
-import DashboardPage from '../screens/DashboardPage';
-import ForgotPasswordPage from '../screens/ForgotPasswordPage';
-import WelcomePage from '../screens/WelcomePage';
 import ProtectedRouterPage from './components';
 import MainLayout from '../layouts/MainLayout';
 import SubLayout from '../layouts/SubLayout';
-import style from './Route.module.scss';
-import AddCustomerPage from '../screens/AddCustomerPage';
-import AddProductPage from '../screens/AddProductPage';
-import CustomerDetailPage from '../screens/CustomerDetailPage';
-import ProductEditPage from '../screens/ProductEditPage';
+
+const WelcomePage = lazy(() => import('../screens/WelcomePage'));
+const LoginPage = lazy(() => import('../screens/LoginPage'));
+const RegisterPage = lazy(() => import('../screens/RegisterPage'));
+const ForgotPasswordPage = lazy(() => import('../screens/ForgotPasswordPage'));
+const DashboardPage = lazy(() => import('../screens/DashboardPage'));
+const UserPage = lazy(() => import('../screens/UserPage'));
+const CustomerPage = lazy(() => import('../screens/CustomerPage'));
+const CustomerDetailPage = lazy(() => import('../screens/CustomerDetailPage'));
+const CustomerEditPage = lazy(() => import('../screens/CustomerEditPage'));
+const AddCustomerPage = lazy(() => import('../screens/AddCustomerPage'));
+const ProductPage = lazy(() => import('../screens/ProductPage'));
+const ProductEditPage = lazy(() => import('../screens/ProductEditPage'));
+const AddProductPage = lazy(() => import('../screens/AddProductPage'));
+const OrderPage = lazy(() => import('../screens/OrderPage'));
 
 const Route = () => (
-    <div className={style.route}>
+    <div className="route">
         <Routes>
-            <RouterPage path="/*" element={<WelcomePage />} />
+            <RouterPage path="/" element={<WelcomePage />} />
             <RouterPage path="/login" element={<LoginPage />} />
             <RouterPage path="/register" element={<RegisterPage />} />
             <RouterPage path="/forgetpassword" element={<ForgotPasswordPage />} />
             <RouterPage element={<ProtectedRouterPage />}>
+                <RouterPage
+                    path="/dashboard"
+                    element={
+                        <MainLayout>
+                            <DashboardPage />
+                        </MainLayout>
+                    }
+                />
                 <RouterPage
                     path="/users"
                     element={
@@ -95,14 +104,6 @@ const Route = () => (
                     element={
                         <MainLayout>
                             <OrderPage />
-                        </MainLayout>
-                    }
-                />
-                <RouterPage
-                    path="/dashboard"
-                    element={
-                        <MainLayout>
-                            <DashboardPage />
                         </MainLayout>
                     }
                 />
