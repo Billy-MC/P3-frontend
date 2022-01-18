@@ -16,7 +16,6 @@ import {
     PeopleOutlined as Customer,
     ShoppingBasketOutlined as Product,
     ShoppingCartOutlined as Order,
-    PersonOutlined as User,
 } from '@mui/icons-material';
 
 import styles from './SideNav.module.scss';
@@ -49,12 +48,6 @@ const SideNav = () => {
             text: 'Orders',
             icon: <Order className={styles.listItemIcon} />,
             path: '/orders',
-        },
-        {
-            id: 'users',
-            text: 'Users',
-            icon: <User className={styles.listItemIcon} />,
-            path: '/users',
         },
     ];
 
