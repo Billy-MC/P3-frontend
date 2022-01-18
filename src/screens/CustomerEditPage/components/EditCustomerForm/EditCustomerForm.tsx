@@ -207,15 +207,14 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
                             </MenuItem>
                         ))}
                     </SelectField>
-                    <Box className={styles['editform-input_field']}>
-                        <InputField
-                            disabled
-                            id="email"
-                            label="Email"
-                            type="email"
-                            value={emailValue}
-                        />
-                    </Box>
+                    <InputField
+                        className={styles['editform-input_field']}
+                        disabled
+                        id="email"
+                        label="Email"
+                        type="email"
+                        value={emailValue}
+                    />
                     <Box className={styles['editform-input_field']}>
                         <InputField
                             required
