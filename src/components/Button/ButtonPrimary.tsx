@@ -13,7 +13,7 @@ const ButtonPrimary: React.FC<ButtonProps> = (props) => {
     const { children, type, className, onClick } = props;
     return (
         <Button
-            className={`${styles.Button} ${className}`}
+            className={`${className} ${styles.Button}`}
             type={type || 'button'}
             variant="contained"
             onClick={onClick}
