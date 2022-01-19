@@ -4,5 +4,5 @@ export default interface IProduct {
     category: string;
     price: string;
     quantity: string;
-    description: string;
+    description?: string;
 }
