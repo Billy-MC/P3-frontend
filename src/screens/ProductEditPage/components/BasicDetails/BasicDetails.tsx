@@ -248,6 +248,7 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
                     Delete Product
                 </ButtonPrimary>
                 <DeleteConfirmation
+                    name={productNameValue}
                     onClick={deleteHandler}
                     openPopup={openPopup}
                     setOpenPopup={setOpenPopup}

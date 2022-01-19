@@ -310,6 +310,7 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
                     Delete Account
                 </ButtonPrimary>
                 <DeleteConfirmation
+                    name={`${firstNameValue} ${lastNameValue}`}
                     onClick={deleteHandler}
                     openPopup={openPopup}
                     setOpenPopup={setOpenPopup}

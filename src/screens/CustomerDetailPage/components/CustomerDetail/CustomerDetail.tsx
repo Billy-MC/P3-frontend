@@ -79,6 +79,7 @@ const CustomerDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
                         Delete Account
                     </ButtonPrimary>
                     <DeleteConfirmation
+                        name={detail.Name}
                         onClick={deleteHandler}
                         openPopup={openPopup}
                         setOpenPopup={setOpenPopup}

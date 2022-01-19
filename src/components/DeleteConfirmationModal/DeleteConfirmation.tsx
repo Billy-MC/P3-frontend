@@ -8,9 +8,10 @@ interface DeleteConfirmProps {
     openPopup: boolean;
     setOpenPopup: React.Dispatch<React.SetStateAction<boolean>>;
     onClick: React.MouseEventHandler<HTMLButtonElement>;
+    name: string;
 }
 
-const DeleteConfirmation: FC<DeleteConfirmProps> = ({ onClick, openPopup, setOpenPopup }) => {
+const DeleteConfirmation: FC<DeleteConfirmProps> = ({ onClick, openPopup, setOpenPopup, name }) => {
     const handleClose = () => {
         setOpenPopup(false);
     };
@@ -20,7 +21,10 @@ const DeleteConfirmation: FC<DeleteConfirmProps> = ({ onClick, openPopup, setOpe
                 <div>Are you sure?</div>
             </DialogTitle>
             <DialogContent>
-                <div> Deleting will permanently remove this from the system.</div>
+                <div>
+                    {' '}
+                    Deleting will permanently remove <strong>{name}</strong> from the system.
+                </div>
             </DialogContent>
             <DialogActions className={styles['addform-btnsection']}>
                 <ButtonPrimary
