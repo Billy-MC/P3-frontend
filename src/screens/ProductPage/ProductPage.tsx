@@ -13,7 +13,7 @@ const ProductPage = () => (
             <Typography className={styles['productPage-header']}>Products</Typography>
             <Link to="add">
                 <ButtonPrimary className={styles['productPage-addbtn']}>
-                    <AddIcon className={styles['productPage-addIcon']} />
+                    <AddIcon className={styles['productPage-addicon']} />
                     Add
                 </ButtonPrimary>
             </Link>
