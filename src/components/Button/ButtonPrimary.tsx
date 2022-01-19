@@ -7,15 +7,13 @@ interface ButtonProps
             React.ButtonHTMLAttributes<HTMLButtonElement>,
             HTMLButtonElement
         >,
-        React.AriaAttributes {
-    className: string;
-}
+        React.AriaAttributes {}
 
 const ButtonPrimary: React.FC<ButtonProps> = (props) => {
     const { children, type, className, onClick } = props;
     return (
         <Button
-            className={`${className} ${styles.Button}`}
+            className={`${styles.Button} ${className}`}
             type={type || 'button'}
             variant="contained"
             onClick={onClick}
