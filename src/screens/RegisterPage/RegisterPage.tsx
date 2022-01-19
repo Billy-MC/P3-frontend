@@ -144,6 +144,7 @@ const RegisterPage = () => {
             >
                 <Typography className={styles['registration-title']}>Create an account</Typography>
                 <InputField
+                    required
                     id="email"
                     label="Email"
                     type="email"
