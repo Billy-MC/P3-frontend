@@ -54,6 +54,14 @@
     }
     &-btn {
         width: 100%;
+        background-color: $primary_color;
+        margin: 16px 0;
+        border-radius: 8px;
+        padding: 8px 20px;
+
+        &:hover {
+            background-color: $primary_color_lighter;
+        }
     }
 
     &-error {

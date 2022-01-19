@@ -21,6 +21,8 @@
             border-radius: 16px;
         }
         &-btn {
+            background-color: $primary_color;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -30,6 +32,10 @@
             }
             svg {
                 font-size: 20px;
+            }
+
+            &:hover {
+                background-color: $primary_color_lighter;
             }
         }
     }
@@ -97,6 +103,7 @@
             &-btn {
                 font-size: 14px;
                 padding: 8px 20px;
+                margin: 16px 0;
                 background-color: white;
                 color: $tertiary_color;
                 box-shadow: none;

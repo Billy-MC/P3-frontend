@@ -41,8 +41,12 @@
 
         &_update {
             @extend %styled-btn;
+            background-color: $primary_color;
             margin: 8px;
             font-weight: 400;
+            &:hover {
+                background-color: $primary_color_lighter;
+            }
         }
 
         &_delete {

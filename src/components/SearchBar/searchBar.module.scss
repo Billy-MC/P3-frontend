@@ -25,7 +25,6 @@
     &:focus-within {
         color: $primary_color;
     }
-    color: rgba(18, 24, 40, 0.15);
 }
 
 .searchIconWrapper {
@@ -49,5 +48,11 @@
 }
 
 .Button {
-    width: 100px;
+    background-color: $primary_color;
+    margin: 16px 0;
+    border-radius: 8px;
+    padding: 8px 20px;
+    &:hover {
+        background-color: $primary_color_lighter;
+    }
 }

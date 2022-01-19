@@ -38,14 +38,18 @@
         width: 100%;
 
         &_add {
+            background-color: $primary_color;
             border: 1px $primary_color_lighter solid;
             font-size: 0.875rem;
             padding: 10px 20px;
             margin: 8px 20px 8px 8px;
             border-radius: 8px;
             width: 10%;
-
             font-weight: 600;
+
+            &:hover {
+                background-color: $primary_color_lighter;
+            }
         }
 
         &_cancel {
