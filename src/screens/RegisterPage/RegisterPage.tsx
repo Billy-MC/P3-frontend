@@ -6,7 +6,7 @@ import ButtonPrimary from '../../components/Button';
 import InputField from '../../components/InputField';
 import PasswordInputField from '../../components/PasswordInputField';
 import useInput from '../../hooks/useInput';
-import { validateEmail, validatePassword } from '../../utils/validator';
+import { validateEmail, validatePassword, validatePhone } from '../../utils/validator';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { register, authError } from '../../store/slices/userSlice';
 
@@ -17,30 +17,32 @@ const valueIsNotEmpty = (value: string) => value.trim() !== '';
 const RegisterPage = () => {
     const dispatch = useAppDispatch();
     const error = useAppSelector(authError);
-
     const navigate = useNavigate();
-    const [checked, setChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
     const [formIsValid, setFormIsValid] = useState(true);
+    const [isTouched, setIsTouched] = useState<boolean>(false);
 
     const {
         value: emailValue,
-        isValid: emailIsValid,
+        isValid: isEmailValid,
         hasError: emailHasError,
         valueChangeHandler: emailChangeHandler,
         inputBlurHandler: emailBlurHandler,
         reset: resetEmail,
     } = useInput(inputEmailIsValid, '');
+
     const {
         value: firstNameValue,
-        isValid: firstNameIsValid,
+        isValid: isFirstNameValid,
         hasError: firstNameHasError,
         valueChangeHandler: firstNameChangeHandler,
         inputBlurHandler: firstNameBlurHandler,
         reset: resetFirstName,
     } = useInput(valueIsNotEmpty, '');
+
     const {
         value: lastNameValue,
-        isValid: lastNameIsValid,
+        isValid: isLastNameValid,
         hasError: lastNameHasError,
         valueChangeHandler: lastNameChangeHandler,
         inputBlurHandler: lastNameBlurHandler,
@@ -48,8 +50,17 @@ const RegisterPage = () => {
     } = useInput(valueIsNotEmpty, '');
 
     const {
+        value: phoneValue,
+        isValid: isPhoneValid,
+        hasError: phoneHasError,
+        valueChangeHandler: phoneChangeHandler,
+        inputBlurHandler: phoneBlurHandler,
+        reset: resetPhone,
+    } = useInput(validatePhone, '');
+
+    const {
         value: passwordValue,
-        isValid: passwordIsValid,
+        isValid: isPasswordValid,
         hasError: passwordHasError,
         valueChangeHandler: passwordChangeHandler,
         inputBlurHandler: passwordBlurHandler,
@@ -58,7 +69,7 @@ const RegisterPage = () => {
 
     const {
         value: comfirmPasswordValue,
-        isValid: comfirmPasswordIsValid,
+        isValid: isComfirmPasswordValid,
         hasError: comfirmPasswordHasError,
         valueChangeHandler: comfirmPasswordChangeHandler,
         inputBlurHandler: comfirmPasswordBlurHandler,
@@ -68,18 +79,32 @@ const RegisterPage = () => {
     useEffect(() => {
         const identifier = setTimeout(() => {
             setFormIsValid(
-                emailIsValid &&
-                    firstNameIsValid &&
-                    lastNameIsValid &&
-                    passwordIsValid &&
-                    comfirmPasswordIsValid,
+                isEmailValid &&
+                    isFirstNameValid &&
+                    isLastNameValid &&
+                    isPasswordValid &&
+                    isComfirmPasswordValid &&
+                    isPhoneValid &&
+                    isChecked,
             );
         });
 
         return () => {
             clearTimeout(identifier);
         };
-    }, [emailIsValid, firstNameIsValid, lastNameIsValid, passwordIsValid, comfirmPasswordIsValid]);
+    }, [
+        isEmailValid,
+        isFirstNameValid,
+        isLastNameValid,
+        isPasswordValid,
+        isComfirmPasswordValid,
+        isPhoneValid,
+        isChecked,
+    ]);
+
+    const onBlurHandler = () => {
+        setIsTouched(true);
+    };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -91,6 +116,7 @@ const RegisterPage = () => {
             email: emailValue,
             firstName: firstNameValue,
             lastName: lastNameValue,
+            phone: phoneValue,
             password: passwordValue,
             confirmedPassword: comfirmPasswordValue,
         };
@@ -104,6 +130,8 @@ const RegisterPage = () => {
         resetLastName();
         resetpassword();
         resetComfirmPassword();
+        resetPhone();
+        setIsChecked(false);
     };
 
     return (
@@ -153,6 +181,23 @@ const RegisterPage = () => {
                 {lastNameHasError && (
                     <p className={styles['registration-error']}>This field cannot empty</p>
                 )}
+                <Box className={styles['addform-input_field']}>
+                    <InputField
+                        required
+                        id="phone"
+                        label="Phone Number"
+                        type="text"
+                        value={phoneValue}
+                        onChange={phoneChangeHandler}
+                        onBlur={phoneBlurHandler}
+                        error={phoneHasError}
+                    />
+                    {phoneHasError && (
+                        <p className={styles['registration-error']}>
+                            This field cannot empty & only can number
+                        </p>
+                    )}
+                </Box>
                 <PasswordInputField
                     required
                     id="password"
@@ -186,10 +231,11 @@ const RegisterPage = () => {
                 <FormControlLabel
                     control={
                         <Checkbox
-                            checked={checked}
-                            onChange={(event) => setChecked(event.target.checked)}
+                            checked={isChecked}
+                            onChange={(event) => setIsChecked(event.target.checked)}
                             name="checked"
                             color="primary"
+                            onBlur={onBlurHandler}
                         />
                     }
                     label={
@@ -206,6 +252,11 @@ const RegisterPage = () => {
                         </Typography>
                     }
                 />
+                {isChecked === false && isTouched === true ? (
+                    <p className={styles['registration-error']}>Please click the Agreement</p>
+                ) : (
+                    ''
+                )}
                 {typeof error === 'string' ? (
                     <Alert severity="error">
                         <strong>{error}</strong> — check it out!

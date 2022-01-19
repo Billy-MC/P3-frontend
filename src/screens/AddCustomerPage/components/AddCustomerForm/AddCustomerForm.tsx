@@ -305,7 +305,7 @@ const AddCustomerForm = () => {
                             required
                             id="phone"
                             label="Mobile Phone Number"
-                            type="test"
+                            type="text"
                             value={phoneValue}
                             onChange={phoneChangeHandler}
                             onBlur={phoneBlurHandler}
