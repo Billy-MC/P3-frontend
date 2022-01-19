@@ -2,44 +2,33 @@
 
 .productPage {
     &-box {
+        display: flex;
         margin: 0px 0px 32px;
         width: 100%;
-        flex-grow: 1;
-    }
-    &-toolbar {
-        margin: 0px 0px 0px -24px;
-        padding-left: 24px;
-        padding-right: 0px;
-        flex-grow: inherit;
+        justify-content: space-between;
     }
     &-header {
-        font-size: 2rem;
+        font-size: 32px;
         font-weight: 700;
-        line-height: 1.375;
-        margin-inline-start: 0px;
-        margin-inline-end: 0px;
-        flex-grow: inherit;
+        line-height: 44px;
+        padding-left: 24px;
     }
-    &-btnSection {
+    &-addbtn {
         display: flex;
-        padding: 2px;
-        justify-content: right;
-    }
-    &-addBtn {
-        width: 100px;
+        width: 20%;
         margin: 0px;
-        border: 0px;
+        border: none;
         padding: 8px 50px;
         font-weight: 600;
-        font-size: 0.875rem;
+        font-size: 14px;
         white-space: nowrap;
     }
-    &-addIcon {
+    &-addicon {
         font-size: large;
         padding-right: 5px;
     }
     &-box_white {
         background-color: white;
-        border-radius: 15px 10px 0px 0px;
+        border-radius: 15px 15px 0px 0px;
     }
 }

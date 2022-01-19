@@ -2,33 +2,22 @@
 
 .customerpage {
     &-box {
+        display: flex;
         margin: 0px 0px 32px;
         width: 100%;
-        flex-grow: 1;
-    }
-    &-toolbar {
-        margin: 0px 0px 0px -24px;
-        padding-left: 24px;
-        padding-right: 0px;
-        flex-grow: inherit;
+        justify-content: space-between;
     }
     &-header {
         font-size: 32px;
         font-weight: 700;
         line-height: 44px;
-        margin-inline-start: 0px;
-        margin-inline-end: 0px;
-        flex-grow: inherit;
-    }
-    &-btnsection {
-        display: flex;
-        padding: 2px;
-        justify-content: right;
+        padding-left: 24px;
     }
     &-addbtn {
+        display: flex;
         width: 20%;
         margin: 0px;
-        border: 0px;
+        border: none;
         padding: 8px 50px;
         font-weight: 600;
         font-size: 14px;
