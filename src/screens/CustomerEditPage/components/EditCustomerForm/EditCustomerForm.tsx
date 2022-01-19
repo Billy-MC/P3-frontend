@@ -18,7 +18,7 @@ export interface DetailsProps {
 
 const inputEmailIsValid = (value: string) =>
     value.trim() !== '' && validateEmail(value.toLowerCase());
-const valueIsNumber = (value: string) => value.trim() !== '' && validateNumber(value);
+const valueIsNumber = (value: string) => validateNumber(value);
 const valueIsNotEmpty = (value: string) => value.trim() !== '';
 
 const genderSelect = ['Male', 'Female', 'Other', 'Not to Tell'];
@@ -39,21 +39,21 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
         hasError: firstNameHasError,
         valueChangeHandler: firstNameChangeHandler,
         inputBlurHandler: firstNameBlurHandler,
-    } = useInput(valueIsNotEmpty, details.firstName);
+    } = useInput(valueIsNotEmpty, details.firstName || '');
     const {
         value: lastNameValue,
         isValid: lastNameIsValid,
         hasError: lastNameHasError,
         valueChangeHandler: lastNameChangeHandler,
         inputBlurHandler: lastNameBlurHandler,
-    } = useInput(valueIsNotEmpty, details.lastName);
+    } = useInput(valueIsNotEmpty, details.lastName || '');
 
     const {
         value: genderValue,
         isValid: genderIsValid,
         valueChangeHandler: genderChangeHandler,
         inputBlurHandler: genderBlurHandler,
-    } = useInput(valueIsNotEmpty, details.gender);
+    } = useInput(valueIsNotEmpty, details.gender || '');
 
     const {
         value: addressValue,
@@ -61,7 +61,7 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
         hasError: addressHasError,
         valueChangeHandler: addressChangeHandler,
         inputBlurHandler: addressBlurHandler,
-    } = useInput(valueIsNotEmpty, details.address.street);
+    } = useInput(valueIsNotEmpty, details.address.street || '');
 
     const {
         value: postCodeValue,
@@ -77,7 +77,7 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
         hasError: cityHasError,
         valueChangeHandler: cityChangeHandler,
         inputBlurHandler: cityBlurHandler,
-    } = useInput(valueIsNotEmpty, details.address.city);
+    } = useInput(valueIsNotEmpty, details.address.city || '');
 
     const {
         value: stateValue,
@@ -85,7 +85,7 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
         hasError: stateHasError,
         valueChangeHandler: stateChangeHandler,
         inputBlurHandler: stateBlurHandler,
-    } = useInput(valueIsNotEmpty, details.address.state);
+    } = useInput(valueIsNotEmpty, details.address.state || '');
 
     const {
         value: phoneValue,
