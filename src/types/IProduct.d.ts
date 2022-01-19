@@ -1,8 +1,8 @@
 export default interface IProduct {
-    sku?: string;
+    sku: string;
     productName: string;
     category: string;
-    price: string | undefined;
-    quantity: string | undefined;
+    price: string;
+    quantity: string;
     description: string;
 }

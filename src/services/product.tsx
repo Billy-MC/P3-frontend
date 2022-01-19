@@ -10,7 +10,7 @@ export const getAllProducts = () => {
     return request(config).then((res) => res.data);
 };
 
-export const getProductBySku = (sku: string) => {
+export const getProductBySku = (sku: string | undefined) => {
     const config: AxiosRequestConfig = {
         url: `products/${sku}`,
         method: 'GET',
@@ -31,7 +31,7 @@ export const createProduct = (body: IProduct) => {
         .catch((error) => error);
 };
 
-export const updateProductBySku = (sku: string | undefined, body: IProduct) => {
+export const updateProductBySku = (sku: string, body: IProduct) => {
     const config: AxiosRequestConfig = {
         url: `products/${sku}`,
         method: 'PUT',

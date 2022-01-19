@@ -23,9 +23,8 @@ const CustomerEditPage = () => {
 
     const customer: ICustomer = useAppSelector(selectCustomer);
 
-    const name = `${customer.firstName} ${customer.lastName}`;
-
     const details = { ...customer };
+    const name = `${details.firstName} ${details.lastName}`;
 
     return (
         <>
@@ -33,7 +32,7 @@ const CustomerEditPage = () => {
             {status === 'succeeded' && (
                 <>
                     <BackToCustomer />
-                    <EditCustomerHeader name={name} email={customer.email} />
+                    <EditCustomerHeader name={name} email={details.email} />
                     <EditCustomerForm details={details} />
                 </>
             )}

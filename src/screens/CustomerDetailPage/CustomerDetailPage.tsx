@@ -35,6 +35,7 @@ const CustomerDetailPage = () => {
             children: <CustomerInvoice />,
         },
     ];
+
     const name = `${customer.firstName} ${customer.lastName}`;
     return (
         <Container>

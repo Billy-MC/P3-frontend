@@ -92,7 +92,7 @@ const Route = () => (
                     }
                 />
                 <RouterPage
-                    path="/products/edit"
+                    path="/products/:sku/edit"
                     element={
                         <SubLayout>
                             <ProductEditPage />

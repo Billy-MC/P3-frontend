@@ -20,11 +20,11 @@ export interface ProductsState {
 }
 
 const selectedProductInitialState = {
-    sku: '',
     productName: '',
     category: '',
-    price: undefined,
-    quantity: undefined,
+    description: '',
+    price: '',
+    quantity: '',
 };
 
 const initialState: ProductsState = {
@@ -42,22 +42,33 @@ export const fetchAllProducts = createAsyncThunk('product/fetchAllProducts', asy
 
 export const fetchProductBySku = createAsyncThunk(
     'product/fetchProductBySku',
-    async (sku: string) => {
-        const response = await getProductBySku(sku);
+    async (sku: string | undefined) => {
+        const response = await getProductBySku(sku as string);
         return response as IProduct;
     },
 );
 
-export const addProduct = createAsyncThunk('product/addProduct', async (body: IProduct) => {
-    const response = await createProduct(body);
-    return response.data as IProduct;
-});
+export const addProduct = createAsyncThunk(
+    'product/addProduct',
+    async (body: Partial<IProduct>, { rejectWithValue }) => {
+        const { sku, ...fields } = body;
+        try {
+            const response = await createProduct(fields as IProduct);
+            return response.fields as IProduct;
+        } catch (e) {
+            return rejectWithValue(e as Error);
+        }
+    },
+);
 
-export const updateProduct = createAsyncThunk('product/updateProduct', async (data: IProduct) => {
-    const { sku, ...fields } = data;
-    const response = await updateProductBySku(sku, fields as IProduct);
-    return response.data as IProduct;
-});
+export const updateProduct = createAsyncThunk<IProduct, { sku: string } & Partial<IProduct>>(
+    'product/updateProduct',
+    async (data) => {
+        const { sku, ...fields } = data;
+        const response = await updateProductBySku(sku as string, fields as IProduct);
+        return response.fields as IProduct;
+    },
+);
 
 export const removeProduct = createAsyncThunk('product/removeProduct', async (sku: string) => {
     await deleteProductBySku(sku);

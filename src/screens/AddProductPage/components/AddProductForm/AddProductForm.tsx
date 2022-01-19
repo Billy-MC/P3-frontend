@@ -13,7 +13,7 @@ import SelectField from '../../../../components/SelectField';
 const isValueNotEmpty = (value: string) => value.trim() !== '';
 const isValueNumber = (value: string) => value.trim() !== '' && validateNumber(value);
 
-const categorySelect = ['Category 1', 'Category 2', 'Category 3', 'Category 4'];
+const categorySelect: string[] = ['Computers', 'Phones', 'Accesories'];
 
 const AddProductForm = () => {
     const [isFormValid, isSetFormValid] = useState(true);
@@ -32,9 +32,7 @@ const AddProductForm = () => {
     const {
         value: descriptionValue,
         isValid: isDescriptionValid,
-        hasError: descriptionHasError,
         valueChangeHandler: descriptionChangeHandler,
-        inputBlurHandler: descriptionBlurHandler,
         reset: resetDescription,
     } = useInput(isValueNotEmpty, '');
 
@@ -185,20 +183,13 @@ const AddProductForm = () => {
                         <TextField
                             fullWidth
                             id="description"
-                            label="Description *"
+                            label="Description"
                             value={descriptionValue}
                             onChange={descriptionChangeHandler}
-                            onBlur={descriptionBlurHandler}
                             multiline
                             rows={5}
-                            error={descriptionHasError}
                         />
-
-                        {descriptionHasError && (
-                            <p className={styles['addform-error']}>This field is required.</p>
-                        )}
                     </Box>
-
                     <Button
                         className={styles['addform-btnsection_upload']}
                         variant="contained"
