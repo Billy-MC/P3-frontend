@@ -13,7 +13,7 @@ import styles from './BasicDetails.module.scss';
 import { updateProduct, removeProduct } from '../../../../store/slices/productSlice';
 
 const valueIsNotEmpty = (value: string) => value.trim() !== '';
-const valueIsNumber = (value: string) => value.trim() !== '' && validateNumber(value);
+const valueIsNumber = (value: string) => validateNumber(value);
 
 export interface DetailsProps {
     details: IProduct;

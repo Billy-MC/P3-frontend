@@ -31,7 +31,6 @@ const AddProductForm = () => {
 
     const {
         value: descriptionValue,
-        isValid: isDescriptionValid,
         valueChangeHandler: descriptionChangeHandler,
         reset: resetDescription,
     } = useInput(isValueNotEmpty, '');
@@ -65,18 +64,14 @@ const AddProductForm = () => {
     useEffect(() => {
         const identifier = setTimeout(() => {
             isSetFormValid(
-                isProductNameValid &&
-                    isCategoryValid &&
-                    isPriceValid &&
-                    isQuantityValid &&
-                    isDescriptionValid,
+                isProductNameValid && isCategoryValid && isPriceValid && isQuantityValid,
             );
         });
 
         return () => {
             clearTimeout(identifier);
         };
-    }, [isProductNameValid, isCategoryValid, isPriceValid, isQuantityValid, isDescriptionValid]);
+    }, [isProductNameValid, isCategoryValid, isPriceValid, isQuantityValid]);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -93,15 +88,15 @@ const AddProductForm = () => {
                 quantity: quantityValue,
                 description: descriptionValue,
             }),
-        );
+        ).then(() => {
+            navigate({ pathname: '/products' });
+        });
 
         resetProductName();
         resetCategory();
         resetPrice();
         resetQuantity();
         resetDescription();
-
-        navigate({ pathname: '/products' });
     };
 
     return (

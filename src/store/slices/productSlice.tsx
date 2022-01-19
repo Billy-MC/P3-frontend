@@ -110,7 +110,6 @@ export const productSlice = createSlice({
             })
             .addCase(addProduct.fulfilled, (state: ProductsState, action) => {
                 state.status = asyncStatus.succeeded;
-                state.products.push(action.payload);
             })
             .addCase(addProduct.rejected, (state: ProductsState, action) => {
                 state.status = asyncStatus.failed;
