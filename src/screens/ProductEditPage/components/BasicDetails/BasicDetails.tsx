@@ -35,7 +35,7 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
         valueChangeHandler: productNameChangeHandler,
         inputBlurHandler: productNameBlurHandler,
         reset: resetProductName,
-    } = useInput(valueIsNotEmpty, details.productName);
+    } = useInput(valueIsNotEmpty, details.productName || '');
 
     const { value: skuValue } = useInput(valueIsNumber, details.sku);
 
@@ -44,7 +44,7 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
         isValid: categoryIsValid,
         valueChangeHandler: categoryChangeHandler,
         inputBlurHandler: categoryBlurHandler,
-    } = useInput(valueIsNotEmpty, details.category);
+    } = useInput(valueIsNotEmpty, details.category || '');
 
     const {
         value: descriptionValue,
