@@ -8,11 +8,16 @@
         width: 100%;
 
         &--delete {
+            background-color: $primary_color;
             border: 1px $primary_color_lighter solid;
             font-size: 14px;
             padding: 8px 20px;
             border-radius: 8px;
             font-weight: 400;
+
+            &:hover {
+                background-color: $primary_color_lighter;
+            }
         }
 
         &--cancel {
