@@ -61,7 +61,7 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
         valueChangeHandler: newPriceChangeHandler,
         inputBlurHandler: newPriceBlurHandler,
         reset: resetNewPrice,
-    } = useInput(valueIsNumber, details.price || '');
+    } = useInput(valueIsNumber, details.price);
 
     const {
         value: quantityValue,
@@ -70,7 +70,7 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
         valueChangeHandler: quantityChangeHandler,
         inputBlurHandler: quantityBlurHandler,
         reset: resetQuantity,
-    } = useInput(valueIsNumber, details.quantity || '');
+    } = useInput(valueIsNumber, details.quantity);
 
     useEffect(() => {
         const identifier = setTimeout(() => {
@@ -186,7 +186,7 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
                         required
                         id="oldPrice"
                         label="Old Price "
-                        type="text"
+                        type="number"
                         disabled
                         value={oldPriceValue}
                     />
@@ -195,7 +195,7 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
                             required
                             id="newPrice"
                             label="New Price "
-                            type="text"
+                            type="number"
                             value={newPriceValue}
                             onChange={newPriceChangeHandler}
                             onBlur={newPriceBlurHandler}
@@ -212,7 +212,7 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
                             required
                             id="quantity"
                             label="Quantity "
-                            type="text"
+                            type="number"
                             value={quantityValue}
                             onChange={quantityChangeHandler}
                             onBlur={quantityBlurHandler}
