@@ -13,8 +13,7 @@ export const signup = (body: IUser) => {
             if (response.status === 200) {
                 return response.data;
             }
-
-            throw new Error('User is already exist');
+            return response;
         })
         .catch((error) => error);
 };
@@ -31,7 +30,7 @@ export const signin = (body: IUser) => {
                 localStorage.setItem('AUTH_TOKEN', response.headers.authorization);
                 return response.data;
             }
-            throw new Error('User is not exist');
+            return response;
         })
         .catch((error) => error);
 };

@@ -22,5 +22,5 @@ export default function request(options: AxiosRequestConfig) {
     });
     return axiosInstance(options)
         .then((response) => response)
-        .catch((error) => error);
+        .catch((error) => error.response.data.error);
 }

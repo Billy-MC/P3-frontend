@@ -17,7 +17,10 @@ export const register = createAsyncThunk(
     async (data: IUser, { rejectWithValue }) => {
         try {
             const response = await signup(data);
-            return response.data as IUser;
+            if (typeof response === 'object') {
+                return { user: response };
+            }
+            return { error: response };
         } catch (e) {
             return rejectWithValue((e as Error).message);
         }
@@ -27,7 +30,10 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk('user/login', async (data: IUser, { rejectWithValue }) => {
     try {
         const response = await signin(data);
-        return { user: response };
+        if (typeof response === 'object') {
+            return { user: response };
+        }
+        return { error: response };
     } catch (e) {
         return rejectWithValue((e as Error).message);
     }
@@ -81,7 +87,7 @@ export const deleteUser = createAsyncThunk(
 
 interface UsersState {
     users: IUser[];
-    user: IUser | null;
+    user: IUser | null | string;
     status: asyncStatus;
     error: null | string | undefined;
     isLoggedIn: boolean;
@@ -107,7 +113,8 @@ export const userSlice = createSlice({
             .addCase(register.fulfilled, (state: UsersState, action) => {
                 state.status = asyncStatus.succeeded;
                 state.isLoggedIn = false;
-                state.users.push(action.payload);
+                state.error = action.payload.error;
+                state.user = action.payload.user;
             })
             .addCase(register.rejected, (state: UsersState, action) => {
                 state.status = asyncStatus.failed;
@@ -120,7 +127,7 @@ export const userSlice = createSlice({
             })
             .addCase(login.fulfilled, (state: UsersState, action) => {
                 state.status = asyncStatus.succeeded;
-                state.isLoggedIn = true;
+                state.error = action.payload.error;
                 state.user = action.payload.user;
             })
             .addCase(login.rejected, (state: UsersState, action) => {
@@ -206,5 +213,6 @@ export const authUserStatus = (state: RootState) => state.users.status;
 export const authUserLogging = (state: RootState) => state.users.isLoggedIn;
 export const authUser = (state: RootState) => state.users.user;
 export const allAuthUser = (state: RootState) => state.users.users;
+export const authError = (state: RootState) => state.users.error;
 
 export default userSlice.reducer;

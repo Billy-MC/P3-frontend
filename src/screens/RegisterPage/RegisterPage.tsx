@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Box, Typography, FormControlLabel, Checkbox, Alert, AlertTitle } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import { Box, Typography, FormControlLabel, Checkbox, Alert } from '@mui/material';
 import styles from './RegisterPage.module.scss';
 import ButtonPrimary from '../../components/Button';
 import InputField from '../../components/InputField';
@@ -9,7 +8,7 @@ import PasswordInputField from '../../components/PasswordInputField';
 import useInput from '../../hooks/useInput';
 import { validateEmail, validatePassword } from '../../utils/validator';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { register, authUserStatus } from '../../store/slices/userSlice';
+import { register, authError } from '../../store/slices/userSlice';
 
 const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
 const inputPasswordIsValid = (value: string) => validatePassword(value) && value.trim() !== '';
@@ -17,7 +16,8 @@ const valueIsNotEmpty = (value: string) => value.trim() !== '';
 
 const RegisterPage = () => {
     const dispatch = useAppDispatch();
-    const status = useAppSelector(authUserStatus);
+    const error = useAppSelector(authError);
+
     const navigate = useNavigate();
     const [checked, setChecked] = useState(false);
     const [formIsValid, setFormIsValid] = useState(true);
@@ -96,9 +96,7 @@ const RegisterPage = () => {
         };
 
         dispatch(register(data)).then(() => {
-            if (status === 'succeeded') {
-                navigate('/login');
-            }
+            navigate('/login');
         });
 
         resetEmail();
@@ -208,25 +206,17 @@ const RegisterPage = () => {
                         </Typography>
                     }
                 />
-                {status === 'failed' && (
+                {typeof error === 'string' ? (
                     <Alert severity="error">
-                        <AlertTitle>Error</AlertTitle>
-                        This email already exist! — <strong>Please check it!</strong>
+                        <strong>{error}</strong> — check it out!
                     </Alert>
-                )}
-                {status === 'loading' ? (
-                    <LoadingButton
-                        className={styles['login-btn-loading']}
-                        loading
-                        variant="outlined"
-                    >
-                        Submit
-                    </LoadingButton>
                 ) : (
-                    <ButtonPrimary className={styles['registration-btn']} type="submit">
-                        Sign UP
-                    </ButtonPrimary>
+                    ''
                 )}
+                <ButtonPrimary className={styles['registration-btn']} type="submit">
+                    Sign UP
+                </ButtonPrimary>
+
                 <p>
                     Already have an account? &nbsp;
                     <Link className={styles['registration-link']} to="/login">

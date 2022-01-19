@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Box, Typography, FormControlLabel, Checkbox } from '@mui/material';
+import { Box, Typography, FormControlLabel, Checkbox, Alert } from '@mui/material';
 import ButtonPrimary from '../../components/Button';
 import InputField from '../../components/InputField';
 import PasswordInputField from '../../components/PasswordInputField';
 import useInput from '../../hooks/useInput';
 import styles from './LoginPage.module.scss';
 import { validateEmail, validatePassword } from '../../utils/validator';
-import { useAppDispatch } from '../../hooks/redux';
-import { login } from '../../store/slices/userSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { login, authError } from '../../store/slices/userSlice';
 
 const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
 const inputPasswordIsValid = (value: string) => validatePassword(value) && value.trim() !== '';
@@ -16,6 +16,7 @@ const inputPasswordIsValid = (value: string) => validatePassword(value) && value
 const LoginPage = () => {
     const [checked, setChecked] = useState(false);
     const [formIsValid, setFormIsValid] = useState(false);
+    const error = useAppSelector(authError);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -112,6 +113,14 @@ const LoginPage = () => {
                     }
                     label={<Typography variant="subtitle1">Remember me</Typography>}
                 />
+
+                {typeof error === 'string' ? (
+                    <Alert severity="error">
+                        <strong>{error}</strong> — check it out!
+                    </Alert>
+                ) : (
+                    ''
+                )}
                 <ButtonPrimary
                     className={styles['login-btn']}
                     type="submit"
