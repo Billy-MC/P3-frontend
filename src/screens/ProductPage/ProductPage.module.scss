@@ -3,25 +3,18 @@
 .productPage {
     &-box {
         display: flex;
-        margin: 0px 0px 32px;
-        width: 100%;
+        margin: 0px 24px 32px;
         justify-content: space-between;
     }
     &-header {
         font-size: 32px;
         font-weight: 700;
         line-height: 44px;
-        padding-left: 24px;
     }
     &-addbtn {
-        display: flex;
-        width: 20%;
         margin: 0px;
         border: none;
-        padding: 8px 50px;
         font-weight: 600;
-        font-size: 14px;
-        white-space: nowrap;
     }
     &-addicon {
         font-size: large;

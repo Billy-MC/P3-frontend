@@ -1,18 +1,13 @@
 .orderpage {
     &-box {
-        margin: 0px 0px 32px;
-        width: 100%;
-        flex-grow: 1;
+        display: flex;
+        margin: 0px 24px 32px;
+        justify-content: space-between;
     }
-
     &-header {
-        padding-left: 24px;
         font-size: 32px;
         font-weight: 700;
         line-height: 44px;
-        margin-inline-start: 0px;
-        margin-inline-end: 0px;
-        flex-grow: inherit;
     }
     &-box_white {
         background-color: white;

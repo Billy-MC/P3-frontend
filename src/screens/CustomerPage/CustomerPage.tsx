@@ -14,7 +14,7 @@ const CustomerPage = () => (
             <Link to="add">
                 <ButtonPrimary className={styles['customerpage-addbtn']}>
                     <AddIcon className={styles['customerpage-addicon']} />
-                    Add
+                    <span>Add</span>
                 </ButtonPrimary>
             </Link>
         </Box>
