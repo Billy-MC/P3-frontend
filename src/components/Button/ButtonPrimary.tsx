@@ -7,7 +7,9 @@ interface ButtonProps
             React.ButtonHTMLAttributes<HTMLButtonElement>,
             HTMLButtonElement
         >,
-        React.AriaAttributes {}
+        React.AriaAttributes {
+    className: string;
+}
 
 const ButtonPrimary: React.FC<ButtonProps> = (props) => {
     const { children, type, className, onClick } = props;
