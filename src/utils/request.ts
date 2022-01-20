@@ -3,10 +3,9 @@ import axios, { AxiosRequestConfig } from 'axios';
 const baseURL =
     process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000/api/'
-        : 'http://devils-alb-958117536.us-east-1.elb.amazonaws.com/api/';
+        : ' https://alb.devilscrm.link/api/';
 const withCredentials = true;
 const timeout = 30000;
-
 /**
  * Requests a path, returning a promise.
  *
