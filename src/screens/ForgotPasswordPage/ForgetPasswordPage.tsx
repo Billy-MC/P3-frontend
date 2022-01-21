@@ -62,7 +62,6 @@ const ForgetPasswordPage = () => {
                     onBlur={emailBlurHandler}
                     error={emailHasError}
                 />
-
                 {emailHasError && (
                     <p className={styles['forgotPassword-error']}>Please Enter valid Email</p>
                 )}

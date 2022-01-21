@@ -16,7 +16,8 @@ export interface ProductsState {
     filters: IFilter[];
     status: asyncStatus;
     error: null | string | undefined;
-    selectedProduct?: IProduct;
+    selectedProduct: IProduct;
+    isSuccess: boolean;
 }
 
 const selectedProductInitialState = {
@@ -32,6 +33,7 @@ const initialState: ProductsState = {
     filters: [],
     status: asyncStatus.idle,
     error: null,
+    isSuccess: false,
     selectedProduct: selectedProductInitialState as IProduct,
 };
 
@@ -42,18 +44,23 @@ export const fetchAllProducts = createAsyncThunk('product/fetchAllProducts', asy
 
 export const fetchProductBySku = createAsyncThunk(
     'product/fetchProductBySku',
-    async (sku: string | undefined) => {
-        const response = await getProductBySku(sku as string);
-        return response as IProduct;
+    async (sku: string | undefined, { rejectWithValue }) => {
+        try {
+            const response = await getProductBySku(sku as string);
+            if (response.error) throw new Error(response.error);
+            return response as IProduct;
+        } catch (e) {
+            return rejectWithValue(e as Error);
+        }
     },
 );
 
 export const addProduct = createAsyncThunk(
     'product/addProduct',
     async (body: Partial<IProduct>, { rejectWithValue }) => {
-        const { sku, ...fields } = body;
         try {
-            const response = await createProduct(fields as IProduct);
+            const response = await createProduct(body as IProduct);
+            if (response.error) throw new Error(response.error);
             return response.fields as IProduct;
         } catch (e) {
             return rejectWithValue(e as Error);
@@ -63,22 +70,41 @@ export const addProduct = createAsyncThunk(
 
 export const updateProduct = createAsyncThunk<IProduct, { sku: string } & Partial<IProduct>>(
     'product/updateProduct',
-    async (data) => {
-        const { sku, ...fields } = data;
-        const response = await updateProductBySku(sku as string, fields as IProduct);
-        return response.fields as IProduct;
+    async (data, { rejectWithValue }) => {
+        try {
+            const { sku, ...fields } = data;
+            const response = await updateProductBySku(sku as string, fields as IProduct);
+            if (response.error) throw new Error(response.error);
+            return response.fields as IProduct;
+        } catch (e) {
+            return rejectWithValue(e as Error);
+        }
     },
 );
 
-export const removeProduct = createAsyncThunk('product/removeProduct', async (sku: string) => {
-    await deleteProductBySku(sku);
-    return sku;
-});
+export const removeProduct = createAsyncThunk(
+    'product/removeProduct',
+    async (sku: string, { rejectWithValue }) => {
+        try {
+            await deleteProductBySku(sku);
+            return sku;
+        } catch (e) {
+            return rejectWithValue(e as Error);
+        }
+    },
+);
 
 export const productSlice = createSlice({
     name: 'product',
     initialState,
-    reducers: {},
+    reducers: {
+        clearState: (state) => {
+            state.error = null;
+            state.isSuccess = false;
+            state.status = asyncStatus.idle;
+            return state;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllProducts.pending, (state: ProductsState) => {
@@ -90,7 +116,7 @@ export const productSlice = createSlice({
             })
             .addCase(fetchAllProducts.rejected, (state: ProductsState, action) => {
                 state.status = asyncStatus.failed;
-                state.error = action.error.message;
+                if (action.payload) state.error = Object(action.payload).message;
             });
         builder
             .addCase(fetchProductBySku.pending, (state: ProductsState) => {
@@ -102,7 +128,7 @@ export const productSlice = createSlice({
             })
             .addCase(fetchProductBySku.rejected, (state: ProductsState, action) => {
                 state.status = asyncStatus.failed;
-                state.error = action.error.message;
+                if (action.payload) state.error = Object(action.payload).message;
             });
         builder
             .addCase(addProduct.pending, (state: ProductsState) => {
@@ -110,10 +136,11 @@ export const productSlice = createSlice({
             })
             .addCase(addProduct.fulfilled, (state: ProductsState, action) => {
                 state.status = asyncStatus.succeeded;
+                state.isSuccess = true;
             })
             .addCase(addProduct.rejected, (state: ProductsState, action) => {
                 state.status = asyncStatus.failed;
-                state.error = action.error.message;
+                if (action.payload) state.error = Object(action.payload).message;
             });
         builder
             .addCase(updateProduct.pending, (state: ProductsState) => {
@@ -121,6 +148,7 @@ export const productSlice = createSlice({
             })
             .addCase(updateProduct.fulfilled, (state: ProductsState, action) => {
                 state.status = asyncStatus.succeeded;
+                state.isSuccess = true;
                 const index = state.products.findIndex(
                     (product: IProduct) => product.sku === action.payload.sku,
                 );
@@ -151,5 +179,8 @@ export const productSlice = createSlice({
 export const selectProducts = (state: RootState) => state.products.products;
 export const selectProduct = (state: RootState) => state.products.selectedProduct;
 export const selectProductStatus = (state: RootState) => state.products.status;
+export const productError = (state: RootState) => state.products.error;
+export const productSuccess = (state: RootState) => state.products.isSuccess;
+export const { clearState } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -8,16 +8,24 @@ import PasswordInputField from '../../components/PasswordInputField';
 import useInput from '../../hooks/useInput';
 import { validateEmail, validatePassword, validatePhone } from '../../utils/validator';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { register, authError } from '../../store/slices/userSlice';
+import {
+    register,
+    authError,
+    authUserStatus,
+    clearState,
+    authUserSuccess,
+} from '../../store/slices/userSlice';
 
 const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
 const inputPasswordIsValid = (value: string) => validatePassword(value) && value.trim() !== '';
 const valueIsNotEmpty = (value: string) => value.trim() !== '';
 
 const RegisterPage = () => {
-    const dispatch = useAppDispatch();
-    const error = useAppSelector(authError);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const errorMsg = useAppSelector(authError);
+    const status = useAppSelector(authUserStatus);
+    const isSuccess = useAppSelector(authUserSuccess);
     const [isChecked, setIsChecked] = useState(false);
     const [formIsValid, setFormIsValid] = useState(true);
     const [isTouched, setIsTouched] = useState<boolean>(false);
@@ -28,7 +36,6 @@ const RegisterPage = () => {
         hasError: emailHasError,
         valueChangeHandler: emailChangeHandler,
         inputBlurHandler: emailBlurHandler,
-        reset: resetEmail,
     } = useInput(inputEmailIsValid, '');
 
     const {
@@ -37,7 +44,6 @@ const RegisterPage = () => {
         hasError: firstNameHasError,
         valueChangeHandler: firstNameChangeHandler,
         inputBlurHandler: firstNameBlurHandler,
-        reset: resetFirstName,
     } = useInput(valueIsNotEmpty, '');
 
     const {
@@ -46,7 +52,6 @@ const RegisterPage = () => {
         hasError: lastNameHasError,
         valueChangeHandler: lastNameChangeHandler,
         inputBlurHandler: lastNameBlurHandler,
-        reset: resetLastName,
     } = useInput(valueIsNotEmpty, '');
 
     const {
@@ -55,7 +60,6 @@ const RegisterPage = () => {
         hasError: phoneHasError,
         valueChangeHandler: phoneChangeHandler,
         inputBlurHandler: phoneBlurHandler,
-        reset: resetPhone,
     } = useInput(validatePhone, '');
 
     const {
@@ -85,7 +89,7 @@ const RegisterPage = () => {
                     isPasswordValid &&
                     isComfirmPasswordValid &&
                     isPhoneValid &&
-                    isChecked,
+                    isTouched,
             );
         });
 
@@ -99,7 +103,7 @@ const RegisterPage = () => {
         isPasswordValid,
         isComfirmPasswordValid,
         isPhoneValid,
-        isChecked,
+        isTouched,
     ]);
 
     const onBlurHandler = () => {
@@ -109,6 +113,7 @@ const RegisterPage = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (formIsValid === false) {
+            setIsTouched(true);
             return;
         }
 
@@ -121,18 +126,25 @@ const RegisterPage = () => {
             confirmedPassword: comfirmPasswordValue,
         };
 
-        dispatch(register(data)).then(() => {
-            navigate('/login');
-        });
+        dispatch(register(data));
 
-        resetEmail();
-        resetFirstName();
-        resetLastName();
         resetpassword();
         resetComfirmPassword();
-        resetPhone();
-        setIsChecked(false);
     };
+
+    useEffect(
+        () => () => {
+            dispatch(clearState());
+        },
+        [dispatch],
+    );
+
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(clearState());
+            navigate({ pathname: `/login` });
+        }
+    }, [dispatch, emailValue, isSuccess, navigate]);
 
     return (
         <div className={styles.registration}>
@@ -258,13 +270,14 @@ const RegisterPage = () => {
                 ) : (
                     ''
                 )}
-                {typeof error === 'string' ? (
+                {status === 'failed' && errorMsg !== null ? (
                     <Alert severity="error">
-                        <strong>{error}</strong> — check it out!
+                        <strong>{errorMsg}</strong> — check it out!
                     </Alert>
                 ) : (
                     ''
                 )}
+
                 <ButtonPrimary className={styles['registration-btn']} type="submit">
                     Sign UP
                 </ButtonPrimary>

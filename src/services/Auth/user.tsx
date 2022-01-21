@@ -13,7 +13,8 @@ export const signup = (body: IUser) => {
             if (response.status === 200) {
                 return response.data;
             }
-            return response;
+
+            return response.data;
         })
         .catch((error) => error);
 };
@@ -30,7 +31,7 @@ export const signin = (body: IUser) => {
                 localStorage.setItem('AUTH_TOKEN', response.headers.authorization);
                 return response.data;
             }
-            return response;
+            return response.data;
         })
         .catch((error) => error);
 };

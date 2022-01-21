@@ -1,4 +1,4 @@
-import { Box, Divider, MenuItem, Switch, TextField } from '@mui/material';
+import { Box, Divider, MenuItem, Switch, TextField, Alert } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../../../../components/InputField';
@@ -7,10 +7,17 @@ import ButtonPrimary from '../../../../components/Button/ButtonPrimary';
 import useInput from '../../../../hooks/useInput';
 import { validateNumber } from '../../../../utils/validator';
 import DeleteConfirmation from '../../../../components/DeleteConfirmationModal';
-import { useAppDispatch } from '../../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import IProduct from '../../../../types/IProduct';
 import styles from './BasicDetails.module.scss';
-import { updateProduct, removeProduct } from '../../../../store/slices/productSlice';
+import {
+    updateProduct,
+    removeProduct,
+    clearState,
+    productSuccess,
+    productError,
+    selectProductStatus,
+} from '../../../../store/slices/productSlice';
 
 const valueIsNotEmpty = (value: string) => value.trim() !== '';
 const valueIsNumber = (value: string) => validateNumber(value);
@@ -25,6 +32,9 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
     const [formIsValid, setFormIsValid] = useState(true);
     const [openPopup, setOpenPopup] = useState(false);
     const showModal = () => setOpenPopup(true);
+    const status = useAppSelector(selectProductStatus);
+    const errorMsg = useAppSelector(productError);
+    const isSuccess = useAppSelector(productSuccess);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -34,7 +44,6 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
         hasError: productNameHasError,
         valueChangeHandler: productNameChangeHandler,
         inputBlurHandler: productNameBlurHandler,
-        reset: resetProductName,
     } = useInput(valueIsNotEmpty, details.productName || '');
 
     const { value: skuValue } = useInput(valueIsNumber, details.sku);
@@ -46,11 +55,10 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
         inputBlurHandler: categoryBlurHandler,
     } = useInput(valueIsNotEmpty, details.category || '');
 
-    const {
-        value: descriptionValue,
-        valueChangeHandler: descriptionChangeHandler,
-        reset: resetDescription,
-    } = useInput(valueIsNotEmpty, details.description || '');
+    const { value: descriptionValue, valueChangeHandler: descriptionChangeHandler } = useInput(
+        valueIsNotEmpty,
+        details.description || '',
+    );
 
     const { value: oldPriceValue } = useInput(valueIsNumber, details.price);
 
@@ -60,7 +68,6 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
         hasError: newPriceHasError,
         valueChangeHandler: newPriceChangeHandler,
         inputBlurHandler: newPriceBlurHandler,
-        reset: resetNewPrice,
     } = useInput(valueIsNumber, details.price);
 
     const {
@@ -69,7 +76,6 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
         hasError: quantityHasError,
         valueChangeHandler: quantityChangeHandler,
         inputBlurHandler: quantityBlurHandler,
-        reset: resetQuantity,
     } = useInput(valueIsNumber, details.quantity);
 
     useEffect(() => {
@@ -101,12 +107,6 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
                 description: descriptionValue,
             }),
         );
-
-        resetProductName();
-        resetDescription();
-        resetQuantity();
-        resetNewPrice();
-        navigate({ pathname: `/products/${skuValue}` });
     };
 
     const deleteHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -117,6 +117,20 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
     };
 
     const navigateHandler = () => navigate(-1);
+
+    useEffect(
+        () => () => {
+            dispatch(clearState());
+        },
+        [dispatch],
+    );
+
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(clearState());
+            navigate({ pathname: `/products/${skuValue}` });
+        }
+    }, [dispatch, isSuccess, navigate, skuValue]);
 
     return (
         <Box component="form" onSubmit={handleSubmit}>
@@ -234,6 +248,13 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
                     <span>Keep selling when stock is empty</span>
                 </Box>
             </Box>
+            {status === 'failed' && errorMsg !== null ? (
+                <Alert severity="error">
+                    <strong>{errorMsg}</strong> — check it out!
+                </Alert>
+            ) : (
+                ''
+            )}
             <Box className={styles['editform-btnsection']}>
                 <ButtonPrimary className={styles['editform-btnsection_update']} type="submit">
                     Update

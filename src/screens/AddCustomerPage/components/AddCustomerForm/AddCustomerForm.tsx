@@ -1,4 +1,4 @@
-import { Box, Divider, MenuItem } from '@mui/material';
+import { Box, Divider, MenuItem, Alert } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import InputField from '../../../../components/InputField';
@@ -6,8 +6,14 @@ import ButtonPrimary from '../../../../components/Button/ButtonPrimary';
 import useInput from '../../../../hooks/useInput';
 import { validateEmail, validateNumber, validatePhone } from '../../../../utils/validator';
 import styles from './AddCustomerForm.module.scss';
-import { useAppDispatch } from '../../../../hooks/redux';
-import { addCustomer } from '../../../../store/slices/customerSlice';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import {
+    addCustomer,
+    selectCustomerStatus,
+    customerError,
+    customerSuccess,
+    clearState,
+} from '../../../../store/slices/customerSlice';
 import { Gender } from '../../../../types/ICustomer';
 import SelectField from '../../../../components/SelectField';
 
@@ -20,6 +26,9 @@ const genderSelect = ['Male', 'Female', 'Other', 'Not to Tell'];
 
 const AddCustomerForm = () => {
     const [formIsValid, setFormIsValid] = useState(true);
+    const status = useAppSelector(selectCustomerStatus);
+    const errorMsg = useAppSelector(customerError);
+    const isSuccess = useAppSelector(customerSuccess);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -29,7 +38,6 @@ const AddCustomerForm = () => {
         hasError: emailHasError,
         valueChangeHandler: emailChangeHandler,
         inputBlurHandler: emailBlurHandler,
-        reset: resetEmail,
     } = useInput(inputEmailIsValid, '');
 
     const {
@@ -37,7 +45,6 @@ const AddCustomerForm = () => {
         isValid: genderIsValid,
         valueChangeHandler: genderChangeHandler,
         inputBlurHandler: genderBlurHandler,
-        reset: resetGender,
     } = useInput(valueIsNotEmpty, 'Not to Tell');
 
     const {
@@ -46,7 +53,6 @@ const AddCustomerForm = () => {
         hasError: firstNameHasError,
         valueChangeHandler: firstNameChangeHandler,
         inputBlurHandler: firstNameBlurHandler,
-        reset: resetFirstName,
     } = useInput(valueIsNotEmpty, '');
 
     const {
@@ -55,7 +61,6 @@ const AddCustomerForm = () => {
         hasError: lastNameHasError,
         valueChangeHandler: lastNameChangeHandler,
         inputBlurHandler: lastNameBlurHandler,
-        reset: resetLastName,
     } = useInput(valueIsNotEmpty, '');
 
     const {
@@ -64,7 +69,6 @@ const AddCustomerForm = () => {
         hasError: addressHasError,
         valueChangeHandler: addressChangeHandler,
         inputBlurHandler: addressBlurHandler,
-        reset: resetAddress,
     } = useInput(valueIsNotEmpty, '');
 
     const {
@@ -73,7 +77,6 @@ const AddCustomerForm = () => {
         hasError: cityHasError,
         valueChangeHandler: cityChangeHandler,
         inputBlurHandler: cityBlurHandler,
-        reset: resetCity,
     } = useInput(valueIsNotEmpty, '');
 
     const {
@@ -82,7 +85,6 @@ const AddCustomerForm = () => {
         hasError: stateHasError,
         valueChangeHandler: stateChangeHandler,
         inputBlurHandler: stateBlurHandler,
-        reset: resetState,
     } = useInput(valueIsNotEmpty, '');
 
     const {
@@ -91,7 +93,6 @@ const AddCustomerForm = () => {
         hasError: phoneHasError,
         valueChangeHandler: phoneChangeHandler,
         inputBlurHandler: phoneBlurHandler,
-        reset: resetPhone,
     } = useInput(validatePhone, '');
 
     const {
@@ -100,7 +101,6 @@ const AddCustomerForm = () => {
         valueChangeHandler: postCodeChangeHandler,
         inputBlurHandler: postCodeBlurHandler,
         hasError: postCodeHasError,
-        reset: resetPostCode,
     } = useInput(valueIsNumber, '');
 
     useEffect(() => {
@@ -154,19 +154,21 @@ const AddCustomerForm = () => {
                 },
             }),
         );
-
-        resetEmail();
-        resetFirstName();
-        resetLastName();
-        resetGender();
-        resetAddress();
-        resetCity();
-        resetState();
-        resetPostCode();
-        resetPhone();
-
-        navigate({ pathname: '/customers' });
     };
+
+    useEffect(
+        () => () => {
+            dispatch(clearState());
+        },
+        [dispatch],
+    );
+
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(clearState());
+            navigate({ pathname: `/customers` });
+        }
+    }, [dispatch, isSuccess, navigate]);
 
     return (
         <Box component="form" onSubmit={handleSubmit}>
@@ -319,6 +321,13 @@ const AddCustomerForm = () => {
                     </Box>
                 </Box>
             </Box>
+            {status === 'failed' && errorMsg !== null ? (
+                <Alert severity="error">
+                    <strong>{errorMsg}</strong> — check it out!
+                </Alert>
+            ) : (
+                ''
+            )}
             <Divider />
             <Box className={styles['addform-btnsection']}>
                 <ButtonPrimary className={styles['addform-btnsection_add']} type="submit">

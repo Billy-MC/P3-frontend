@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../../interfaces/redux';
+
 import {
     getAllCustomers,
     getCustomerByEmail,
@@ -15,6 +16,7 @@ interface CustomersState {
     status: asyncStatus;
     error: null | string | undefined;
     selectedCustomer: ICustomer;
+    isSuccess: boolean;
 }
 const selectedCustomerInitialState = {
     email: '',
@@ -33,6 +35,7 @@ const initialState: CustomersState = {
     customers: [],
     status: asyncStatus.idle,
     error: null,
+    isSuccess: false,
     selectedCustomer: selectedCustomerInitialState as ICustomer,
 };
 
@@ -43,9 +46,14 @@ export const fetchAllCustomers = createAsyncThunk('customer/fetchAllCustomers', 
 
 export const fetchCustomerByEmail = createAsyncThunk(
     'customer/fetchCustomerByEmail',
-    async (email: string | undefined) => {
-        const response = await getCustomerByEmail(email);
-        return response as ICustomer;
+    async (email: string | undefined, { rejectWithValue }) => {
+        try {
+            const response = await getCustomerByEmail(email);
+            if (response.error) throw new Error(response.error);
+            return response as ICustomer;
+        } catch (e) {
+            return rejectWithValue(e as Error);
+        }
     },
 );
 
@@ -54,7 +62,8 @@ export const addCustomer = createAsyncThunk(
     async (data: ICustomer, { rejectWithValue }) => {
         try {
             const response = await createCustomer(data);
-            return response.data as ICustomer;
+            if (response.error) throw new Error(response.error);
+            return response;
         } catch (e) {
             return rejectWithValue(e as Error);
         }
@@ -67,7 +76,8 @@ export const updateCustomer = createAsyncThunk(
         const { email, ...fields } = data;
         try {
             const response = await updateCustomerByEmail(email, fields as ICustomer);
-            return response.data as ICustomer;
+            if (response.error) throw new Error(response.error);
+            return response;
         } catch (e) {
             return rejectWithValue(e as Error);
         }
@@ -89,7 +99,14 @@ export const deleteCustomer = createAsyncThunk(
 export const customerSlice = createSlice({
     name: 'customer',
     initialState,
-    reducers: {},
+    reducers: {
+        clearState: (state) => {
+            state.error = null;
+            state.isSuccess = false;
+            state.status = asyncStatus.idle;
+            return state;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllCustomers.pending, (state: CustomersState) => {
@@ -110,10 +127,11 @@ export const customerSlice = createSlice({
             })
             .addCase(addCustomer.fulfilled, (state: CustomersState, action) => {
                 state.status = asyncStatus.succeeded;
+                state.isSuccess = true;
             })
             .addCase(addCustomer.rejected, (state: CustomersState, action) => {
                 state.status = asyncStatus.failed;
-                state.error = action.error.message;
+                if (action.payload) state.error = Object(action.payload).message;
             });
 
         builder
@@ -122,6 +140,7 @@ export const customerSlice = createSlice({
             })
             .addCase(updateCustomer.fulfilled, (state: CustomersState, action) => {
                 state.status = asyncStatus.succeeded;
+                state.isSuccess = true;
                 const index = state.customers.findIndex(
                     (customer: ICustomer) => customer.email === action.payload.email,
                 );
@@ -132,7 +151,7 @@ export const customerSlice = createSlice({
             })
             .addCase(updateCustomer.rejected, (state: CustomersState, action) => {
                 state.status = asyncStatus.failed;
-                state.error = action.error.message;
+                if (action.payload) state.error = Object(action.payload).message;
             });
 
         builder
@@ -159,7 +178,7 @@ export const customerSlice = createSlice({
 
             .addCase(deleteCustomer.rejected, (state: CustomersState, action) => {
                 state.status = asyncStatus.failed;
-                state.error = action.error.message;
+                if (action.payload) state.error = Object(action.payload).message;
             });
     },
 });
@@ -167,5 +186,8 @@ export const customerSlice = createSlice({
 export const selectCustomers = (state: RootState) => state.customers.customers;
 export const selectCustomer = (state: RootState) => state.customers.selectedCustomer;
 export const selectCustomerStatus = (state: RootState) => state.customers.status;
+export const customerError = (state: RootState) => state.customers.error;
+export const customerSuccess = (state: RootState) => state.customers.isSuccess;
+export const { clearState } = customerSlice.actions;
 
 export default customerSlice.reducer;

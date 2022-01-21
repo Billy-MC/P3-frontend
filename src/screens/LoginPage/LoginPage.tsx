@@ -8,7 +8,7 @@ import useInput from '../../hooks/useInput';
 import styles from './LoginPage.module.scss';
 import { validateEmail, validatePassword } from '../../utils/validator';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { login, authError } from '../../store/slices/userSlice';
+import { login, authError, authUserStatus } from '../../store/slices/userSlice';
 
 const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
 const inputPasswordIsValid = (value: string) => validatePassword(value) && value.trim() !== '';
@@ -16,7 +16,8 @@ const inputPasswordIsValid = (value: string) => validatePassword(value) && value
 const LoginPage = () => {
     const [checked, setChecked] = useState(false);
     const [formIsValid, setFormIsValid] = useState(false);
-    const error = useAppSelector(authError);
+    const errorMsg = useAppSelector(authError);
+    const status = useAppSelector(authUserStatus);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -114,9 +115,9 @@ const LoginPage = () => {
                     label={<Typography variant="subtitle1">Remember me</Typography>}
                 />
 
-                {typeof error === 'string' ? (
+                {status === 'failed' && errorMsg !== null ? (
                     <Alert severity="error">
-                        <strong>{error}</strong> — check it out!
+                        <strong>{errorMsg}</strong> — check it out!
                     </Alert>
                 ) : (
                     ''

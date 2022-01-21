@@ -1,4 +1,4 @@
-import { Box, Button, Divider, MenuItem, TextField } from '@mui/material';
+import { Box, Button, Divider, MenuItem, TextField, Alert } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import InputField from '../../../../components/InputField';
@@ -6,8 +6,14 @@ import ButtonPrimary from '../../../../components/Button/ButtonPrimary';
 import useInput from '../../../../hooks/useInput';
 import { validateNumber } from '../../../../utils/validator';
 import styles from './AddProductForm.module.scss';
-import { useAppDispatch } from '../../../../hooks/redux';
-import { addProduct } from '../../../../store/slices/productSlice';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import {
+    addProduct,
+    productError,
+    productSuccess,
+    clearState,
+    selectProductStatus,
+} from '../../../../store/slices/productSlice';
 import SelectField from '../../../../components/SelectField';
 
 const isValueNotEmpty = (value: string) => value.trim() !== '';
@@ -16,6 +22,9 @@ const isValueNumber = (value: string) => value.trim() !== '' && validateNumber(v
 const categorySelect: string[] = ['Computers', 'Phones', 'Accesories'];
 
 const AddProductForm = () => {
+    const status = useAppSelector(selectProductStatus);
+    const errorMsg = useAppSelector(productError);
+    const isSuccess = useAppSelector(productSuccess);
     const [isFormValid, isSetFormValid] = useState(true);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -26,21 +35,18 @@ const AddProductForm = () => {
         hasError: productNameHasError,
         valueChangeHandler: productNameChangeHandler,
         inputBlurHandler: productNameBlurHandler,
-        reset: resetProductName,
     } = useInput(isValueNotEmpty, '');
 
-    const {
-        value: descriptionValue,
-        valueChangeHandler: descriptionChangeHandler,
-        reset: resetDescription,
-    } = useInput(isValueNotEmpty, '');
+    const { value: descriptionValue, valueChangeHandler: descriptionChangeHandler } = useInput(
+        isValueNotEmpty,
+        '',
+    );
 
     const {
         value: categoryValue,
         isValid: isCategoryValid,
         valueChangeHandler: categoryChangeHandler,
         inputBlurHandler: categoryBlurHandler,
-        reset: resetCategory,
     } = useInput(isValueNotEmpty, '');
 
     const {
@@ -49,7 +55,6 @@ const AddProductForm = () => {
         valueChangeHandler: priceChangeHandler,
         inputBlurHandler: priceBlurHandler,
         hasError: priceHasError,
-        reset: resetPrice,
     } = useInput(isValueNumber, '');
 
     const {
@@ -58,7 +63,6 @@ const AddProductForm = () => {
         valueChangeHandler: quantityChangeHandler,
         inputBlurHandler: quantityBlurHandler,
         hasError: quantityHasError,
-        reset: resetQuantity,
     } = useInput(isValueNumber, '');
 
     useEffect(() => {
@@ -88,16 +92,22 @@ const AddProductForm = () => {
                 quantity: quantityValue,
                 description: descriptionValue,
             }),
-        ).then(() => {
-            navigate({ pathname: '/products' });
-        });
-
-        resetProductName();
-        resetCategory();
-        resetPrice();
-        resetQuantity();
-        resetDescription();
+        );
     };
+
+    useEffect(
+        () => () => {
+            dispatch(clearState());
+        },
+        [dispatch],
+    );
+
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(clearState());
+            navigate({ pathname: `/products` });
+        }
+    }, [dispatch, isSuccess, navigate]);
 
     return (
         <Box component="form" onSubmit={handleSubmit}>
@@ -195,6 +205,13 @@ const AddProductForm = () => {
                     </Button>
                 </Box>
             </Box>
+            {status === 'failed' && errorMsg !== null ? (
+                <Alert severity="error">
+                    <strong>{errorMsg}</strong> — check it out!
+                </Alert>
+            ) : (
+                ''
+            )}
             <Divider />
             <Box className={styles['addform-btnsection']}>
                 <ButtonPrimary className={styles['addform-btnsection_add']} type="submit">

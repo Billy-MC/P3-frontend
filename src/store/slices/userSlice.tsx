@@ -17,12 +17,10 @@ export const register = createAsyncThunk(
     async (data: IUser, { rejectWithValue }) => {
         try {
             const response = await signup(data);
-            if (typeof response === 'object') {
-                return { user: response };
-            }
-            return { error: response };
+            if (response.error) throw new Error(response.error);
+            return response;
         } catch (e) {
-            return rejectWithValue((e as Error).message);
+            return rejectWithValue(e as Error);
         }
     },
 );
@@ -30,12 +28,10 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk('user/login', async (data: IUser, { rejectWithValue }) => {
     try {
         const response = await signin(data);
-        if (typeof response === 'object') {
-            return { user: response };
-        }
-        return { error: response };
+        if (response.error) throw new Error(response.error);
+        return response;
     } catch (e) {
-        return rejectWithValue((e as Error).message);
+        return rejectWithValue(e as Error);
     }
 });
 
@@ -53,9 +49,9 @@ export const fetchUserByEmail = createAsyncThunk(
     async (email: string | undefined, { rejectWithValue }) => {
         try {
             const response = await getUserByEmail(email);
-            return response as IUser;
+            return response;
         } catch (e) {
-            return rejectWithValue((e as Error).message);
+            return rejectWithValue(e as Error);
         }
     },
 );
@@ -66,7 +62,8 @@ export const updateUser = createAsyncThunk(
         const { email, ...fields } = data;
         try {
             const response = await updateUserByEmail(email, fields as IUser);
-            return response.data as IUser;
+            if (response.error) throw new Error(response.error);
+            return response;
         } catch (e) {
             return rejectWithValue((e as Error).message);
         }
@@ -90,12 +87,12 @@ interface UsersState {
     user: IUser | null | string;
     status: asyncStatus;
     error: null | string | undefined;
-    isLoggedIn: boolean;
+    isSuccess: boolean;
 }
 
 const initialState: UsersState = {
     users: [],
-    isLoggedIn: false,
+    isSuccess: false,
     user: null,
     status: asyncStatus.idle,
     error: null,
@@ -104,7 +101,14 @@ const initialState: UsersState = {
 export const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {},
+    reducers: {
+        clearState: (state) => {
+            state.error = null;
+            state.isSuccess = false;
+            state.status = asyncStatus.idle;
+            return state;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(register.pending, (state: UsersState) => {
@@ -112,13 +116,12 @@ export const userSlice = createSlice({
             })
             .addCase(register.fulfilled, (state: UsersState, action) => {
                 state.status = asyncStatus.succeeded;
-                state.isLoggedIn = false;
-                state.error = action.payload.error;
+                state.isSuccess = true;
                 state.user = action.payload.user;
             })
             .addCase(register.rejected, (state: UsersState, action) => {
                 state.status = asyncStatus.failed;
-                state.isLoggedIn = false;
+                if (action.payload) state.error = Object(action.payload).message;
             });
 
         builder
@@ -127,13 +130,12 @@ export const userSlice = createSlice({
             })
             .addCase(login.fulfilled, (state: UsersState, action) => {
                 state.status = asyncStatus.succeeded;
-                state.error = action.payload.error;
+                state.isSuccess = true;
                 state.user = action.payload.user;
             })
             .addCase(login.rejected, (state: UsersState, action) => {
                 state.status = asyncStatus.failed;
-                state.isLoggedIn = false;
-                state.user = null;
+                if (action.payload) state.error = Object(action.payload).message;
             });
         builder
             .addCase(logedout.pending, (state: UsersState) => {
@@ -141,13 +143,11 @@ export const userSlice = createSlice({
             })
             .addCase(logedout.fulfilled, (state: UsersState, action) => {
                 state.status = asyncStatus.succeeded;
-                state.isLoggedIn = false;
                 state.user = null;
             })
             .addCase(logedout.rejected, (state: UsersState, action) => {
                 state.status = asyncStatus.failed;
-                state.isLoggedIn = false;
-                state.user = null;
+                if (action.payload) state.error = Object(action.payload).message;
             });
         builder
             .addCase(fetchAllUsers.pending, (state: UsersState) => {
@@ -155,11 +155,10 @@ export const userSlice = createSlice({
             })
             .addCase(fetchAllUsers.fulfilled, (state: UsersState, action) => {
                 state.status = asyncStatus.succeeded;
-                state.users = action.payload;
             })
             .addCase(fetchAllUsers.rejected, (state: UsersState, action) => {
                 state.status = asyncStatus.failed;
-                state.error = action.error.message;
+                if (action.payload) state.error = Object(action.payload).message;
             });
 
         builder
@@ -178,7 +177,7 @@ export const userSlice = createSlice({
             })
             .addCase(updateUser.rejected, (state: UsersState, action) => {
                 state.status = asyncStatus.failed;
-                state.error = action.error.message;
+                if (action.payload) state.error = Object(action.payload).message;
             });
 
         builder
@@ -191,7 +190,7 @@ export const userSlice = createSlice({
             })
             .addCase(fetchUserByEmail.rejected, (state: UsersState, action) => {
                 state.status = asyncStatus.failed;
-                state.error = action.error.message;
+                if (action.payload) state.error = Object(action.payload).message;
             });
 
         builder
@@ -205,14 +204,15 @@ export const userSlice = createSlice({
 
             .addCase(deleteUser.rejected, (state: UsersState, action) => {
                 state.status = asyncStatus.failed;
-                state.error = action.error.message;
+                if (action.payload) state.error = Object(action.payload).message;
             });
     },
 });
 export const authUserStatus = (state: RootState) => state.users.status;
-export const authUserLogging = (state: RootState) => state.users.isLoggedIn;
+export const authUserSuccess = (state: RootState) => state.users.isSuccess;
 export const authUser = (state: RootState) => state.users.user;
 export const allAuthUser = (state: RootState) => state.users.users;
 export const authError = (state: RootState) => state.users.error;
+export const { clearState } = userSlice.actions;
 
 export default userSlice.reducer;

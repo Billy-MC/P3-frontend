@@ -1,4 +1,4 @@
-import { Box, Divider, MenuItem } from '@mui/material';
+import { Box, Divider, MenuItem, Alert } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../../../../components/InputField';
@@ -6,8 +6,15 @@ import ButtonPrimary from '../../../../components/Button/ButtonPrimary';
 import useInput from '../../../../hooks/useInput';
 import { validateEmail, validateNumber, validatePhone } from '../../../../utils/validator';
 import styles from './EditCustomerForm.module.scss';
-import { useAppDispatch } from '../../../../hooks/redux';
-import { updateCustomer, deleteCustomer } from '../../../../store/slices/customerSlice';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import {
+    updateCustomer,
+    deleteCustomer,
+    customerError,
+    customerSuccess,
+    clearState,
+    selectCustomerStatus,
+} from '../../../../store/slices/customerSlice';
 import DeleteConfirmation from '../../../../components/DeleteConfirmationModal';
 import ICustomer, { Gender } from '../../../../types/ICustomer';
 import SelectField from '../../../../components/SelectField';
@@ -28,6 +35,9 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
     const showModal = () => setOpenPopup(true);
     const { details } = props;
     const [formIsValid, setFormIsValid] = useState(true);
+    const status = useAppSelector(selectCustomerStatus);
+    const errorMsg = useAppSelector(customerError);
+    const isSuccess = useAppSelector(customerSuccess);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -95,6 +105,13 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
         inputBlurHandler: phoneBlurHandler,
     } = useInput(validatePhone, details.phone);
 
+    useEffect(
+        () => () => {
+            dispatch(clearState());
+        },
+        [dispatch],
+    );
+
     useEffect(() => {
         const identifier = setTimeout(() => {
             setFormIsValid(
@@ -152,9 +169,14 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
                 },
             }),
         );
-
-        navigate({ pathname: `/customers/${emailValue}` });
     };
+
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(clearState());
+            navigate({ pathname: `/customers/${emailValue}` });
+        }
+    }, [dispatch, emailValue, isSuccess, navigate]);
 
     return (
         <Box className={styles.editform} component="form" onSubmit={handleSubmit}>
@@ -295,6 +317,13 @@ const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
                     </Box>
                 </Box>
             </Box>
+            {status === 'failed' && errorMsg !== null ? (
+                <Alert severity="error">
+                    <strong>{errorMsg}</strong> — check it out!
+                </Alert>
+            ) : (
+                ''
+            )}
             <Divider />
             <Box className={styles['editform-btnsection']}>
                 <ButtonPrimary className={styles['editform-btnsection_update']} type="submit">
