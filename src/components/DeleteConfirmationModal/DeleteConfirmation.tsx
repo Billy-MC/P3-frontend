@@ -18,25 +18,24 @@ const DeleteConfirmation: FC<DeleteConfirmProps> = ({ onClick, openPopup, setOpe
     return (
         <Dialog open={openPopup} onClose={handleClose}>
             <DialogTitle>
-                <div>Are you sure?</div>
+                <h2>Are you sure?</h2>
             </DialogTitle>
             <DialogContent>
-                <div>
-                    {' '}
+                <p>
                     Deleting will permanently remove <strong>{name}</strong> from the system.
-                </div>
+                </p>
             </DialogContent>
-            <DialogActions className={styles['addform-btnsection']}>
+            <DialogActions className={styles.dialogue_btnsection}>
                 <ButtonPrimary
                     onClick={onClick}
-                    className={styles['dialogue__btnsection--delete']}
+                    className={styles['dialogue_btnsection-delete']}
                     type="submit"
                 >
                     Delete
                 </ButtonPrimary>
                 <ButtonPrimary
                     onClick={handleClose}
-                    className={styles['dialogue__btnsection--cancel']}
+                    className={styles['dialogue_btnsection-cancel']}
                 >
                     Cancel
                 </ButtonPrimary>

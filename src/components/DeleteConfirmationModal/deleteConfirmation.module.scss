@@ -1,13 +1,9 @@
 @import '../../assets/styles/variable.scss';
 
 .dialogue {
-    &__btnsection {
-        display: flex;
-        padding: 2px;
-        justify-content: space-between;
-        width: 100%;
-
-        &--delete {
+    &_btnsection {
+        &-delete {
+            margin: 2px;
             background-color: $primary_color;
             border: 1px $primary_color_lighter solid;
             font-size: 14px;
@@ -20,7 +16,8 @@
             }
         }
 
-        &--cancel {
+        &-cancel {
+            margin: 2px;
             font-size: 14px;
             padding: 8px 20px;
             margin-right: 8px;
