@@ -3,6 +3,7 @@
 %styled-btn {
     font-size: 14px;
     padding: 8px 20px;
+    border-radius: 8px;
 }
 
 form {
@@ -72,7 +73,6 @@ form {
             @extend %styled-btn;
             margin: 8px;
             font-weight: 600;
-            border-radius: 8px;
             background-color: $primary_color;
             color: white;
             &:hover {
@@ -85,7 +85,6 @@ form {
             box-shadow: none;
             background-color: white;
             color: $tertiary_color;
-            float: right;
             &:hover {
                 box-shadow: none;
                 background-color: $tertiary_color_lighter;
@@ -99,7 +98,6 @@ form {
             box-shadow: none;
             background-color: white;
             color: $primary_color;
-            border-radius: 8px;
             border: 1px solid $primary_color;
             &:hover {
                 box-shadow: none;

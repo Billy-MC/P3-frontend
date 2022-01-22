@@ -3,6 +3,7 @@
 %styled-btn {
     font-size: 14px;
     padding: 8px 20px;
+    border-radius: 8px;
 }
 
 .editform {
@@ -67,7 +68,6 @@
             box-shadow: none;
             background-color: white;
             color: $primary_color;
-            border-radius: 8px;
             border: 1px solid $primary_color;
 
             &:hover {
