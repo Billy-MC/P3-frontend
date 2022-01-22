@@ -117,7 +117,7 @@ const LoginPage = () => {
 
                 {status === 'failed' && errorMsg !== null ? (
                     <Alert severity="error">
-                        <strong>{errorMsg}</strong> — check it out!
+                        <strong>{errorMsg}</strong>
                     </Alert>
                 ) : (
                     ''
