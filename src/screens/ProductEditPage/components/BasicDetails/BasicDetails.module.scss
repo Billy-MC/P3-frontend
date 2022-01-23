@@ -48,6 +48,14 @@ form {
             padding-top: 8px;
             flex: 0 0 99.7%;
         }
+        &_upload {
+            margin-top: 10px;
+            background-color: $primary_color;
+            &:hover {
+                box-shadow: none;
+                background-color: $primary_color_lighter;
+            }
+        }        
         &_select {
             flex: 0 0 49%;
         }

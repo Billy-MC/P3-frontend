@@ -3,6 +3,7 @@ import { Route as RouterPage, Routes } from 'react-router-dom';
 import ProtectedRouterPage from './components';
 import MainLayout from '../layouts/MainLayout';
 import SubLayout from '../layouts/SubLayout';
+import ProductDetailPage from '../screens/ProductDetailPage';
 
 const WelcomePage = lazy(() => import('../screens/WelcomePage'));
 const LoginPage = lazy(() => import('../screens/LoginPage'));
@@ -88,6 +89,14 @@ const Route = () => (
                     element={
                         <SubLayout>
                             <AddProductPage />
+                        </SubLayout>
+                    }
+                />
+                <RouterPage
+                    path="/products/:sku"
+                    element={
+                        <SubLayout>
+                            <ProductDetailPage />
                         </SubLayout>
                     }
                 />
