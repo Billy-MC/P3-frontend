@@ -9,9 +9,15 @@ interface ButtonProps
         React.AriaAttributes {}
 
 const ButtonPrimary: React.FC<ButtonProps> = (props) => {
-    const { children, type, className, onClick } = props;
+    const { children, type, className, onClick, disabled } = props;
     return (
-        <Button className={className} type={type || 'button'} variant="contained" onClick={onClick}>
+        <Button
+            className={className}
+            type={type || 'button'}
+            variant="contained"
+            disabled={disabled}
+            onClick={onClick}
+        >
             {children}
         </Button>
     );

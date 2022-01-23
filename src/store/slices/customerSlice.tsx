@@ -23,12 +23,15 @@ const selectedCustomerInitialState = {
     firstName: '',
     lastName: '',
     phone: '',
+    gender: 'MALE',
     address: {
         street: '',
         state: '',
         postcode: '',
         city: '',
     },
+    orderAccumulation: 0,
+    totalSpent: 0,
 };
 
 const initialState: CustomersState = {

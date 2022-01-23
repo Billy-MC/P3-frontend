@@ -21,6 +21,7 @@ const ProductPage = lazy(() => import('../screens/ProductPage'));
 const ProductEditPage = lazy(() => import('../screens/ProductEditPage'));
 const AddProductPage = lazy(() => import('../screens/AddProductPage'));
 const OrderPage = lazy(() => import('../screens/OrderPage'));
+const OrderEditPage = lazy(() => import('../screens/OrderEditPage'));
 
 const Route = () => (
     <div className="route">
@@ -110,6 +111,14 @@ const Route = () => (
                         <SubLayout>
                             <ProductEditPage />
                         </SubLayout>
+                    }
+                />
+                <RouterPage
+                    path="/orders/:id"
+                    element={
+                        <MainLayout>
+                            <OrderEditPage />
+                        </MainLayout>
                     }
                 />
                 <RouterPage

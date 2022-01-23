@@ -27,4 +27,5 @@ export default interface ICustomer {
     notification?: Notification;
     gender: Gender;
     spending?: number;
+    orderAccumulation?: number;
 }

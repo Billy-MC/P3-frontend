@@ -39,14 +39,17 @@ export const fetchOrderById = createAsyncThunk(
     },
 );
 export const updateOrderStatus = createAsyncThunk(
-    'customer/updateOrderStatus',
+    'order/updateOrderStatus',
     async (data: IOrderUpdate, { rejectWithValue }) => {
         const { id, body } = data;
         try {
             const response = await updateOrderStatusById(id, body);
-            return response.data as IOrder;
+            if (response.error) {
+                throw new Error(response.error);
+            }
+            return response as IOrder;
         } catch (e) {
-            return rejectWithValue(e as Error);
+            return rejectWithValue(e);
         }
     },
 );
@@ -54,7 +57,11 @@ export const updateOrderStatus = createAsyncThunk(
 export const orderSlice = createSlice({
     name: 'order',
     initialState,
-    reducers: {},
+    reducers: {
+        setIdle: (state) => {
+            state.status = asyncStatus.idle;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllOrders.pending, (state: OrderState) => {
@@ -86,17 +93,22 @@ export const orderSlice = createSlice({
             })
             .addCase(updateOrderStatus.fulfilled, (state: OrderState, action) => {
                 state.status = asyncStatus.succeeded;
-                state.selectedOrder.status = action.payload.status;
+                state.selectedOrder = action.payload;
             })
             .addCase(updateOrderStatus.rejected, (state: OrderState, action) => {
                 state.status = asyncStatus.failed;
-                state.error = action.error.message;
+                if (action.payload) {
+                    state.error = Object(action.payload).message as string;
+                }
             });
     },
 });
 
+export const { setIdle } = orderSlice.actions;
+
 export const selectedAllOrders = (state: RootState) => state.orders.orders;
 export const selectOrder = (state: RootState) => state.orders.selectedOrder;
 export const selectOrderStatus = (state: RootState) => state.orders.status;
+export const selectError = (state: RootState) => state.orders.error;
 
 export default orderSlice.reducer;

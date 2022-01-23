@@ -57,6 +57,7 @@ const orderColumnDef: GridColDef[] = [
         field: 'dateCreated',
         headerName: 'DATE',
         type: 'dateTime',
+        sortingOrder: ['desc', 'asc', null],
         valueGetter: (params: GridValueGetterParams) => {
             const value = new Date(params.row.dateCreated);
             return value;

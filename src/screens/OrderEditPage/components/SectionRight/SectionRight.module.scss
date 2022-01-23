@@ -1,0 +1,12 @@
+.sectionRight {
+    width: 100%;
+    display: box;
+    margin-left: 15px;
+    height: auto;
+    &_body {
+        width: 100%;
+        height: auto;
+        background-color: white;
+        box-shadow: rgb(100 116 139 / 6%) 0px 1px 1px, rgb(100 116 139 / 10%) 0px 1px 2px;
+    }
+}
