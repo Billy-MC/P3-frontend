@@ -142,8 +142,12 @@ const ResetPasswordPage = () => {
                 ) : (
                     ''
                 )}
-                <ButtonPrimary className={styles['resetpassword-btn']} type="submit">
-                    Sign UP
+                <ButtonPrimary
+                    className={styles['resetpassword-btn']}
+                    type="submit"
+                    disabled={!formIsValid}
+                >
+                    Reset Password
                 </ButtonPrimary>
             </Box>
         </Container>
