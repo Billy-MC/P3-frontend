@@ -91,7 +91,7 @@ const ForgetPasswordPage = () => {
                 )}
                 {status === 'failed' && errorMsg !== null ? (
                     <Alert severity="error">
-                        <strong>{errorMsg}</strong> — check it out!
+                        <strong>{errorMsg}</strong>
                     </Alert>
                 ) : (
                     ''
@@ -103,7 +103,11 @@ const ForgetPasswordPage = () => {
                 ) : (
                     ''
                 )}
-                <ButtonPrimary className={styles['forgotPassword-btn']} type="submit">
+                <ButtonPrimary
+                    className={styles['forgotPassword-btn']}
+                    type="submit"
+                    disabled={!formIsValid}
+                >
                     Recover Password
                 </ButtonPrimary>
                 <p className={styles['forgotPassword-redirect']}>

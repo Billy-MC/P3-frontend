@@ -287,7 +287,11 @@ const RegisterPage = () => {
                 ) : (
                     ''
                 )}
-                <ButtonPrimary className={styles['registration-btn']} type="submit">
+                <ButtonPrimary
+                    className={styles['registration-btn']}
+                    type="submit"
+                    disabled={!formIsValid}
+                >
                     Sign UP
                 </ButtonPrimary>
 
