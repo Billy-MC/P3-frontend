@@ -14,6 +14,7 @@ import {
     authUserStatus,
     clearState,
     authUserSuccess,
+    regMessage,
 } from '../../store/slices/userSlice';
 
 const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
@@ -26,6 +27,7 @@ const RegisterPage = () => {
     const errorMsg = useAppSelector(authError);
     const status = useAppSelector(authUserStatus);
     const isSuccess = useAppSelector(authUserSuccess);
+    const message = useAppSelector(regMessage);
     const [isChecked, setIsChecked] = useState(false);
     const [formIsValid, setFormIsValid] = useState(true);
     const [isTouched, setIsTouched] = useState<boolean>(false);
@@ -140,11 +142,12 @@ const RegisterPage = () => {
     );
 
     useEffect(() => {
-        if (isSuccess) {
-            dispatch(clearState());
-            navigate({ pathname: `/login` });
+        if (status === 'succeeded') {
+            setTimeout(() => {
+                navigate({ pathname: `/login` });
+            }, 5000);
         }
-    }, [dispatch, emailValue, isSuccess, navigate]);
+    }, [dispatch, navigate, status]);
 
     return (
         <div className={styles.registration}>
@@ -272,12 +275,18 @@ const RegisterPage = () => {
                 )}
                 {status === 'failed' && errorMsg !== null ? (
                     <Alert severity="error">
-                        <strong>{errorMsg}</strong> — check it out!
+                        <strong>{errorMsg}</strong>
                     </Alert>
                 ) : (
                     ''
                 )}
-
+                {message !== '' && errorMsg === null && isSuccess === true ? (
+                    <Alert severity="success">
+                        <strong>{message}</strong>
+                    </Alert>
+                ) : (
+                    ''
+                )}
                 <ButtonPrimary className={styles['registration-btn']} type="submit">
                     Sign UP
                 </ButtonPrimary>

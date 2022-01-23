@@ -16,15 +16,15 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
-import { logedout } from '../../store/slices/userSlice';
+import { logOut } from '../../store/slices/userSlice';
 import { useAppDispatch } from '../../hooks/redux';
 
 const Header = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const logOut = useCallback(() => {
-        dispatch(logedout());
+    const logout = useCallback(() => {
+        dispatch(logOut());
     }, [dispatch]);
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -39,7 +39,7 @@ const Header = () => {
     };
 
     const logoutHandler = () => {
-        logOut();
+        logout();
         navigate('/login');
     };
 

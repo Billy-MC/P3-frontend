@@ -1,15 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Alert } from '@mui/material';
 import styles from './ForgetPasswordPage.module.scss';
 import InputField from '../../components/InputField';
 import useInput from '../../hooks/useInput';
 import ButtonPrimary from '../../components/Button';
 import { validateEmail } from '../../utils/validator';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+
+import {
+    sendForgotemail,
+    authError,
+    authUserStatus,
+    clearState,
+    regMessage,
+    authUserSuccess,
+} from '../../store/slices/userSlice';
 
 const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
 
 const ForgetPasswordPage = () => {
+    const errorMsg = useAppSelector(authError);
+    const status = useAppSelector(authUserStatus);
+    const message = useAppSelector(regMessage);
+    const isSuccess = useAppSelector(authUserSuccess);
+    const dispatch = useAppDispatch();
     const [formIsValid, setFormIsValid] = useState(false);
 
     const {
@@ -35,8 +50,17 @@ const ForgetPasswordPage = () => {
         if (formIsValid === false) {
             return;
         }
+
+        dispatch(sendForgotemail({ email: emailValue }));
         resetEmail();
     };
+
+    useEffect(
+        () => () => {
+            dispatch(clearState());
+        },
+        [dispatch],
+    );
 
     return (
         <div className={styles.forgotPassword}>
@@ -64,6 +88,20 @@ const ForgetPasswordPage = () => {
                 />
                 {emailHasError && (
                     <p className={styles['forgotPassword-error']}>Please Enter valid Email</p>
+                )}
+                {status === 'failed' && errorMsg !== null ? (
+                    <Alert severity="error">
+                        <strong>{errorMsg}</strong> — check it out!
+                    </Alert>
+                ) : (
+                    ''
+                )}
+                {message !== '' && isSuccess === true ? (
+                    <Alert severity="success">
+                        <strong>{message}</strong>
+                    </Alert>
+                ) : (
+                    ''
                 )}
                 <ButtonPrimary className={styles['forgotPassword-btn']} type="submit">
                     Recover Password

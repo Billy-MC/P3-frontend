@@ -9,6 +9,8 @@ const WelcomePage = lazy(() => import('../screens/WelcomePage'));
 const LoginPage = lazy(() => import('../screens/LoginPage'));
 const RegisterPage = lazy(() => import('../screens/RegisterPage'));
 const ForgotPasswordPage = lazy(() => import('../screens/ForgotPasswordPage'));
+const ResetPasswordPage = lazy(() => import('../screens/ResetPasswordPage'));
+const VerifyEmailPage = lazy(() => import('../screens/VerifyEmailPage'));
 const DashboardPage = lazy(() => import('../screens/DashboardPage'));
 const UserPage = lazy(() => import('../screens/UserPage'));
 const CustomerPage = lazy(() => import('../screens/CustomerPage'));
@@ -26,6 +28,8 @@ const Route = () => (
             <RouterPage path="/" element={<WelcomePage />} />
             <RouterPage path="/login" element={<LoginPage />} />
             <RouterPage path="/register" element={<RegisterPage />} />
+            <RouterPage path="/emailActivation" element={<VerifyEmailPage />} />
+            <RouterPage path="/resetPassword" element={<ResetPasswordPage />} />
             <RouterPage path="/forgetpassword" element={<ForgotPasswordPage />} />
             <RouterPage element={<ProtectedRouterPage />}>
                 <RouterPage

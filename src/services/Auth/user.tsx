@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 import request from '../../utils/request';
 import { IUser } from '../../types/IUser';
 
-export const signup = (body: IUser) => {
+export const signup = async (body: IUser) => {
     const config: AxiosRequestConfig = {
         url: 'users/signup',
         method: 'POST',
@@ -19,7 +19,7 @@ export const signup = (body: IUser) => {
         .catch((error) => error);
 };
 
-export const signin = (body: IUser) => {
+export const signin = async (body: IUser) => {
     const config: AxiosRequestConfig = {
         url: 'users/login',
         method: 'POST',
@@ -38,6 +38,39 @@ export const signin = (body: IUser) => {
 
 export const logout = () => {
     localStorage.removeItem('AUTH_TOKEN');
+};
+
+export const verify = async (token: string | null) => {
+    const config: AxiosRequestConfig = {
+        url: 'users/verifyEmail',
+        method: 'GET',
+        params: { token },
+    };
+    return request(config)
+        .then((res) => res.data)
+        .catch((error) => error);
+};
+
+export const forgotPassword = async (body: Partial<IUser>) => {
+    const config: AxiosRequestConfig = {
+        url: 'users/forgotPassword',
+        method: 'POST',
+        data: body,
+    };
+    return request(config)
+        .then((res) => res.data)
+        .catch((error) => error);
+};
+
+export const resetPassword = async (body: Partial<IUser>) => {
+    const config: AxiosRequestConfig = {
+        url: 'users/resetPassword',
+        method: 'PATCH',
+        data: body,
+    };
+    return request(config)
+        .then((res) => res.data)
+        .catch((error) => error);
 };
 
 export const getAllUsers = () => {

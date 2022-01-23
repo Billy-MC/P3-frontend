@@ -8,7 +8,7 @@ import useInput from '../../hooks/useInput';
 import styles from './LoginPage.module.scss';
 import { validateEmail, validatePassword } from '../../utils/validator';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { login, authError, authUserStatus } from '../../store/slices/userSlice';
+import { login, authError, authUserStatus, clearState } from '../../store/slices/userSlice';
 
 const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
 const inputPasswordIsValid = (value: string) => validatePassword(value) && value.trim() !== '';
@@ -69,6 +69,13 @@ const LoginPage = () => {
         resetEmail();
         resetpassword();
     };
+
+    useEffect(
+        () => () => {
+            dispatch(clearState());
+        },
+        [dispatch],
+    );
 
     return (
         <div className={styles.login}>
