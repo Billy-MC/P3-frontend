@@ -1,0 +1,48 @@
+.salesboard {
+    width: 409px;
+    height: 149px;
+    background: #0EC23E;
+    border-radius: 20px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    position: relative;
+
+    &__container {
+        padding-left: 175px;
+        padding-top: 47px;
+        width: 187px;
+        height: 71px;
+    }
+
+    &__img {
+        height:206px;
+        width: 206px;
+        background: url('../../../assets/images/Saly-45.svg');
+        background-repeat: no-repeat;
+        position: absolute;
+        right: 220px;
+    }
+
+    &__title {
+        width: 134px;
+        height: 20px;
+        font-size: 17px;
+        line-height: 20px;
+        color: #FFFFFF;
+        margin: 0px;
+    }
+
+    &__amount {
+        width: 187px;
+        height: 41px;
+        font-size: 35px;
+        line-height: 41px;
+        color: #FFFFFF;
+        margin-top: 10px;
+    }
+}
+
+
+
+

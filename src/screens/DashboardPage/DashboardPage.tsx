@@ -1,9 +1,10 @@
 import LoadingSpinner from '../../components/LoadingSpinner';
+import SalesBoard from './components/SalesBoard';
 
 const DashboardPage = () => (
     <div>
         <LoadingSpinner />
-        <p>DashboardPage</p>
+        <SalesBoard monthlySales={200000} />
     </div>
 );
 
