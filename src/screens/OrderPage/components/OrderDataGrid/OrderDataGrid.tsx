@@ -7,7 +7,11 @@ import IconButton from '@mui/material/IconButton';
 import { Box, Button } from '@mui/material';
 import DataGridTable from '../../../../components/DataGridTable';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { fetchAllOrders, selectedAllOrders } from '../../../../store/slices/orderSlice';
+import {
+    fetchAllOrders,
+    selectedAllOrders,
+    selectOrderStatus,
+} from '../../../../store/slices/orderSlice';
 import IOrder, { IProduct } from '../../../../types/IOrder';
 import { capitalizor } from '../../../../utils/dataProcessor';
 import {
@@ -109,6 +113,7 @@ const OrderDataGrid: React.FC = () => {
                     headerClassName: 'super-app-theme--header',
                     ...row,
                 }))}
+                statusSelector={selectOrderStatus}
             />
         </div>
     );

@@ -6,7 +6,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Box, IconButton } from '@mui/material';
 import DataGridTable from '../../../../components/DataGridTable';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { fetchAllProducts, selectProducts } from '../../../../store/slices/productSlice';
+import {
+    fetchAllProducts,
+    selectProducts,
+    selectProductStatus,
+} from '../../../../store/slices/productSlice';
 import IProduct from '../../../../types/IProduct';
 import { capitalizor, quantityToStatus } from '../../../../utils/dataProcessor';
 import {
@@ -82,6 +86,7 @@ const ProductDataGrid = () => {
                 headerClassName: 'super-app-theme--header',
                 ...row,
             }))}
+            statusSelector={selectProductStatus}
         />
     );
 };

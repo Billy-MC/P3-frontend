@@ -17,7 +17,6 @@ import ICustomer from '../../../../types/ICustomer';
 import styles from './CustomerDataGrid.module.scss';
 import { capitalizor } from '../../../../utils/dataProcessor';
 import PrimarySecondaryTitle from '../../../../components/DataGridTable/components/DataGridCells';
-import LoadingSpinner from '../../../../components/LoadingSpinner';
 
 function getFullName(params: GridValueGetterParams) {
     return `${params.row.firstName || ''} ${params.row.lastName || ''}`;
@@ -101,25 +100,20 @@ const columnDef: GridColDef[] = [
 const CustomerDataGrid: React.FC = () => {
     const customers: ICustomer[] = useAppSelector(selectCustomers);
     const dispatch = useAppDispatch();
-    const status = useAppSelector(selectCustomerStatus);
 
     useEffect(() => {
         dispatch(fetchAllCustomers());
     }, [dispatch]);
 
     return (
-        <div>
-            {status === 'loading' && <LoadingSpinner />}
-            {status === 'succeeded' && (
-                <DataGridTable
-                    rows={customers}
-                    columns={columnDef.map((row) => ({
-                        headerClassName: 'super-app-theme--header',
-                        ...row,
-                    }))}
-                />
-            )}
-        </div>
+        <DataGridTable
+            rows={customers}
+            columns={columnDef.map((row) => ({
+                headerClassName: 'super-app-theme--header',
+                ...row,
+            }))}
+            statusSelector={selectCustomerStatus}
+        />
     );
 };
 

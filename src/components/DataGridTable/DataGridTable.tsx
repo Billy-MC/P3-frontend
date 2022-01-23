@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Box } from '@mui/material';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { Box, LinearProgress } from '@mui/material';
+import { DataGrid, GridColDef, GridOverlay } from '@mui/x-data-grid';
 import { styled } from '@mui/material/styles';
 import { useAppSelector } from '../../hooks/redux';
 import { selectFilters, selectLocalFilters } from '../../store/slices/filterSlice';
 import styles from './DataGridTable.module.scss';
 import IFilter from '../../types/IFilter';
+import { RootState } from '../../interfaces/redux';
 
 const StyledDataGrid = styled(DataGrid)`
     &.MuiDataGrid-root .MuiDataGrid-columnHeader:focus,
@@ -20,12 +21,22 @@ export interface IRow {
 interface IDataGridTableProps {
     rows: IRow[];
     columns: GridColDef[];
+    statusSelector: (state: RootState) => any;
 }
+const CustomLoadingOverlay = () => (
+    <GridOverlay>
+        <div className={styles.loadingLayout}>
+            <LinearProgress />
+        </div>
+    </GridOverlay>
+);
 
 const DataGridTable: React.FC<IDataGridTableProps> = (props) => {
-    const { rows, columns } = props;
+    const { rows, columns, statusSelector } = props;
     const filterModel = useAppSelector(selectFilters);
     const localFilters: IFilter[] = useAppSelector(selectLocalFilters);
+    const loadingStatus = useAppSelector(statusSelector);
+
     let newRow: IRow[];
     // if local Filter has required filter
     if (localFilters.length !== 0) {
@@ -66,6 +77,10 @@ const DataGridTable: React.FC<IDataGridTableProps> = (props) => {
                 disableDensitySelector
                 disableSelectionOnClick
                 disableColumnMenu
+                loading={loadingStatus === 'loading'}
+                components={{
+                    LoadingOverlay: CustomLoadingOverlay,
+                }}
             />
         </Box>
     );
