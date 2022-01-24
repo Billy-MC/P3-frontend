@@ -91,7 +91,7 @@ const RegisterPage = () => {
                     isPasswordValid &&
                     isComfirmPasswordValid &&
                     isPhoneValid &&
-                    isTouched,
+                    isChecked,
             );
         });
 
@@ -105,7 +105,7 @@ const RegisterPage = () => {
         isPasswordValid,
         isComfirmPasswordValid,
         isPhoneValid,
-        isTouched,
+        isChecked,
     ]);
 
     const onBlurHandler = () => {
