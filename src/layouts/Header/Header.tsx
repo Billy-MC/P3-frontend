@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
@@ -121,14 +120,6 @@ const Header = () => {
         <Box className={styles['header-box']}>
             <AppBar className={styles['header-appbar']}>
                 <Toolbar className={styles['header-toolbar']}>
-                    <IconButton
-                        className={styles['header-iconmenu']}
-                        size="large"
-                        edge="start"
-                        aria-label="open drawer"
-                    >
-                        <MenuIcon />
-                    </IconButton>
                     <Box className={styles['header-box2']} />
                     <Box>
                         <IconButton

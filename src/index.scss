@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-@import './assets//styles/variable.scss';
+@import './assets/styles/variable.scss';
 @import './assets/styles/normalize.css';
 body {
     margin: 0;
@@ -9,7 +9,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: $primary_color;
-    background-color: #9b90c21a;
+    background-color: $body_color;
     background-image: url('./assets/images/texture.png');
     background-repeat: repeat;
     transition: background-color 2s ease-in;

@@ -10,16 +10,14 @@
         flex-grow: 1;
     }
     &-appbar {
-        background-color: $primary_color;
+        // background-color: hsla(0, 0%, 100%, 0.5);
+        background-color: white;
         position: fixed;
         padding-left: 260px;
-    }
-    &-iconmenu {
-        color: inherit;
-        margin-right: 2;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
     }
     &-color {
-        color: inherit;
+        color: $primary_color;
     }
     &-avatar {
         height: 36px;
@@ -42,10 +40,12 @@
         padding-right: 0px;
     }
     &-btn {
-        padding-right: 24px;
-        color: inherit;
+        padding: 8px;
+        margin: 0 10px;
+        color: $primary_color;
+        border-radius: 20px;
     }
     &-menu {
-        margin-top: 63px;
+        margin-top: 59px;
     }
 }
