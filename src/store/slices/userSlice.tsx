@@ -18,6 +18,8 @@ import {
 import { IUser } from '../../types/IUser';
 import asyncStatus from '../../types/asyncStatus';
 
+const currentUser = JSON.parse(localStorage.getItem('USER') || '{}');
+
 export const register = createAsyncThunk(
     'user/register',
     async (data: IUser, { rejectWithValue }) => {
@@ -181,7 +183,7 @@ interface UsersState {
 const initialState: UsersState = {
     users: [],
     isSuccess: false,
-    user: null,
+    user: currentUser,
     status: asyncStatus.idle,
     error: null,
     message: '',

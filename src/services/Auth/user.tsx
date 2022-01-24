@@ -29,6 +29,7 @@ export const signin = async (body: IUser) => {
         .then((response) => {
             if (response.status === 200) {
                 localStorage.setItem('AUTH_TOKEN', response.headers.authorization);
+                localStorage.setItem('USER', JSON.stringify(response.data.user) as string);
                 return response.data;
             }
             return response.data;
@@ -38,6 +39,7 @@ export const signin = async (body: IUser) => {
 
 export const logout = () => {
     localStorage.removeItem('AUTH_TOKEN');
+    localStorage.removeItem('USER');
 };
 
 export const verify = async (token: string | null) => {
@@ -133,6 +135,7 @@ export const deleteMeByEmail = (body: Partial<IUser>) => {
         .then((res) => {
             if (res.status === 204) {
                 localStorage.removeItem('AUTH_TOKEN');
+                localStorage.removeItem('USER');
                 return res.data;
             }
             return res.data;
