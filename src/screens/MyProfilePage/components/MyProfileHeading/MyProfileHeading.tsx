@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import { deepOrange } from '@mui/material/colors';
 import Stack from '@mui/material/Stack';
 
 import BackPage from '../../../../components/BackPage/BackPage';
@@ -20,10 +19,7 @@ const MyProfileHeading: React.FC<HeaderProps> = (props: HeaderProps) => {
             <BackPage to="/dashboard" title="Back" />
             <Box className={styles['userdetail-heading']}>
                 <Stack direction="row" spacing={2}>
-                    <Avatar
-                        className={styles['userdetail-heading-avatar']}
-                        sx={{ bgcolor: deepOrange[500] }}
-                    >
+                    <Avatar className={styles['userdetail-heading-avatar']}>
                         <h2> {initialName}</h2>
                     </Avatar>
                     <Typography

@@ -120,8 +120,9 @@ export const deleteUser = createAsyncThunk(
     'user/deleteUser',
     async (email: string, { rejectWithValue }) => {
         try {
-            await deleteUserByEmail(email);
-            return email;
+            const response = await deleteUserByEmail(email);
+            if (response.error) throw new Error(response.error);
+            return response;
         } catch (e) {
             return rejectWithValue((e as Error).message);
         }
@@ -144,10 +145,11 @@ export const updateMe = createAsyncThunk(
 
 export const deleteMe = createAsyncThunk(
     'user/deleteMe',
-    async (email: string, { rejectWithValue }) => {
+    async (body: Partial<IUser>, { rejectWithValue }) => {
         try {
-            await deleteMeByEmail(email);
-            return email;
+            const response = await deleteMeByEmail(body);
+            if (response.error) throw new Error(response.error);
+            return response;
         } catch (e) {
             return rejectWithValue((e as Error).message);
         }
@@ -156,9 +158,9 @@ export const deleteMe = createAsyncThunk(
 
 export const updateMyPassword = createAsyncThunk(
     'user/updateMyPassword',
-    async (data: any, { rejectWithValue }) => {
+    async (body: Partial<IUser>, { rejectWithValue }) => {
         try {
-            const response = await updatePassword(data);
+            const response = await updatePassword(body);
             if (response.error) throw new Error(response.error);
             return response;
         } catch (e) {
@@ -363,6 +365,21 @@ export const userSlice = createSlice({
             .addCase(updateMyPassword.rejected, (state: UsersState, action) => {
                 state.status = asyncStatus.failed;
                 if (action.payload) state.error = action.payload as string;
+            });
+        builder
+            .addCase(deleteMe.pending, (state: UsersState) => {
+                state.status = asyncStatus.loading;
+                state.isSuccess = false;
+            })
+            .addCase(deleteMe.fulfilled, (state: UsersState, action) => {
+                state.status = asyncStatus.succeeded;
+                state.isSuccess = true;
+                state.message = action.payload.message;
+                state.user = null;
+            })
+            .addCase(deleteMe.rejected, (state: UsersState, action) => {
+                state.status = asyncStatus.failed;
+                if (action.payload) state.error = Object(action.payload).message;
             });
     },
 });

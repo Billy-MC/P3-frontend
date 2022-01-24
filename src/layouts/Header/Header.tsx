@@ -13,7 +13,6 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import { deepOrange } from '@mui/material/colors';
 import styles from './Header.module.scss';
 import { logOut, authUser } from '../../store/slices/userSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -136,12 +135,7 @@ const Header = () => {
                             aria-haspopup="true"
                             onClick={handleProfileMenuOpen}
                         >
-                            <Avatar
-                                className={styles['header-avatar']}
-                                sx={{ bgcolor: deepOrange[500] }}
-                            >
-                                {initialName}
-                            </Avatar>
+                            <Avatar className={styles['header-avatar']}>{initialName}</Avatar>
                             <Typography
                                 className={styles['header-typography']}
                                 noWrap

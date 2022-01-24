@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, List, ListItem, ListItemText, Divider } from '@mui/material';
 import ButtonPrimary from '../../../../components/Button';
 import styles from '../../MyProfilePage.module.scss';
 import DeleteConfirmation from '../../../../components/DeleteConfirmationModal';
 import { IUser } from '../../../../types/IUser';
-import { deleteMe, logOut } from '../../../../store/slices/userSlice';
+import { deleteMe, clearState } from '../../../../store/slices/userSlice';
 import { useAppDispatch } from '../../../../hooks/redux';
 
 export interface DetailsProps {
@@ -15,26 +15,31 @@ export interface DetailsProps {
 const MyProfile: React.FC<DetailsProps> = (props: DetailsProps) => {
     const [openPopup, setOpenPopup] = useState(false);
     const showModal = () => setOpenPopup(true);
-
     const { user } = props;
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const logeOut = useCallback(() => {
-        dispatch(logOut());
-    }, [dispatch]);
+    useEffect(
+        () => () => {
+            dispatch(clearState());
+        },
+        [dispatch],
+    );
 
     const deleteHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
 
-        dispatch(deleteMe(user.email));
-        logeOut();
+        dispatch(deleteMe({ email: user.email }));
+
         navigate({ pathname: '/' });
     };
 
     const details = [
         { name: 'Email', value: user ? user.email : '' },
-        { name: 'User Name', value: `${user ? user.firstName : ''} ${user ? user.lastName : ''}` },
+        {
+            name: 'User Name',
+            value: `${user ? user.firstName : ''} ${user ? user.lastName : ''}`,
+        },
         { name: 'Phone', value: user ? user.phone : '' || 'No provided' },
     ];
 
@@ -45,15 +50,12 @@ const MyProfile: React.FC<DetailsProps> = (props: DetailsProps) => {
                 <Divider />
                 <List className={styles['userdetail-details-section']}>
                     {details.map((detail) => (
-                        <>
-                            <ListItem
-                                key={detail.name}
-                                className={styles['userdetail-details-itemtext']}
-                            >
+                        <div key={detail.name}>
+                            <ListItem className={styles['userdetail-details-itemtext']}>
                                 <ListItemText primary={detail.name} secondary={detail.value} />
                             </ListItem>
                             <Divider />
-                        </>
+                        </div>
                     ))}
                 </List>
             </Box>

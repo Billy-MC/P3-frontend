@@ -123,17 +123,24 @@ export const updateMeByEmail = (body: IUser) => {
         .catch((error) => error);
 };
 
-export const deleteMeByEmail = (email: string) => {
+export const deleteMeByEmail = (body: Partial<IUser>) => {
     const config: AxiosRequestConfig = {
         url: `users/deleteMe`,
         method: 'PATCH',
+        data: body,
     };
     return request(config)
-        .then((res) => res.data)
+        .then((res) => {
+            if (res.status === 204) {
+                localStorage.removeItem('AUTH_TOKEN');
+                return res.data;
+            }
+            return res.data;
+        })
         .catch((error) => error);
 };
 
-export const updatePassword = (body: any) => {
+export const updatePassword = (body: Partial<IUser>) => {
     const config: AxiosRequestConfig = {
         url: 'users/updateMyPassword',
         method: 'PATCH',
