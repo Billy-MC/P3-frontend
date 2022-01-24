@@ -1,7 +1,9 @@
+@import '../../../../assets/styles/variable.scss';
+
 .salesboard {
     width: 409px;
     height: 149px;
-    background: #0EC23E;
+    background: $primary_color_lighter;
     border-radius: 20px;
     font-family: Roboto;
     font-style: normal;
@@ -16,7 +18,7 @@
     }
 
     &__img {
-        height:206px;
+        height: 206px;
         width: 206px;
         background: url('../../../../assets/images/Saly-45.svg');
         background-repeat: no-repeat;
@@ -29,7 +31,7 @@
         height: 20px;
         font-size: 17px;
         line-height: 20px;
-        color: #FFFFFF;
+        color: #ffffff;
         margin: 0px;
     }
 
@@ -38,11 +40,7 @@
         height: 41px;
         font-size: 35px;
         line-height: 41px;
-        color: #FFFFFF;
+        color: #ffffff;
         margin-top: 10px;
     }
 }
-
-
-
-
