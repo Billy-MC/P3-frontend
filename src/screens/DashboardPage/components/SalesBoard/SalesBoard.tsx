@@ -5,7 +5,7 @@ interface SalesBoardProps {
     monthlySales: number;
 }
 
-const DashboardPage: FC<SalesBoardProps> = ({ monthlySales }) => (
+const SalesBoard: FC<SalesBoardProps> = ({ monthlySales }) => (
     <div className={styles.salesboard}>
         <div className={styles.salesboard__img} />
         <div className={styles.salesboard__container}>
@@ -15,4 +15,4 @@ const DashboardPage: FC<SalesBoardProps> = ({ monthlySales }) => (
     </div>
 );
 
-export default DashboardPage;
+export default SalesBoard;
