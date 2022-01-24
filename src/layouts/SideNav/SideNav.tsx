@@ -56,7 +56,7 @@ const SideNav = () => {
                 anchor="left"
                 classes={{ paper: styles['sideNav-drawerPaper'] }}
             >
-                <NavLink to="/">
+                <NavLink to="/dashboard">
                     <div className={styles['sideNav-header-logo']}>
                         <img src={MainIcon} alt="mainicon" />
                     </div>

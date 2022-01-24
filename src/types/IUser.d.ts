@@ -6,4 +6,5 @@ export interface IUser {
     confirmedPassword?: string;
     role?: string;
     token?: string | null;
+    active?: boolean;
 }
