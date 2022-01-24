@@ -8,6 +8,8 @@ import PasswordInputField from '../../components/PasswordInputField';
 import useInput from '../../hooks/useInput';
 import { validateEmail, validatePassword, validatePhone } from '../../utils/validator';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import MainIcon from '../../assets/images/MainIcon-removebg.png';
+
 import {
     register,
     authError,
@@ -151,6 +153,7 @@ const RegisterPage = () => {
 
     return (
         <div className={styles.registration}>
+            <img src={MainIcon} alt="mainicon" className={styles['registration-logo']} />
             <Box
                 className={styles['registration-box']}
                 component="form"

@@ -9,6 +9,7 @@ import styles from './LoginPage.module.scss';
 import { validateEmail, validatePassword } from '../../utils/validator';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { login, authError, authUserStatus, clearState } from '../../store/slices/userSlice';
+import MainIcon from '../../assets/images/MainIcon-removebg.png';
 
 const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
 const inputPasswordIsValid = (value: string) => validatePassword(value) && value.trim() !== '';
@@ -79,6 +80,7 @@ const LoginPage = () => {
 
     return (
         <div className={styles.login}>
+            <img src={MainIcon} alt="mainicon" className={styles['login-logo']} />
             <Box
                 className={styles['login-box']}
                 component="form"

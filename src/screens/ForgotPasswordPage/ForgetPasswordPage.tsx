@@ -7,6 +7,7 @@ import useInput from '../../hooks/useInput';
 import ButtonPrimary from '../../components/Button';
 import { validateEmail } from '../../utils/validator';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import MainIcon from '../../assets/images/MainIcon-removebg.png';
 
 import {
     sendForgotemail,
@@ -64,6 +65,7 @@ const ForgetPasswordPage = () => {
 
     return (
         <div className={styles.forgotPassword}>
+            <img src={MainIcon} alt="mainicon" className={styles['forgotPassword-logo']} />
             <Box
                 className={styles['forgotPassword-box']}
                 component="form"

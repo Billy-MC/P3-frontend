@@ -1,6 +1,11 @@
 @import '../../assets/styles/variable.scss';
 
 .registration {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
     &::before {
         content: '';
         position: absolute;
@@ -26,9 +31,16 @@
         background-position: center;
     }
 
+    &-logo {
+        margin-left: 80px;
+        img {
+            width: 150px;
+        }
+    }
+
     &-box {
-        margin-top: 400px;
-        margin-left: 200px;
+        margin-top: 200px;
+        margin-left: 150px;
         width: 275px;
         align-items: center;
         justify-content: center;
