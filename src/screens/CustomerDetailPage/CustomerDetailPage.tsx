@@ -32,7 +32,7 @@ const CustomerDetailPage = () => {
         },
         {
             name: 'Invoices',
-            children: <CustomerInvoice />,
+            children: <CustomerInvoice email={email || ''} />,
         },
     ];
 

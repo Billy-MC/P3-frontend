@@ -1,7 +1,7 @@
 import { Paper, Box } from '@mui/material';
 import IInvoice from '../../../../types/IInvoice';
 import styles from './InvoicePreview.module.scss';
-import Logo from '../../../../assets/images/devilsLogo.svg';
+import Logo from '../../../../assets/images/MainIcon-removebg.png';
 import { addressInline, DateToDDMMMYYYYHHMM } from '../../../../utils/dataProcessor';
 import TaxedProductTable from '../TaxedProductTable';
 

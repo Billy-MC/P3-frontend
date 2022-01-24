@@ -17,7 +17,7 @@ import { countTotalPrice } from '../../../../utils/dataProcessor';
 import { MoneyTag } from '../../../../components/DataGridTable/components/DataGridCells/DataGridCells';
 import styles from './InvoiceDataGrid.module.scss';
 
-const orderColumnDef: GridColDef[] = [
+const invoiceColumnDef: GridColDef[] = [
     {
         field: 'invoiceId',
         headerName: 'ID',
@@ -95,7 +95,7 @@ const orderColumnDef: GridColDef[] = [
     },
 ];
 
-const OrderDataGrid: React.FC = () => {
+const InvoiceDataGrid: React.FC = () => {
     const invoices: IInvoice[] = useAppSelector(selectedAllInvoices);
     const dispatch = useAppDispatch();
 
@@ -107,7 +107,7 @@ const OrderDataGrid: React.FC = () => {
         <div>
             <DataGridTable
                 rows={invoices || []}
-                columns={orderColumnDef.map((row) => ({
+                columns={invoiceColumnDef.map((row) => ({
                     headerClassName: 'super-app-theme--header',
                     ...row,
                 }))}
@@ -117,4 +117,4 @@ const OrderDataGrid: React.FC = () => {
     );
 };
 
-export default OrderDataGrid;
+export default InvoiceDataGrid;

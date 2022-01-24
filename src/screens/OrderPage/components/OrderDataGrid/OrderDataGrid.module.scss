@@ -1,9 +1,9 @@
 .primary {
     margin: 0;
     color: black;
-    padding: 0;
+    padding: 0 10px;
     text-transform: none;
-}
-.primary:hover {
-    background-color: transparent;
+    &:hover {
+        background-color: #cecece;
+    }
 }

@@ -24,8 +24,9 @@
             align-items: flex-end;
         }
         &_logo {
-            width: 42px;
             height: 42px;
+            width: 100px;
+            object-fit: cover;
             font-size: 14px;
         }
         &_paid {
