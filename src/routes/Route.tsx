@@ -25,6 +25,7 @@ const InvoicePage = lazy(() => import('../screens/InvoicePage'));
 const InvocieDetailPage = lazy(() => import('../screens/InvoiceDetailPage'));
 const OrderEditPage = lazy(() => import('../screens/OrderEditPage'));
 const MyProfilePage = lazy(() => import('../screens/MyProfilePage'));
+const ErrorPage = lazy(() => import('../screens/ErrorPage'));
 
 const Route = () => (
     <div className="route">
@@ -157,6 +158,7 @@ const Route = () => (
                     }
                 />
             </RouterPage>
+            <RouterPage path="*" element={<ErrorPage />} />
         </Routes>
     </div>
 );
