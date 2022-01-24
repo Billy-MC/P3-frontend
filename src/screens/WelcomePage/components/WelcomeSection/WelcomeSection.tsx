@@ -8,7 +8,7 @@ const WelcomeSection: react.FC = () => (
         <h1 className={styles.welcomeMessage}>
             Welcome to
             <br />
-            Devils&apos; B2C CRM System
+            Blue-Period&apos;s CRM
         </h1>
         <Link to="/dashboard" className={styles.router}>
             <ButtonPrimary className={styles.button}>Start</ButtonPrimary>

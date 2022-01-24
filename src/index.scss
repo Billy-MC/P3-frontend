@@ -9,6 +9,10 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: $primary_color;
+    background-color: #9b90c21a;
+    background-image: url('./assets/images/texture.png');
+    background-repeat: repeat;
+    transition: background-color 2s ease-in;
 }
 
 code {

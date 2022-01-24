@@ -1,22 +1,12 @@
-import * as React from 'react';
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
-import {
-    Drawer,
-    Typography,
-    List,
-    ListItem,
-    ListItemText,
-    ListItemIcon,
-    ListItemButton,
-    Divider,
-} from '@mui/material';
-
+import { Drawer, List, ListItem, ListItemText, ListItemIcon, ListItemButton } from '@mui/material';
 import {
     HomeOutlined as Dashboard,
     PeopleOutlined as Customer,
     ShoppingBasketOutlined as Product,
     ShoppingCartOutlined as Order,
 } from '@mui/icons-material';
+import MainIcon from '../../assets/images/MainIcon-removebg.png';
 
 import styles from './SideNav.module.scss';
 
@@ -59,17 +49,11 @@ const SideNav = () => {
                 anchor="left"
                 classes={{ paper: styles['sideNav-drawerPaper'] }}
             >
-                <div className={styles['sideNav-header']}>
-                    <NavLink to="/" className={styles['sideNav-header-link']}>
-                        <div className={styles['sideNav-header-logo']}>
-                            <p>logo</p>
-                        </div>
-                    </NavLink>
-                    <Typography variant="h5" className={styles['sideNav-header-title']}>
-                        Devils
-                    </Typography>
-                </div>
-                <Divider className={styles['sideNav-divider']} />
+                <NavLink to="/">
+                    <div className={styles['sideNav-header-logo']}>
+                        <img src={MainIcon} alt="mainicon" />
+                    </div>
+                </NavLink>
                 <div className={styles['sideNav-menu']}>
                     <List>
                         {menuItems.map((item) => (

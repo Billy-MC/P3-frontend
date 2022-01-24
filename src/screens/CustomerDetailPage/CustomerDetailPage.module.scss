@@ -5,10 +5,11 @@
         display: flex;
         justify-content: space-between;
         font-size: 16px;
-        padding: 0 24px;
+        align-items: center;
 
         &-custname {
             font-size: 32px;
+            margin-bottom: 5px;
         }
         &-custemailtitle {
             font-size: 14px;

@@ -5,7 +5,7 @@
         display: flex;
         justify-content: space-between;
         font-size: 16px;
-        padding: 0 24px;
+        align-items: center;
 
         &-prodname {
             font-size: 32px;
@@ -57,14 +57,15 @@
             padding: 10px 24px;
             flex-direction: row;
             align-items: flex-start;
-            
+
             span {
                 margin: 0px;
                 font-size: 14px;
                 font-weight: 500;
                 line-height: 1.57;
             }
-            p, &-description {
+            p,
+            &-description {
                 margin: 0px;
                 font-size: 14px;
                 font-weight: 400;

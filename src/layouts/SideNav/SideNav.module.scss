@@ -2,32 +2,14 @@
 
 .sideNav {
     &-header {
-        display: flex;
-        padding-top: 15px;
-        width: auto;
-        position: relative;
-        transition: all 0.6s ease-in-out;
-        align-items: center;
-        justify-content: space-between;
-
         &-logo {
-            height: 40px;
-            width: 40px;
-            margin: 10px;
-
+            img {
+                border-radius: 8px;
+                width: 150px;
+            }
             display: flex;
             justify-content: center;
             align-items: center;
-
-            color: #000;
-            font-size: 15px;
-            background-color: $background_color;
-            text-align: center;
-        }
-
-        &-link {
-            text-decoration: none;
-            text-decoration: none;
         }
 
         &-title {
@@ -41,11 +23,6 @@
             flex: 1 1;
             transition: all 0.6s ease-in-out;
         }
-    }
-
-    &-divider {
-        margin-top: 15px;
-        background: #6b7280;
     }
 
     &-drawer {
@@ -67,8 +44,7 @@
 
             li {
                 font-size: 8px;
-                padding-top: 0px;
-                padding-bottom: 0px;
+                margin-bottom: 15px;
 
                 span {
                     line-height: 1;
