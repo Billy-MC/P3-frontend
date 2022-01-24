@@ -5,6 +5,7 @@ import {
     PeopleOutlined as Customer,
     ShoppingBasketOutlined as Product,
     ShoppingCartOutlined as Order,
+    Description as Invoice,
 } from '@mui/icons-material';
 import MainIcon from '../../assets/images/MainIcon-removebg.png';
 
@@ -38,6 +39,12 @@ const SideNav = () => {
             text: 'Orders',
             icon: <Order className={styles.listItemIcon} />,
             path: '/orders',
+        },
+        {
+            id: 'invoices',
+            text: 'Invoices',
+            icon: <Invoice className={styles.listItemIcon} />,
+            path: '/invoices',
         },
     ];
 

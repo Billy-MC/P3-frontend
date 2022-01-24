@@ -13,6 +13,14 @@ export interface IProduct {
     description?: string;
     price: number;
 }
+
+interface Address {
+    street: string;
+    city: string;
+    state: string;
+    postcode: string;
+}
+
 export interface ICustomerInfo {
     name: string;
     email: string;

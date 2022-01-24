@@ -12,22 +12,14 @@ import {
     selectedAllOrders,
     selectOrderStatus,
 } from '../../../../store/slices/orderSlice';
-import IOrder, { IProduct } from '../../../../types/IOrder';
-import { capitalizor } from '../../../../utils/dataProcessor';
+import IOrder from '../../../../types/IOrder';
+import { capitalizor, countTotalPrice } from '../../../../utils/dataProcessor';
 import {
     PrimaryKeyLayout,
     MoneyTag,
 } from '../../../../components/DataGridTable/components/DataGridCells/DataGridCells';
 import StatusBar from '../../../../components/StatusBar';
 import styles from './OrderDataGrid.module.scss';
-
-const countTotalPrice = (params: GridValueGetterParams): number => {
-    const total: number = params.row.products.reduce(
-        (prevValue: number, p: IProduct) => prevValue + p.quantity * p.price,
-        0,
-    );
-    return total;
-};
 
 const orderColumnDef: GridColDef[] = [
     {

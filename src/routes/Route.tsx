@@ -21,6 +21,8 @@ const ProductPage = lazy(() => import('../screens/ProductPage'));
 const ProductEditPage = lazy(() => import('../screens/ProductEditPage'));
 const AddProductPage = lazy(() => import('../screens/AddProductPage'));
 const OrderPage = lazy(() => import('../screens/OrderPage'));
+const InvoicePage = lazy(() => import('../screens/InvoicePage'));
+const InvocieDetailPage = lazy(() => import('../screens/InvoiceDetailPage'));
 const OrderEditPage = lazy(() => import('../screens/OrderEditPage'));
 
 const Route = () => (
@@ -127,6 +129,22 @@ const Route = () => (
                         <MainLayout>
                             <OrderPage />
                         </MainLayout>
+                    }
+                />
+                <RouterPage
+                    path="/invoices"
+                    element={
+                        <MainLayout>
+                            <InvoicePage />
+                        </MainLayout>
+                    }
+                />
+                <RouterPage
+                    path="/invoices/:id"
+                    element={
+                        <SubLayout>
+                            <InvocieDetailPage />
+                        </SubLayout>
                     }
                 />
             </RouterPage>

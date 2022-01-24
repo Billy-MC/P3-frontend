@@ -15,11 +15,20 @@ interface InvoiceState {
 const selectedInvoiceInitialState = {
     invoiceId: '',
     orderId: '',
-    customerInfo: {} as ICustomerInfo,
+    customerInfo: {
+        name: '',
+        email: '',
+        phone: '',
+        address: {
+            street: '',
+            city: '',
+            state: '',
+            postcode: '',
+        },
+    } as ICustomerInfo,
     products: [] as IProduct[],
     dateCreated: new Date(),
     dateDue: new Date(),
-    status: '',
 };
 
 const initialState: InvoiceState = {
@@ -75,7 +84,7 @@ export const invoiceSlice = createSlice({
 });
 
 export const selectedAllInvoices = (state: RootState) => state.invoices.invoices;
-export const selectInvoice = (state: RootState) => state.invoices.invoice;
+export const selectInvoice = (state: RootState) => state.invoices.selectedInvoice;
 export const selectInvoiceStatus = (state: RootState) => state.orders.status;
 
 export default invoiceSlice.reducer;
