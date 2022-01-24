@@ -24,6 +24,7 @@ const OrderPage = lazy(() => import('../screens/OrderPage'));
 const InvoicePage = lazy(() => import('../screens/InvoicePage'));
 const InvocieDetailPage = lazy(() => import('../screens/InvoiceDetailPage'));
 const OrderEditPage = lazy(() => import('../screens/OrderEditPage'));
+const MyProfilePage = lazy(() => import('../screens/MyProfilePage'));
 
 const Route = () => (
     <div className="route">
@@ -49,6 +50,14 @@ const Route = () => (
                         <MainLayout>
                             <UserPage />
                         </MainLayout>
+                    }
+                />
+                <RouterPage
+                    path="/users/:email/profile"
+                    element={
+                        <SubLayout>
+                            <MyProfilePage />
+                        </SubLayout>
                     }
                 />
                 <RouterPage

@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -10,13 +11,13 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import { useNavigate } from 'react-router-dom';
+import { deepOrange } from '@mui/material/colors';
 import styles from './Header.module.scss';
-import { logOut } from '../../store/slices/userSlice';
-import { useAppDispatch } from '../../hooks/redux';
+import { logOut, authUser } from '../../store/slices/userSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { IUser } from '../../types/IUser';
 
 const Header = () => {
     const dispatch = useAppDispatch();
@@ -42,9 +43,16 @@ const Header = () => {
         navigate('/login');
     };
 
-    const user = {
-        Name: 'Jiang Ren',
-    };
+    const user = useAppSelector(authUser);
+
+    const tempUser: IUser = user ? user.user : null;
+    const loginUser = tempUser || user;
+
+    const email = loginUser ? loginUser.email || '' : '';
+    const firstName = loginUser ? loginUser.firstName || '' : '';
+    const lastName = loginUser ? loginUser.lastName || '' : '';
+    const fullName = `${firstName} ${lastName}`;
+    const initialName = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -65,7 +73,7 @@ const Header = () => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>
+            <MenuItem onClick={() => navigate(`/users/${email}/profile`)}>
                 <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -76,18 +84,6 @@ const Header = () => {
                     <AccountCircleOutlinedIcon />
                 </IconButton>
                 <p className={styles['header-p']}>My Profile </p>
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
-                <IconButton
-                    size="large"
-                    aria-label="edit of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    className={(styles['header-color'], styles['header-iconsize'])}
-                >
-                    <EditOutlinedIcon />
-                </IconButton>
-                <p className={styles['header-p']}>Edit Profile</p>
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
                 <IconButton
@@ -140,13 +136,18 @@ const Header = () => {
                             aria-haspopup="true"
                             onClick={handleProfileMenuOpen}
                         >
-                            <Avatar className={styles['header-avatar']}>JR</Avatar>
+                            <Avatar
+                                className={styles['header-avatar']}
+                                sx={{ bgcolor: deepOrange[500] }}
+                            >
+                                {initialName}
+                            </Avatar>
                             <Typography
                                 className={styles['header-typography']}
                                 noWrap
                                 component="div"
                             >
-                                {user.Name}
+                                {fullName}
                             </Typography>
                         </IconButton>
                     </Box>

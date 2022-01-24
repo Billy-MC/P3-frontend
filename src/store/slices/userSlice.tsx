@@ -11,6 +11,9 @@ import {
     deleteUserByEmail,
     forgotPassword,
     resetPassword,
+    updateMeByEmail,
+    deleteMeByEmail,
+    updatePassword,
 } from '../../services/Auth/user';
 import { IUser } from '../../types/IUser';
 import asyncStatus from '../../types/asyncStatus';
@@ -119,6 +122,45 @@ export const deleteUser = createAsyncThunk(
         try {
             await deleteUserByEmail(email);
             return email;
+        } catch (e) {
+            return rejectWithValue((e as Error).message);
+        }
+    },
+);
+
+export const updateMe = createAsyncThunk(
+    'user/updateMe',
+    async (data: IUser, { rejectWithValue }) => {
+        const { ...fields } = data;
+        try {
+            const response = await updateMeByEmail(fields as IUser);
+            if (response.error) throw new Error(response.error);
+            return response;
+        } catch (e) {
+            return rejectWithValue((e as Error).message);
+        }
+    },
+);
+
+export const deleteMe = createAsyncThunk(
+    'user/deleteMe',
+    async (email: string, { rejectWithValue }) => {
+        try {
+            await deleteMeByEmail(email);
+            return email;
+        } catch (e) {
+            return rejectWithValue((e as Error).message);
+        }
+    },
+);
+
+export const updateMyPassword = createAsyncThunk(
+    'user/updateMyPassword',
+    async (data: any, { rejectWithValue }) => {
+        try {
+            const response = await updatePassword(data);
+            if (response.error) throw new Error(response.error);
+            return response;
         } catch (e) {
             return rejectWithValue((e as Error).message);
         }
@@ -295,6 +337,32 @@ export const userSlice = createSlice({
             .addCase(deleteUser.rejected, (state: UsersState, action) => {
                 state.status = asyncStatus.failed;
                 if (action.payload) state.error = Object(action.payload).message;
+            });
+
+        builder
+            .addCase(updateMe.pending, (state: UsersState, action) => {
+                state.status = asyncStatus.loading;
+            })
+            .addCase(updateMe.fulfilled, (state: UsersState, action) => {
+                state.status = asyncStatus.succeeded;
+                state.user = action.payload.user;
+            })
+            .addCase(updateMe.rejected, (state: UsersState, action) => {
+                state.status = asyncStatus.failed;
+                if (action.payload) state.error = Object(action.payload).message;
+            });
+
+        builder
+            .addCase(updateMyPassword.pending, (state: UsersState) => {
+                state.status = asyncStatus.loading;
+            })
+            .addCase(updateMyPassword.fulfilled, (state: UsersState, action) => {
+                state.status = asyncStatus.succeeded;
+                state.isSuccess = true;
+            })
+            .addCase(updateMyPassword.rejected, (state: UsersState, action) => {
+                state.status = asyncStatus.failed;
+                if (action.payload) state.error = action.payload as string;
             });
     },
 });

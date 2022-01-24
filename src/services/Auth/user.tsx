@@ -111,3 +111,35 @@ export const deleteUserByEmail = (email: string) => {
         .then((res) => res.data)
         .catch((error) => error);
 };
+
+export const updateMeByEmail = (body: IUser) => {
+    const config: AxiosRequestConfig = {
+        url: `users/updateMe`,
+        method: 'PATCH',
+        data: body,
+    };
+    return request(config)
+        .then((res) => res.data)
+        .catch((error) => error);
+};
+
+export const deleteMeByEmail = (email: string) => {
+    const config: AxiosRequestConfig = {
+        url: `users/deleteMe`,
+        method: 'PATCH',
+    };
+    return request(config)
+        .then((res) => res.data)
+        .catch((error) => error);
+};
+
+export const updatePassword = (body: any) => {
+    const config: AxiosRequestConfig = {
+        url: 'users/updateMyPassword',
+        method: 'PATCH',
+        data: body,
+    };
+    return request(config)
+        .then((res) => res.data)
+        .catch((error) => error);
+};
