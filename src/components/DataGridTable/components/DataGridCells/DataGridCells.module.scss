@@ -1,17 +1,34 @@
 @import '../../../../assets/styles/variable.scss';
 
-.primary {
-    margin: 0;
-    color: black;
-    padding: 0;
-    text-transform: none;
-}
-.primary:hover {
-    background-color: transparent;
-}
-.secondary {
-    margin: 0;
-    color: $span_color;
+.layout {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    &_primary {
+        margin-bottom: 1px;
+        color: black;
+        padding: 0;
+        text-transform: none;
+        transition: ease, 0.5s;
+        padding: 0 10px;
+        &:hover {
+            background-color: #cecece;
+        }
+    }
+    &_primary_noHover {
+        margin-bottom: 1px;
+        color: black;
+        font-weight: 500;
+        padding: 0;
+        text-transform: none;
+        transition: ease, 0.5s;
+    }
+
+    &_secondary {
+        margin: 1px 0 0 0;
+        padding: 0;
+        color: $span_color;
+    }
 }
 
 .dollar_color {

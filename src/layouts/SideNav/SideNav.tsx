@@ -10,12 +10,12 @@ import {
     ListItemButton,
     Divider,
 } from '@mui/material';
-
 import {
     HomeOutlined as Dashboard,
     PeopleOutlined as Customer,
     ShoppingBasketOutlined as Product,
     ShoppingCartOutlined as Order,
+    Description as Invoice,
 } from '@mui/icons-material';
 
 import styles from './SideNav.module.scss';
@@ -48,6 +48,12 @@ const SideNav = () => {
             text: 'Orders',
             icon: <Order className={styles.listItemIcon} />,
             path: '/orders',
+        },
+        {
+            id: 'invoices',
+            text: 'Invoices',
+            icon: <Invoice className={styles.listItemIcon} />,
+            path: '/invoices',
         },
     ];
 

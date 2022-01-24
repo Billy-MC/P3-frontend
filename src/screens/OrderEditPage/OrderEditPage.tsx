@@ -34,6 +34,7 @@ const OrderEditPage = () => {
 
     const handleCloseSnack = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
+            setOpenSnack(false);
             return;
         }
         setOpenSnack(false);

@@ -17,7 +17,7 @@ const OrderPageSearchBar = () => {
     return (
         <div className={styles.searchbar}>
             <SearchBar
-                placeHolder="Search by order number"
+                placeHolder="Search by Order-Id"
                 className={styles.input}
                 searchByClick={(data: string) => setSearchWords(data.toLowerCase().trim())}
             />

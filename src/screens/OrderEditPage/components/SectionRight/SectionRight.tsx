@@ -8,11 +8,7 @@ interface ISectionRightProps {
 
 const SectionRight: React.FC<ISectionRightProps> = (props) => {
     const { className, products } = props;
-    return (
-        <div className={`${styles.sectionRight} ${className}`}>
-            <div className={styles.sectionRight_body}>{products}</div>
-        </div>
-    );
+    return <div className={`${styles.sectionRight} ${className}`}>{products}</div>;
 };
 
 SectionRight.defaultProps = {

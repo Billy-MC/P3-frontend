@@ -28,7 +28,7 @@ const columnDef: GridColDef[] = [
         renderCell: (params: GridRenderCellParams) => (
             <PrimaryKeyLayout
                 primary={`${capitalizor(params.row.productName)}`}
-                secondary={`in ${params.row.category}`}
+                secondary={`in ${params.row.category.toUpperCase()}`}
                 linkAddress={`${params.row.sku}`}
             />
         ),
@@ -40,7 +40,7 @@ const columnDef: GridColDef[] = [
         renderCell: (params) => <MoneyTag amount={params.row.price} />,
         flex: 2,
     },
-    { field: 'quantity', headerName: 'quantity', type: 'number', flex: 1 },
+    { field: 'quantity', headerName: 'QUANTITY', type: 'number', flex: 1 },
     {
         field: 'status',
         headerName: 'STATUS',
