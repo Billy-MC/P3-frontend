@@ -68,14 +68,14 @@ export const addProduct = createAsyncThunk(
     },
 );
 
-export const updateProduct = createAsyncThunk<IProduct, { sku: string } & Partial<IProduct>>(
+export const updateProduct = createAsyncThunk(
     'product/updateProduct',
-    async (data, { rejectWithValue }) => {
+    async (data: Partial<IProduct>, { rejectWithValue }) => {
         try {
             const { sku, ...fields } = data;
             const response = await updateProductBySku(sku as string, fields as IProduct);
             if (response.error) throw new Error(response.error);
-            return response.fields as IProduct;
+            return response;
         } catch (e) {
             return rejectWithValue(e as Error);
         }

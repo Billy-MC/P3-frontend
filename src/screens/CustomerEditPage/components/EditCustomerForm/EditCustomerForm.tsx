@@ -28,7 +28,7 @@ const inputEmailIsValid = (value: string) =>
 const valueIsNumber = (value: string) => validateNumber(value);
 const valueIsNotEmpty = (value: string) => value.trim() !== '';
 
-const genderSelect = ['Male', 'Female', 'Other', 'Not to Tell'];
+const genderSelect = ['Male', 'Female', 'Other', 'Not to Tell', ''];
 
 const EditCustomerForm: React.FC<DetailsProps> = (props: DetailsProps) => {
     const [openPopup, setOpenPopup] = useState(false);

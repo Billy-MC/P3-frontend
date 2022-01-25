@@ -31,7 +31,7 @@ export const createProduct = (body: IProduct) => {
         .catch((error) => error);
 };
 
-export const updateProductBySku = (sku: string, body: IProduct) => {
+export const updateProductBySku = (sku: string, body: Partial<IProduct>) => {
     const config: AxiosRequestConfig = {
         url: `products/${sku}`,
         method: 'PUT',

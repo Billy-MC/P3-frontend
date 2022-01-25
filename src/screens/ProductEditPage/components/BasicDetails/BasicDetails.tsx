@@ -46,7 +46,7 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
         inputBlurHandler: productNameBlurHandler,
     } = useInput(valueIsNotEmpty, details.productName || '');
 
-    const { value: skuValue } = useInput(valueIsNumber, details.sku);
+    const { value: skuValue } = useInput(valueIsNotEmpty, details.sku || '');
 
     const {
         value: categoryValue,

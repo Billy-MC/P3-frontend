@@ -50,7 +50,7 @@ const CustomerDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
                 <span className={styles['customerdetail-details-title']}>Basic Details</span>
                 <Divider />
                 <List>
-                    {Object.keys(detail).map((key, i) => (
+                    {Object.keys(detail).map((key) => (
                         <div key={key}>
                             <ListItem className={styles['customerdetail-details-itemtext']}>
                                 <ListItemText

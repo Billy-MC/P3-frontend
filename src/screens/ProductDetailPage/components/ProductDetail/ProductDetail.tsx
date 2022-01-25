@@ -22,7 +22,6 @@ export interface DetailsProps {
 const ProductDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
     const [openPopup, setOpenPopup] = useState(false);
     const showModal = () => setOpenPopup(true);
-
     const { details } = props;
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -32,7 +31,7 @@ const ProductDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
         Category: details.category,
         Description: details.description,
         Quantity: details.quantity,
-        Price: details.price,
+        Price: `$ ${details.price}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
     };
 
     const deleteHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -49,17 +48,12 @@ const ProductDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
                 <Divider />
                 <List>
                     {Object.keys(detail).map((key, i) => (
-                        <div key={key}>
+                        <div key={key[i]}>
                             <ListItem className={styles['productdetail-details-itemtext']}>
                                 <ListItemText
                                     primary={key}
                                     secondary={
-                                        (key === 'Price' &&
-                                            `$ ${detail[key as keyof IDetail]}`.replace(
-                                                /\B(?=(\d{3})+(?!\d))/g,
-                                                ',',
-                                            )) ||
-                                        (key === 'Description' && (
+                                        key[i] === 'Description' ? (
                                             <TextField
                                                 fullWidth
                                                 variant="standard"
@@ -74,8 +68,9 @@ const ProductDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
                                                 multiline
                                                 defaultValue={detail[key as keyof IDetail]}
                                             />
-                                        )) ||
-                                        detail[key as keyof IDetail]
+                                        ) : (
+                                            detail[key as keyof IDetail]
+                                        )
                                     }
                                 />
                             </ListItem>
