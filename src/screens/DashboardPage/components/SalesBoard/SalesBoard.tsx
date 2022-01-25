@@ -7,7 +7,6 @@ interface SalesBoardProps {
 
 const SalesBoard: FC<SalesBoardProps> = ({ monthlySales }) => (
     <div className={styles.salesboard}>
-        <div className={styles.salesboard__img} />
         <div className={styles.salesboard__container}>
             <p className={styles.salesboard__title}>Monthly Sales</p>
             <p className={styles.salesboard__amount}>${monthlySales.toLocaleString()}</p>
