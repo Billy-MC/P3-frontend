@@ -6,12 +6,9 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import styles from './Header.module.scss';
 import { logOut, authUser } from '../../store/slices/userSlice';
@@ -84,18 +81,6 @@ const Header = () => {
                 </IconButton>
                 <p className={styles['header-p']}>My Profile </p>
             </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
-                <IconButton
-                    size="large"
-                    aria-label="setting of current acount"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    className={(styles['header-color'], styles['header-iconsize'])}
-                >
-                    <SettingsOutlinedIcon />
-                </IconButton>
-                <p className={styles['header-p']}>Account Settings</p>
-            </MenuItem>
             <MenuItem onClick={logoutHandler} className={styles['header-logout']}>
                 <IconButton
                     size="large"
@@ -117,15 +102,6 @@ const Header = () => {
                 <Toolbar className={styles['header-toolbar']}>
                     <Box className={styles['header-box2']} />
                     <Box>
-                        <IconButton
-                            className={styles['header-color']}
-                            size="large"
-                            aria-label="show 16 new notifications"
-                        >
-                            <Badge badgeContent={16} color="error">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
                         <IconButton
                             className={styles['header-btn']}
                             size="large"

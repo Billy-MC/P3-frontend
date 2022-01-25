@@ -135,7 +135,7 @@ const BasicDetails: React.FC<DetailsProps> = (props: DetailsProps) => {
     return (
         <Box component="form" onSubmit={handleSubmit}>
             <Box className={styles['editform-details']}>
-                <h2 className={styles['editform-title']}>Product Details</h2>
+                <h2 className={styles['editform-title']}>Edit Product</h2>
                 <Divider />
                 <Box className={styles['editform-input']}>
                     <Box className={styles['editform-input_form']}>

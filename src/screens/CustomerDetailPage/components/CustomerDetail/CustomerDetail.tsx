@@ -48,25 +48,19 @@ const CustomerDetail: React.FC<DetailsProps> = (props: DetailsProps) => {
         <>
             <Box className={styles['customerdetail-details']}>
                 <span className={styles['customerdetail-details-title']}>Basic Details</span>
-                <Divider />
                 <List>
                     {Object.keys(detail).map((key) => (
                         <div key={key}>
+                            <Divider />
                             <ListItem className={styles['customerdetail-details-itemtext']}>
                                 <ListItemText
                                     primary={key}
                                     secondary={detail[key as keyof IDetail]}
                                 />
                             </ListItem>
-                            <Divider />
                         </div>
                     ))}
                 </List>
-                <Box className={styles['customerdetail-details-reset']}>
-                    <ButtonPrimary className={styles['customerdetail-details-reset-btn']}>
-                        Reset & Send Password
-                    </ButtonPrimary>
-                </Box>
             </Box>
             <Box className={styles['customerdetail-details']}>
                 <span className={styles['customerdetail-details-title']}>Data Management</span>
