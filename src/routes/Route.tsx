@@ -28,139 +28,137 @@ const MyProfilePage = lazy(() => import('../screens/MyProfilePage'));
 const ErrorPage = lazy(() => import('../screens/ErrorPage'));
 
 const Route = () => (
-    <div className="route">
-        <Routes>
-            <RouterPage path="/" element={<WelcomePage />} />
-            <RouterPage path="/login" element={<LoginPage />} />
-            <RouterPage path="/register" element={<RegisterPage />} />
-            <RouterPage path="/emailActivation" element={<VerifyEmailPage />} />
-            <RouterPage path="/resetPassword" element={<ResetPasswordPage />} />
-            <RouterPage path="/forgetpassword" element={<ForgotPasswordPage />} />
-            <RouterPage element={<ProtectedRouterPage />}>
-                <RouterPage
-                    path="/dashboard"
-                    element={
-                        <MainLayout>
-                            <DashboardPage />
-                        </MainLayout>
-                    }
-                />
-                <RouterPage
-                    path="/users"
-                    element={
-                        <MainLayout>
-                            <UserPage />
-                        </MainLayout>
-                    }
-                />
-                <RouterPage
-                    path="/users/:email/profile"
-                    element={
-                        <SubLayout>
-                            <MyProfilePage />
-                        </SubLayout>
-                    }
-                />
-                <RouterPage
-                    path="/customers/*"
-                    element={
-                        <MainLayout>
-                            <CustomerPage />
-                        </MainLayout>
-                    }
-                />
-                <RouterPage
-                    path="/customers/:email"
-                    element={
-                        <SubLayout>
-                            <CustomerDetailPage />
-                        </SubLayout>
-                    }
-                />
-                <RouterPage
-                    path="/customers/:email/edit"
-                    element={
-                        <SubLayout>
-                            <CustomerEditPage />
-                        </SubLayout>
-                    }
-                />
-                <RouterPage
-                    path="/customers/add"
-                    element={
-                        <SubLayout>
-                            <AddCustomerPage />
-                        </SubLayout>
-                    }
-                />
-                <RouterPage
-                    path="/products"
-                    element={
-                        <MainLayout>
-                            <ProductPage />
-                        </MainLayout>
-                    }
-                />
-                <RouterPage
-                    path="/products/add"
-                    element={
-                        <SubLayout>
-                            <AddProductPage />
-                        </SubLayout>
-                    }
-                />
-                <RouterPage
-                    path="/products/:sku"
-                    element={
-                        <SubLayout>
-                            <ProductDetailPage />
-                        </SubLayout>
-                    }
-                />
-                <RouterPage
-                    path="/products/:sku/edit"
-                    element={
-                        <SubLayout>
-                            <ProductEditPage />
-                        </SubLayout>
-                    }
-                />
-                <RouterPage
-                    path="/orders/:id"
-                    element={
-                        <MainLayout>
-                            <OrderEditPage />
-                        </MainLayout>
-                    }
-                />
-                <RouterPage
-                    path="/orders"
-                    element={
-                        <MainLayout>
-                            <OrderPage />
-                        </MainLayout>
-                    }
-                />
-                <RouterPage
-                    path="/invoices"
-                    element={
-                        <MainLayout>
-                            <InvoicePage />
-                        </MainLayout>
-                    }
-                />
-                <RouterPage
-                    path="/invoices/:id"
-                    element={
-                        <SubLayout>
-                            <InvocieDetailPage />
-                        </SubLayout>
-                    }
-                />
-            </RouterPage>
-            <RouterPage path="*" element={<ErrorPage />} />
-        </Routes>
-    </div>
+    <Routes>
+        <RouterPage path="/" element={<WelcomePage />} />
+        <RouterPage path="/login" element={<LoginPage />} />
+        <RouterPage path="/register" element={<RegisterPage />} />
+        <RouterPage path="/emailActivation" element={<VerifyEmailPage />} />
+        <RouterPage path="/resetPassword" element={<ResetPasswordPage />} />
+        <RouterPage path="/forgetpassword" element={<ForgotPasswordPage />} />
+        <RouterPage element={<ProtectedRouterPage />}>
+            <RouterPage
+                path="/dashboard"
+                element={
+                    <MainLayout>
+                        <DashboardPage />
+                    </MainLayout>
+                }
+            />
+            <RouterPage
+                path="/users"
+                element={
+                    <MainLayout>
+                        <UserPage />
+                    </MainLayout>
+                }
+            />
+            <RouterPage
+                path="/users/:email/profile"
+                element={
+                    <SubLayout>
+                        <MyProfilePage />
+                    </SubLayout>
+                }
+            />
+            <RouterPage
+                path="/customers/*"
+                element={
+                    <MainLayout>
+                        <CustomerPage />
+                    </MainLayout>
+                }
+            />
+            <RouterPage
+                path="/customers/:email"
+                element={
+                    <SubLayout>
+                        <CustomerDetailPage />
+                    </SubLayout>
+                }
+            />
+            <RouterPage
+                path="/customers/:email/edit"
+                element={
+                    <SubLayout>
+                        <CustomerEditPage />
+                    </SubLayout>
+                }
+            />
+            <RouterPage
+                path="/customers/add"
+                element={
+                    <SubLayout>
+                        <AddCustomerPage />
+                    </SubLayout>
+                }
+            />
+            <RouterPage
+                path="/products"
+                element={
+                    <MainLayout>
+                        <ProductPage />
+                    </MainLayout>
+                }
+            />
+            <RouterPage
+                path="/products/add"
+                element={
+                    <SubLayout>
+                        <AddProductPage />
+                    </SubLayout>
+                }
+            />
+            <RouterPage
+                path="/products/:sku"
+                element={
+                    <SubLayout>
+                        <ProductDetailPage />
+                    </SubLayout>
+                }
+            />
+            <RouterPage
+                path="/products/:sku/edit"
+                element={
+                    <SubLayout>
+                        <ProductEditPage />
+                    </SubLayout>
+                }
+            />
+            <RouterPage
+                path="/orders/:id"
+                element={
+                    <MainLayout>
+                        <OrderEditPage />
+                    </MainLayout>
+                }
+            />
+            <RouterPage
+                path="/orders"
+                element={
+                    <MainLayout>
+                        <OrderPage />
+                    </MainLayout>
+                }
+            />
+            <RouterPage
+                path="/invoices"
+                element={
+                    <MainLayout>
+                        <InvoicePage />
+                    </MainLayout>
+                }
+            />
+            <RouterPage
+                path="/invoices/:id"
+                element={
+                    <SubLayout>
+                        <InvocieDetailPage />
+                    </SubLayout>
+                }
+            />
+        </RouterPage>
+        <RouterPage path="*" element={<ErrorPage />} />
+    </Routes>
 );
 
 export default Route;
