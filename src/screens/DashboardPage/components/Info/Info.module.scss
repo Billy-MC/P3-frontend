@@ -3,11 +3,10 @@
 .info {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
 
     &-item {
         flex: 1;
-        margin-right: 20px;
         padding: 30px;
         border-radius: 10px;
         box-shadow: 0px 0px 15px -10px #000000bf;

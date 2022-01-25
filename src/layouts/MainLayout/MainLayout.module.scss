@@ -13,7 +13,7 @@
         flex: 1 1 auto;
     }
     &-content {
-        min-height: 100vh;
+        min-height: min-content;
         max-width: 2000px;
         width: 100%;
         margin: 0 auto;
