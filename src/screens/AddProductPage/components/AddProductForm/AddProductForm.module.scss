@@ -59,6 +59,10 @@
                 box-shadow: none;
                 background-color: $primary_color_lighter;
             }
+
+            &_input {
+                display: none;
+            }
         }
 
         &_add {

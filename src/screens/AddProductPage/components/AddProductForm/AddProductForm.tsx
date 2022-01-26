@@ -195,13 +195,20 @@ const AddProductForm = () => {
                             rows={5}
                         />
                     </Box>
+
                     <Button
                         className={styles['addform-btnsection_upload']}
                         variant="contained"
                         component="label"
                     >
                         Upload Image
-                        <input type="file" id="image" hidden />
+                        <input
+                            className={styles['addform-btnsection_upload_input']}
+                            accept="image/*"
+                            id="image"
+                            multiple
+                            type="file"
+                        />
                     </Button>
                 </Box>
             </Box>
