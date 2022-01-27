@@ -1,9 +1,14 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-const baseURL =
-    process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000/api/'
-        : 'https://alb.devilscrm.link/api/';
+let baseURL: string;
+if (process.env.NODE_ENV === 'production') {
+    baseURL = 'https://alb.blueperiod.link/';
+} else if (process.env.NODE_ENV === 'development') {
+    baseURL = 'http://localhost:3000/api/';
+} else {
+    baseURL = 'https://alb.devilscrm.link/api/';
+}
+
 const withCredentials = true;
 const timeout = 30000;
 /**
