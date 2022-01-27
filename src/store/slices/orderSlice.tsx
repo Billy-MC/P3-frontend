@@ -17,6 +17,7 @@ const selectedOrderInitialState = {
     products: [] as IProduct[],
     dateCreated: new Date(),
     status: '',
+    invoiceId: '',
 };
 
 const initialState: OrderState = {

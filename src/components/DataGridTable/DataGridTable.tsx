@@ -70,7 +70,7 @@ const DataGridTable: React.FC<IDataGridTableProps> = (props) => {
                 getRowId={(row) => row._id}
                 columns={columns}
                 pageSize={10}
-                rowsPerPageOptions={[10, 25, 50, 100]}
+                pagination
                 rowHeight={80}
                 filterModel={filterModel}
                 disableColumnSelector

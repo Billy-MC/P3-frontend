@@ -30,7 +30,7 @@ const OrderEditPage = () => {
     const loadingStatus: string = useAppSelector(selectOrderStatus);
 
     const dispatch = useAppDispatch();
-    const { customerInfo, products, dateCreated, status } = selectedOrder;
+    const { customerInfo, products, dateCreated, status, invoiceId } = selectedOrder;
 
     const handleCloseSnack = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
@@ -144,6 +144,7 @@ const OrderEditPage = () => {
                             orderId={queryOrderId || ''}
                             dateCreated={dateCreated}
                             status={status}
+                            invoiceId={invoiceId}
                         />
                     }
                     customerInfo={<CustomerDetail customer={customerInfo} />}

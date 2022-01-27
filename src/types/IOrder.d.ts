@@ -41,4 +41,5 @@ export default interface IOrder {
     products: IProduct[];
     dateCreated: Date;
     status: orderStatus;
+    invoiceId?: string;
 }

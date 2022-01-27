@@ -15,12 +15,11 @@ interface IOrderDetailProps {
 const OrderDetail: React.FC<IOrderDetailProps> = (props: IOrderDetailProps) => {
     const { orderId, dateCreated, status, invoiceId } = props;
     const formatedDate: ReactNode = <p>{DateToDDMMMYYYYHHMM(dateCreated)}</p>;
-    const formatedInovice: ReactNode =
-        invoiceId === undefined ? (
-            <strong className={styles.orderDetail_invoice_unavailable}>Unavailable</strong>
-        ) : (
-            <strong className={styles.orderDetail_invoice}>{invoiceId}</strong>
-        );
+    const formatedInovice: ReactNode = invoiceId ? (
+        <strong className={styles.orderDetail_invoice}>{invoiceId}</strong>
+    ) : (
+        <strong className={styles.orderDetail_invoice_unavailable}>Unavailable</strong>
+    );
     return (
         <List className={styles.orderDetail}>
             <h3 className={styles.orderDetail_tilte}>Order Info</h3>
@@ -37,7 +36,7 @@ const OrderDetail: React.FC<IOrderDetailProps> = (props: IOrderDetailProps) => {
 };
 
 OrderDetail.defaultProps = {
-    invoiceId: undefined,
+    invoiceId: '',
 };
 
 export default OrderDetail;
