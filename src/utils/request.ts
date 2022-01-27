@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 let baseURL: string;
 if (process.env.NODE_ENV === 'production') {
-    baseURL = 'https://alb.blueperiod.link/';
+    baseURL = 'https://alb.blueperiod.link/api/';
 } else if (process.env.NODE_ENV === 'development') {
     baseURL = 'http://localhost:3000/api/';
 } else {
