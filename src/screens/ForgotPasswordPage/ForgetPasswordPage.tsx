@@ -7,7 +7,7 @@ import useInput from '../../hooks/useInput';
 import ButtonPrimary from '../../components/Button';
 import { validateEmail } from '../../utils/validator';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import MainIcon from '../../assets/images/MainIcon-removebg.png';
+import MainIcon from '../../assets/images/logos/logoColorNoBG.png';
 
 import {
     sendForgotemail,

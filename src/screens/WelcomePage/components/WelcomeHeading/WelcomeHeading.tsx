@@ -1,6 +1,6 @@
 import * as react from 'react';
 import styles from './welcomeHeading.module.scss';
-import MainIcon from '../../../../assets/images/MainIcon-removebg.png';
+import MainIcon from '../../../../assets/images/logos/logoColorNoBG.png';
 
 const WelcomeHeading: react.FC = () => (
     <div className={styles.welcomeHeading}>

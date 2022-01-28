@@ -9,7 +9,7 @@ import styles from './LoginPage.module.scss';
 import { validateEmail, validatePassword } from '../../utils/validator';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { login, authError, authUserStatus, clearState } from '../../store/slices/userSlice';
-import MainIcon from '../../assets/images/MainIcon-removebg.png';
+import MainIcon from '../../assets/images/logos/logoColorNoBG.png';
 
 const inputEmailIsValid = (value: string) => validateEmail(value.toLowerCase());
 const inputPasswordIsValid = (value: string) => validatePassword(value) && value.trim() !== '';

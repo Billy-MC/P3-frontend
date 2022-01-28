@@ -1,7 +1,7 @@
 import { Paper, Box } from '@mui/material';
 import IInvoice from '../../../../types/IInvoice';
 import styles from './InvoicePreview.module.scss';
-import Logo from '../../../../assets/images/MainIcon-removebg.png';
+import Logo from '../../../../assets/images/logos/blueLogoTextBlack.png';
 import { addressInline, DateToDDMMMYYYYHHMM } from '../../../../utils/dataProcessor';
 import TaxedProductTable from '../TaxedProductTable';
 
@@ -27,7 +27,7 @@ const InvoicePreview: React.FC<IInvoicePreviewProps> = (props: IInvoicePreviewPr
                             className={styles.invoicePreview_content_logo}
                         />
                         <p className={styles.invoicePreview_content_emphesise}>
-                            www.devilscrm.link
+                            www.blueperiod.link
                         </p>
                     </div>
                     <div className={styles.invoicePreview_content_right}>

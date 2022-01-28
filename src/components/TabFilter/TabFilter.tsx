@@ -36,7 +36,7 @@ const TabFilter: React.FC<ITabFilter> = (props) => {
 
     const content = filter.map((e) =>
         e.children ? (
-            <TabPanel key={e.name} value={e.name}>
+            <TabPanel key={e.name} value={e.name} className={styles.tabfilter}>
                 {e.children}
             </TabPanel>
         ) : (

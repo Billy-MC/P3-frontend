@@ -5,11 +5,12 @@
         &-logo {
             img {
                 border-radius: 8px;
-                width: 80px;
+                width: 200px;
             }
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
+            margin: 15px 0 35px 20px;
         }
 
         &-title {

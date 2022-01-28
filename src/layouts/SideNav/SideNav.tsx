@@ -7,7 +7,7 @@ import {
     ShoppingCartOutlined as Order,
     Description as Invoice,
 } from '@mui/icons-material';
-import MainIcon from '../../assets/images/MainIcon-removebg.png';
+import MainIcon from '../../assets/images/logos/blueLogoNoBG.png';
 
 import styles from './SideNav.module.scss';
 

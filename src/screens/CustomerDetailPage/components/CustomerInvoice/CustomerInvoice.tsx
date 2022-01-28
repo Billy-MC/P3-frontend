@@ -100,7 +100,7 @@ const InvoiceDataGrid: React.FC = () => {
     }, [dispatch]);
 
     return (
-        <div>
+        <div className={styles.datagrid}>
             <DataGridTable
                 rows={invoices || []}
                 columns={invoiceColumnDef.map((row) => ({
