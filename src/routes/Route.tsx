@@ -1,11 +1,11 @@
 import { lazy } from 'react';
-import { Route as RouterPage, Routes } from 'react-router-dom';
+import { Route as RouterPage, Routes, Navigate } from 'react-router-dom';
 import ProtectedRouterPage from './components';
 import MainLayout from '../layouts/MainLayout';
 import SubLayout from '../layouts/SubLayout';
+
 import ProductDetailPage from '../screens/ProductDetailPage';
 
-const WelcomePage = lazy(() => import('../screens/WelcomePage'));
 const LoginPage = lazy(() => import('../screens/LoginPage'));
 const RegisterPage = lazy(() => import('../screens/RegisterPage'));
 const ForgotPasswordPage = lazy(() => import('../screens/ForgotPasswordPage'));
@@ -30,7 +30,7 @@ const ErrorPage = lazy(() => import('../screens/ErrorPage'));
 
 const Route = () => (
     <Routes>
-        <RouterPage path="/" element={<WelcomePage />} />
+        <RouterPage path="/" element={<Navigate replace to="/login" />} />
         <RouterPage path="/login" element={<LoginPage />} />
         <RouterPage path="/register" element={<RegisterPage />} />
         <RouterPage path="/emailActivation" element={<VerifyEmailPage />} />
