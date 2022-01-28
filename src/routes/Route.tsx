@@ -25,6 +25,7 @@ const InvoicePage = lazy(() => import('../screens/InvoicePage'));
 const InvocieDetailPage = lazy(() => import('../screens/InvoiceDetailPage'));
 const OrderEditPage = lazy(() => import('../screens/OrderEditPage'));
 const MyProfilePage = lazy(() => import('../screens/MyProfilePage'));
+const AccountPage = lazy(() => import('../screens/AccountSetting'));
 const ErrorPage = lazy(() => import('../screens/ErrorPage'));
 
 const Route = () => (
@@ -57,6 +58,14 @@ const Route = () => (
                 element={
                     <SubLayout>
                         <MyProfilePage />
+                    </SubLayout>
+                }
+            />
+            <RouterPage
+                path="/users/:email/profile/accountsetting"
+                element={
+                    <SubLayout>
+                        <AccountPage />
                     </SubLayout>
                 }
             />

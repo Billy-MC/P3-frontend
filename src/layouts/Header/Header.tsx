@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import styles from './Header.module.scss';
 import { logOut, authUser } from '../../store/slices/userSlice';
@@ -80,6 +81,18 @@ const Header = () => {
                     <AccountCircleOutlinedIcon />
                 </IconButton>
                 <p className={styles['header-p']}>My Profile </p>
+            </MenuItem>
+            <MenuItem onClick={() => navigate(`/users/${email}/profile/accountsetting`)}>
+                <IconButton
+                    size="large"
+                    aria-label="setting of current acount"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    className={(styles['header-color'], styles['header-iconsize'])}
+                >
+                    <SettingsOutlinedIcon />
+                </IconButton>
+                <p className={styles['header-p']}>Account Settings</p>
             </MenuItem>
             <MenuItem onClick={logoutHandler} className={styles['header-logout']}>
                 <IconButton
