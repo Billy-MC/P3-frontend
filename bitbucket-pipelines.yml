@@ -2,7 +2,7 @@ image: node:16.13.0
 
 pipelines:
     branches:
-        uat:
+        main:
             - step:
                   name: Installing and Building the App
                   caches:
@@ -21,6 +21,6 @@ pipelines:
                         variables:
                             AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                             AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                            AWS_DEFAULT_REGION: $AWS_REGION_UAT
-                            S3_BUCKET: $UAT_BUCKET_NAME
+                            AWS_DEFAULT_REGION: $AWS_REGION_PROD
+                            S3_BUCKET: $PROD_BUCKET_NAME
                             LOCAL_PATH: 'build'
